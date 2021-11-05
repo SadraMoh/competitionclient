@@ -1,0 +1,52 @@
+// - Variables
+@import "vars";
+@import "utility";
+@import "components";
+
+// - Reset
+// - Utility
+// - Components
+
+//- Reset
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "iranyekanregular", 'B Yekan';
+  outline: none;
+  border: 0;
+  text-align: right;
+}
+
+html,
+body {
+  background-color: $background;
+  overflow-x: hidden;
+}
+
+ul {
+  list-style-type: none;
+}
+
+img {
+  object-fit: contain;
+  object-position: center;
+}
+
+#modal-group {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  @include col;
+  padding: 32px;
+  background-color: rgba(0,0,0,.64);
+}
+
+@media only screen and (max-width: 800px) {
+  html,body {
+    font-size: 0.92em;
+  }
+}
