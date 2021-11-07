@@ -18,4 +18,11 @@
 
   </div>
   <button [disabled]="!isValid" class="login" (click)="login()">ورود</button>
+
+
+  <div *ngIf="usr">
+    <p>User {{ usr.fullName }} successfully logged in</p>
+  </div>
+  
+  
 </div>

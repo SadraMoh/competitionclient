@@ -13,19 +13,16 @@ export class AccountService {
 
   readonly route = join(environment.api, 'account');
 
-  /** The jwt token */
-  _token?: string;
-
-  public get token(): string {
-    if (!this.token) throw "user not logged in";
-    return this._token as string;
+  /** token in localStorage */
+  public get token(): string | null {
+    return localStorage.getItem('tkn');
   }
 
-  public set token(v: string) {
-    this._token = v;
+  public set token(v: string | null) {
+    localStorage.setItem('tkn', v as string);
   }
 
-  constructor(public client: HttpClient) { }
+  constructor(private client: HttpClient) { }
 
   /**
    * login method
@@ -37,13 +34,12 @@ export class AccountService {
 
     return from(new Promise<Res<Signin>>((res, rej) => {
       this.client.post<Res<Signin>>(to, input).subscribe(result => {
-        if (!result.isSuccess) {
+        if (!result.isSuccess)
           rej(result.message);
-        } else {
+        else {
           this.token = result.value.token as string;
           res(result);
         }
-
       });
     }))
   }
