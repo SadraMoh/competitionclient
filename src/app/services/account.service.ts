@@ -2,22 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
 import { Signin } from '../models/account/Signin';
+import { Confirm } from '../models/account/Confirm';
 import { environment } from 'src/environments/environment';
-import { Res } from '../models/Res';
+import { isResVaild, Res } from '../models/Res';
 import { join } from '@fireflysemantics/join';
+import { Signup } from '../models/account/Signup';
+import { DbRes, isDbResValid } from '../models/DbRes';
+import { ApiService } from './apiservice';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class AccountService implements ApiService {
 
   readonly route = join(environment.api, 'account');
 
-  /** token in localStorage */
+  /** Get token from localStorage */
   public get token(): string | null {
     return localStorage.getItem('tkn');
   }
 
+  /** Store token in localStorage */
   public set token(v: string | null) {
     localStorage.setItem('tkn', v as string);
   }
@@ -25,23 +30,61 @@ export class AccountService {
   constructor(private client: HttpClient) { }
 
   /**
-   * login method
-   * @param input Username and Password
-   * @returns Username and JWT
+   * Login method
+   * @param input Username, Password
+   * @returns Username, JWT
    */
   login(input: Signin): Observable<Res<Signin>> {
     const to = join(this.route, 'Signin');
 
     return from(new Promise<Res<Signin>>((res, rej) => {
       this.client.post<Res<Signin>>(to, input).subscribe(result => {
-        if (!result.isSuccess)
-          rej(result.message);
-        else {
+        if (isResVaild(result)) {
           this.token = result.value.token as string;
           res(result);
         }
+        else
+          rej(result.message);
       });
     }))
   }
+
+  /**
+   * Signup a new user
+   * @param input Username, TelNo, Password
+   * @returns all info about the user
+   */
+  signup(input: Signup): Observable<Res<Signup>> {
+    const to = join(this.route, 'Signup');
+
+    return from(new Promise<Res<Signup>>((res, rej) => {
+      this.client.post<DbRes<Signup>>(to, input).subscribe(result => {
+        if (isDbResValid(result))
+          res(result.result);
+        else
+          rej(result.exception);
+
+      });
+    }));
+  }
+
+  /**
+   * Confirm telephone number via auth
+   * @param input telNo, auth
+   * @returns telNo, auth
+   */
+  confirm(input: Confirm) {
+    const to = join(this.route, 'Confirm');
+
+    return from(new Promise<Res<Confirm>>((res, rej) => {
+      this.client.post<DbRes<Confirm>>(to, input).subscribe(result => {
+        if (isDbResValid(result))
+          res(result.result);
+        else
+          rej(result.exception);
+      });
+    }))
+  }
+
 
 }

@@ -3,3 +3,9 @@ export interface Res<Value> {
   message: string;
   value: Value;
 }
+
+export function isResVaild(res: Res<any>) {
+
+  return res.isSuccess;
+
+}

@@ -12,3 +12,9 @@ export interface DbRes<Value> {
   asyncState?: any;
   isFaulted: boolean;
 }
+
+export function isDbResValid(dbRes: DbRes<any>) {
+
+  return !dbRes.isCanceled && dbRes.isCompleted && !dbRes.isFaulted;
+
+}

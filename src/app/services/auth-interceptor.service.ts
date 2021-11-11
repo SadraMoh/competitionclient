@@ -7,9 +7,10 @@ import { AccountService } from './account.service';
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
-
+ 
   constructor(private account: AccountService) { }
 
+  /** add JWT to the outgoing request if there is one */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const { token } = this.account;

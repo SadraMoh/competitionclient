@@ -7,12 +7,13 @@ import { Signin } from '../models/account/Signin';
 import { Res } from '../models/Res';
 import { HttpClient } from '@angular/common/http';
 import User from 'src/app/models/user/User';
-import { DbRes } from '../models/DbRes';
+import { DbRes, isDbResValid } from '../models/DbRes';
+import { ApiService } from './apiservice';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements ApiService {
 
   readonly route = join(environment.api, 'user');
 
@@ -22,12 +23,15 @@ export class UserService {
   ) { }
 
 
+  /** Get the logged in users data */
   getUserData(): Observable<Res<User>> {
     const to = join(this.route, 'find');
 
+    if(!this.account.token) throw 'User not logged in';
+
     return from(new Promise<Res<User>>((res, rej) => {
       this.client.get<DbRes<User>>(to).subscribe(dbres => {
-        if (dbres.isFaulted || dbres.isCanceled)
+        if (isDbResValid(dbres))
           rej(dbres.exception);
         else
           res(dbres.result);
