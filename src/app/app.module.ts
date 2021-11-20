@@ -15,6 +15,7 @@ import { UserLayoutComponent } from './areas/user/user-layout/user-layout.compon
 import { AccountLayoutComponent } from './areas/account/account-layout/account-layout.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { MobileNavigationComponent } from './areas/shared/layout/mobile-navigation/mobile-navigation.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     NotFoundComponent,
     UserLayoutComponent,
     AccountLayoutComponent,
+    MobileNavigationComponent,
   ],
   imports: [
     BrowserModule,

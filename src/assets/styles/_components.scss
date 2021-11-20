@@ -5,232 +5,230 @@
 //- Components
 
 // anchor tags
+// a,
+// .link {
+//   color: lighten($color: $primary, $amount: 2%);
+//   text-decoration: none;
+//   cursor: pointer;
+// }
 
-a,
-.link {
-  color: lighten($color: $primary, $amount: 2%);
-  text-decoration: none;
-  cursor: pointer;
-}
+// a:hover,
+// .link:hover {
+//   @include trans();
+//   color: lighten($color: $primary, $amount: 10%);
+// }
 
-a:hover,
-.link:hover {
-  @include trans();
-  color: lighten($color: $primary, $amount: 10%);
-}
+// a:active,
+// .link:active {
+//   @include trans(0.03s);
+//   color: lighten($color: $primary, $amount: 20%);
+//   text-shadow: 0 0 0;
+// }
 
-a:active,
-.link:active {
-  @include trans(0.03s);
-  color: lighten($color: $primary, $amount: 20%);
-  text-shadow: 0 0 0;
-}
+// .link-text {
+//   color: $text-1;
+//   text-decoration: none;
+//   cursor: pointer;
+//   @include trans;
+// }
 
-.link-text {
-  color: $text-1;
-  text-decoration: none;
-  cursor: pointer;
-  @include trans;
-}
+// .link-text:hover {
+//   color: $primary;
+// }
 
-.link-text:hover {
-  color: $primary;
-}
+// //- Btn, Button
 
-//- Btn, Button
+// // size and alignment
+// .btn {
+//   padding: 6px 12px;
+//   cursor: pointer;
+//   min-width: 108px;
+//   @include rowr;
+//   align-items: center;
+//   justify-content: center;
+//   border-radius: $button-border-radius;
+//   white-space: nowrap;
 
-// size and alignment
-.btn {
-  padding: 6px 12px;
-  cursor: pointer;
-  min-width: 108px;
-  @include rowr;
-  align-items: center;
-  justify-content: center;
-  border-radius: $button-border-radius;
-  white-space: nowrap;
+//   > span {
+//     color: inherit;
+//   }
 
-  > span {
-    color: inherit;
-  }
+//   /** !!! only spans allowed as content */
+//   // only the text span
+//   span:not(.material-icons) {
+//     font-size: 1.15em;
+//   }
 
-  /** !!! only spans allowed as content */
-  // only the text span
-  span:not(.material-icons) {
-    font-size: 1.15em;
-  }
+//   // space between icon and text (only if there is an icon)
+//   > .material-icons + span:nth-child(2) {
+//     margin-right: 8px;
+//   }
+// }
 
-  // space between icon and text (only if there is an icon)
-  > .material-icons + span:nth-child(2) {
-    margin-right: 8px;
-  }
-}
+// // color, effects and hierarchy
 
-// color, effects and hierarchy
+// .btn-primary {
+//   background-color: $primary;
+//   color: $text-d-1;
+//   @include trans();
+// }
 
-.btn-primary {
-  background-color: $primary;
-  color: $text-d-1;
-  @include trans();
-}
+// .btn-primary:hover {
+//   background-color: lighten($color: $primary, $amount: 6%);
+//   @include trans(0.2s);
+//   color: $text-d-1;
+// }
 
-.btn-primary:hover {
-  background-color: lighten($color: $primary, $amount: 6%);
-  @include trans(0.2s);
-  color: $text-d-1;
-}
+// .btn-primary:active {
+//   @include trans(0.05s);
+// }
 
-.btn-primary:active {
-  @include trans(0.05s);
-  box-shadow: 0 0 0 4px $click-effect-color;
-}
+// .btn-outline {
+//   background-color: transparent;
+//   color: #4b4b4b;
+//   border: #4b4b4b 2px solid;
+//   // ! Compensate for border width
+//   padding: 4px 10px;
+//   @include trans();
+// }
 
-.btn-outline {
-  background-color: transparent;
-  color: #4b4b4b;
-  border: #4b4b4b 2px solid;
-  // ! Compensate for border width
-  padding: 4px 10px;
-  @include trans();
-}
+// .btn-outline:hover {
+//   color: lighten($color: #4b4b4b, $amount: 8%);
+//   border-color: lighten($color: #4b4b4b, $amount: 8%);
+// }
 
-.btn-outline:hover {
-  color: lighten($color: #4b4b4b, $amount: 8%);
-  border-color: lighten($color: #4b4b4b, $amount: 8%);
-}
+// .btn-outline:active {
+//   @include trans(0.05s);
+//   color: $primary;
+//   border-color: $primary;
+// }
 
-.btn-outline:active {
-  @include trans(0.05s);
-  color: $primary;
-  border-color: $primary;
-}
+// .btn-invis {
+//   background-color: transparent;
+//   color: $text-2;
+//   @include trans();
+// }
 
-.btn-invis {
-  background-color: transparent;
-  color: $text-2;
-  @include trans();
-}
+// .btn-invis:hover {
+//   background-color: transparentize($color: #000, $amount: 0.95);
+// }
 
-.btn-invis:hover {
-  background-color: transparentize($color: #000, $amount: 0.95);
-}
+// .btn-invis:active {
+//   @include trans(0.05s);
+//   background-color: transparentize($color: #000, $amount: 0.88);
+// }
 
-.btn-invis:active {
-  @include trans(0.05s);
-  background-color: transparentize($color: #000, $amount: 0.88);
-}
+// .btn-big {
+//   cursor: pointer;
+//   font-size: 1.25em;
+//   color: $background;
+//   background: linear-gradient(90deg, $secondary 0%, $primary 100%);
+//   padding: 8px (12px + 32px);
+//   @include circle;
+//   box-shadow: 0px 0px 0px 8px rgba(39, 173, 212, 0.08),
+//     0px 8px 20px 1px rgba(0, 0, 0, 0.1);
+//   text-align: center;
+//   @include trans;
+//   user-select: none;
+// }
 
-.btn-big {
-  cursor: pointer;
-  font-size: 1.25em;
-  color: $background;
-  background: linear-gradient(90deg, $secondary 0%, $primary 100%);
-  padding: 8px (12px + 32px);
-  @include circle;
-  box-shadow: 0px 0px 0px 8px rgba(39, 173, 212, 0.08),
-    0px 8px 20px 1px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  @include trans;
-  user-select: none;
-}
+// .btn-big:hover {
+//   opacity: 0.88;
+// }
 
-.btn-big:hover {
-  opacity: 0.88;
-}
+// .btn-big:active {
+//   @include trans(0.05s);
+//   opacity: 0.78;
+//   box-shadow: 0px 0px 0px 12px rgba(39, 173, 212, 0.2);
+// }
 
-.btn-big:active {
-  @include trans(0.05s);
-  opacity: 0.78;
-  box-shadow: 0px 0px 0px 12px rgba(39, 173, 212, 0.2);
-}
+// .btn-icon {
+//   background-color: transparent;
+//   padding: 4px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   align-content: center;
+//   text-align: center;
+//   color: $text-3;
+//   cursor: pointer;
+//   @include trans;
+// }
 
-.btn-icon {
-  background-color: transparent;
-  padding: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-  color: $text-3;
-  cursor: pointer;
-  @include trans;
-}
+// .btn-icon:hover {
+//   color: $text-1;
+// }
 
-.btn-icon:hover {
-  color: $text-1;
-}
+// //- Card
 
-//- Card
+// @mixin mat {
+//   background-color: $card-background;
+//   border-radius: $card-border-radius;
+// }
 
-@mixin mat {
-  background-color: $card-background;
-  border-radius: $card-border-radius;
-}
+// .mat {
+//   @include mat;
+// }
 
-.mat {
-  @include mat;
-}
+// .card-shadow {
+//   box-shadow: $card-shadow;
+// }
 
-.card-shadow {
-  box-shadow: $card-shadow;
-}
+// .card-radius {
+//   border-radius: $card-border-radius;
+// }
 
-.card-radius {
-  border-radius: $card-border-radius;
-}
+// .card-padding {
+//   padding: $card-padding;
+// }
 
-.card-padding {
-  padding: $card-padding;
-}
+// .card-border {
+//   border: $card-border-color 1 solid;
+// }
 
-.card-border {
-  border: $card-border-color 1 solid;
-}
+// .card {
+//   @include mat;
+//   padding: $card-padding;
+//   box-shadow: $card-shadow;
+//   overflow: hidden;
+// }
 
-.card {
-  @include mat;
-  padding: $card-padding;
-  box-shadow: $card-shadow;
-  overflow: hidden;
-}
+// .card-butt {
+//   border-bottom: 0;
+//   box-shadow: $card-shadow, 0 8px 0 0 $primary;
+//   margin-bottom: 8px;
+// }
 
-.card-butt {
-  border-bottom: 0;
-  box-shadow: $card-shadow, 0 8px 0 0 $primary;
-  margin-bottom: 8px;
-}
+// //- form
 
-//- form
+// .textbox {
+//   background-color: $control-backgorund;
+//   padding: 6px 8px;
+//   @include placeholder($control-placeholder);
+//   border-radius: 12px;
+//   font-size: 1em;
+//   color: $text-2;
+//   border: 0;
+//   min-width: 50px;
+//   direction: rtl;
+// }
 
-.textbox {
-  background-color: $control-backgorund;
-  padding: 6px 8px;
-  @include placeholder($control-placeholder);
-  border-radius: 12px;
-  font-size: 1em;
-  color: $text-2;
-  border: 0;
-  min-width: 50px;
-  direction: rtl;
-}
-
-.combobox {
-  background-color: $control-backgorund;
-  padding: 5px 8px;
-  border-left: $control-backgorund solid 8px;
-  border-radius: 12px;
-  font-size: 1em;
-  color: $text-2;
-  min-width: 50px;
-  direction: rtl;
-}
+// .combobox {
+//   background-color: $control-backgorund;
+//   padding: 5px 8px;
+//   border-left: $control-backgorund solid 8px;
+//   border-radius: 12px;
+//   font-size: 1em;
+//   color: $text-2;
+//   min-width: 50px;
+//   direction: rtl;
+// }
 
 //- layout
 
 $break-1: 1600px;
 $break-2: 1366px;
-$break-3: 900px;
+$break-3: 864px;
 $break-4: 532px;
 
 .container {
@@ -273,17 +271,17 @@ $break-4: 532px;
   width: 100%;
 }
 
-$gap-tween-component: 48px;
+// $gap-tween-component: 48px;
 
-.gap-tween-component-down {
-  margin-bottom: $gap-tween-component;
-}
+// .gap-tween-component-down {
+//   margin-bottom: $gap-tween-component;
+// }
 
-.gap-tween-component-up {
-  margin-top: $gap-tween-component;
-}
+// .gap-tween-component-up {
+//   margin-top: $gap-tween-component;
+// }
 
-.biscuit {
-  width: 100%;
-  margin-bottom: -8px;
-}
+// .biscuit {
+//   width: 100%;
+//   margin-bottom: -8px;
+// }

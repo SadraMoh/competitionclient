@@ -1,10 +1,16 @@
+//- Sizes
+
+$header-navbar-height: 56px;
+$mobile-navbar-height: 48px;
+$footer-height: 50px;
+
 //- Variables
 
 $primary: #27add4;
 $secondary: #1e86d1;
 
-$background: #fcfcfc;
-$background-d: #363b3a;
+$background: #FAFAFA;
+$background-d: #B0CFD1;
 
 $stain: #f5f5f5;
 
@@ -24,13 +30,15 @@ $icon-light: #a0a0a0;
 //- Card
 
 $card-background: #fff;
-$card-border-color: #e7e7e7;
+$card-butt-color: #D2D2D2;
+$card-border-color: #E0E0E0;
 $card-border-radius: 16px;
 $card-padding: 12px;
 
 $card-shadow: 0 4px 16px 1px rgba(0, 0, 0, 0.16);
+$card-butt: 0px 4px 0px 0px $card-butt-color;
 
-$control-backgorund: #f6f6f6;
+$control-backgorund: #F5F5F5;
 $control-placeholder: #bfbfbf;
 
 $slight-shade-background: #f5f5f5;
@@ -53,14 +61,3 @@ $blue-text: #4fbddd;
 
 $button-border-radius: 4px;
 
-$click-effect-color: transparentize($primary, 0.72);
-
-// (Name, Color, Bg) ...
-$cat-colors: 0 #dd4fcf #f3d0fc, 1 #dd934f #fce2d0, 2 #4fdd99 #d0fce1,
-  3 #4fbddd #d0f2fc;
-
-//- Sizes
-
-$header-banner-height: 56px;
-
-$header-navbar-height: 48px;

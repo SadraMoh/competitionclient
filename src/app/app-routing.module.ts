@@ -33,9 +33,9 @@ const routes: Routes = [
           { path: '**', redirectTo: 'login' },
         ]
       },
-      // user 
+      // profile 
       {
-        path: 'user', component: UserLayoutComponent, children: []
+        path: 'profile', component: UserLayoutComponent, children: []
       }
     ]
   },

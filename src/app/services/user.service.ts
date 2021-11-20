@@ -4,11 +4,11 @@ import { environment } from 'src/environments/environment';
 import { join } from '@fireflysemantics/join';
 import { from, Observable } from 'rxjs';
 import { Signin } from '../models/account/Signin';
-import { Res } from '../models/Res';
+import { isResVaild, Res } from '../models/Res';
 import { HttpClient } from '@angular/common/http';
 import User from 'src/app/models/user/User';
 import { DbRes, isDbResValid } from '../models/DbRes';
-import { ApiService } from './apiservice';
+import { ApiService } from './ApiService';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,11 @@ export class UserService implements ApiService {
     if(!this.account.token) throw 'User not logged in';
 
     return from(new Promise<Res<User>>((res, rej) => {
-      this.client.get<DbRes<User>>(to).subscribe(dbres => {
-        if (isDbResValid(dbres))
-          rej(dbres.exception);
+      this.client.get<Res<User>>(to).subscribe(result => {
+        if (isResVaild(result))
+          res(result);
         else
-          res(dbres.result);
+          rej(result.message);
       });
     }))
   }

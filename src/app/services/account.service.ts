@@ -8,7 +8,7 @@ import { isResVaild, Res } from '../models/Res';
 import { join } from '@fireflysemantics/join';
 import { Signup } from '../models/account/Signup';
 import { DbRes, isDbResValid } from '../models/DbRes';
-import { ApiService } from './apiservice';
+import { ApiService } from './ApiService';
 
 @Injectable({
   providedIn: 'root'

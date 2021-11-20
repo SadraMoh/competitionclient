@@ -1,0 +1,62 @@
+
+
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/utility';
+
+.header {
+  @include row;
+
+  .user {
+    @include row;
+
+    img.avatar {
+      @include circle;
+      border: #efefef solid 1px;
+    }
+
+    .username {
+      color: $text-2;
+      font-size: 1em;
+
+      margin-right: 8px;
+    }
+  }
+
+  //-----------------//
+
+  .desktop-nav {
+    ul {
+      > li {
+        > a {
+        }
+      }
+    }
+  }
+
+  //-----------------//
+
+  .left {
+    .points {
+      img {
+      }
+
+      label {
+      }
+
+      //-----//
+
+      .coins {
+        img {
+        }
+
+        label {
+        }
+      }
+
+      //-----//
+
+      .logo {
+      }
+    }
+  }
+}
