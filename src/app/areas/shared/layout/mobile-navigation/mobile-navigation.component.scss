@@ -1,0 +1,67 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.mobile-nav {
+  @include rowr;
+  background-color: $card-background;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px 20px;
+  box-shadow: 0 -4px 16px transparentize($color: #000, $amount: 0.9);
+  justify-content: center;
+  //-
+  display: none;
+
+  > ul {
+    @include rowr;
+    flex: auto;
+    justify-content: space-between;
+    max-width: 764px;
+
+    a {
+      @include row;
+      color: #8f5ff4;
+      align-items: center;
+      width: 150px;
+      padding: 8px;
+      @include circle;
+      justify-content: center;
+
+      .material-icon {
+      }
+
+      span {
+        margin-right: 6px;
+      }
+    }
+
+    a.active {
+      background-color: #f1eaff;
+    }
+  }
+}
+
+@media screen and (max-width: $break-3) {
+  .mobile-nav {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .mobile-nav {
+    > ul {
+      a {
+        width: 100px;
+        
+        .material-icon {
+        }
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}

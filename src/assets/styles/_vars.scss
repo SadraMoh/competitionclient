@@ -1,10 +1,16 @@
 //- Sizes
 
-$header-navbar-height: 56px;
+$header-navbar-height: 68px;
 $mobile-navbar-height: 48px;
 $footer-height: 50px;
 
 //- Variables
+
+$break-1: 1600px;
+$break-2: 1366px;
+/** verschrankung */
+$break-3: 864px;
+$break-4: 532px;
 
 $primary: #27add4;
 $secondary: #1e86d1;

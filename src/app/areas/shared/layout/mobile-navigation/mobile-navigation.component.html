@@ -1,1 +1,24 @@
-<p>mobile-navigation works!</p>
+<nav class="mobile-nav">
+  <ul>
+    <li>
+      <a routerLink="/profile" routerLinkActive="active">
+        <span class="title">پروفایل</span>
+        <i class="material-icons">face</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+        <span class="title">خانه</span>
+        <i class="material-icons">home</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/contact" routerLinkActive="active">
+        <span class="title">درباره</span>
+        <i class="material-icons">info</i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="clearfix" role="none"></div>

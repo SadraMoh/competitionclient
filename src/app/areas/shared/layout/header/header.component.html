@@ -1,12 +1,12 @@
 <header class="header">
   <div class="user">
-    <img src="" alt="" class="avatar">
+    <img src="/assets/png/avatar.png" alt="" class="avatar">
     <h4 class="username">کاربر کاربرزاده</h4>
   </div>
   <nav class="desktop-nav">
     <ul>
       <li>
-        <a routerLink="/" routerLinkActive="active">خانه</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true}">خانه</a>
       </li>
       <li>
         <a routerLink="/profile" routerLinkActive="active">پروفایل</a>
@@ -15,18 +15,24 @@
         <a routerLink="/contact" routerLinkActive="active">تماس باما</a>
       </li>
     </ul>
-  </nav> 
+  </nav>
   <div class="left">
     <div class="points">
-      <img src="" alt="">
+      <div class="icon">
+        <img src="/assets/svg/score.svg" alt="">
+      </div>
       <label>100</label>
     </div>
     <div class="coins">
-      <img src="" alt="">
+      <div class="icon">
+        <img src="/assets/svg/coin.svg" alt="">
+      </div>
       <label>120</label>
     </div>
     <a routerLink="/" class="logo">
-      <img src="" alt="">
+      <img src="/assets/png/owl.png" alt="" width="48" height="48">
     </a>
   </div>
 </header>
+
+<div class="clearfix" role="none"></div>

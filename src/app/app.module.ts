@@ -16,6 +16,7 @@ import { AccountLayoutComponent } from './areas/account/account-layout/account-l
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { MobileNavigationComponent } from './areas/shared/layout/mobile-navigation/mobile-navigation.component';
+import { ContactComponent } from './areas/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MobileNavigationComponent } from './areas/shared/layout/mobile-navigati
     UserLayoutComponent,
     AccountLayoutComponent,
     MobileNavigationComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,31 +1,46 @@
-
-
-@import '/src/assets/styles/vars';
-@import '/src/assets/styles/utility';
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
 
 .header {
-  @include row;
+  @include rowr;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: $card-background;
+  box-shadow: 0 4px 16px transparentize($color: #000, $amount: 0.9);
+  // height: $header-navbar-height;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
 
   .user {
-    @include row;
+    @include rowr;
+    align-items: center;
 
     img.avatar {
       @include circle;
-      border: #efefef solid 1px;
+      width: 48px;
+      height: 48px;
     }
 
     .username {
       color: $text-2;
-      font-size: 1em;
+      font-size: 1.2em;
 
-      margin-right: 8px;
+      margin-right: 12px;
     }
   }
 
   //-----------------//
 
   .desktop-nav {
+    visibility: hidden;
+    margin-left: auto;
+    @include flex;
+
     ul {
+      @include rowr;
       > li {
         > a {
         }
@@ -36,27 +51,77 @@
   //-----------------//
 
   .left {
+    @include rowr;
+    align-items: center;
+
     .points {
-      img {
+      @include rowr;
+      align-items: center;
+      margin-left: 10px;
+
+      .icon {
+        @include row;
+        height: 24px;
+        border-radius: 14px;
+        background-color: #b9f5a4;
+        padding: 5px;
+        margin-left: 5px;
+
+        img {
+          width: 24px;
+          margin: auto;
+        }
       }
 
       label {
+        color: #64ec24;
+        font-size: 1.1em;
       }
+    }
 
-      //-----//
+    //-----//
 
-      .coins {
+    .coins {
+      @include rowr;
+      align-items: center;
+      margin-left: 10px;
+
+      .icon {
+        @include row;
+        height: 24px;
+        border-radius: 14px;
+        background-color: #f5e3a4;
+        padding: 5px;
+        margin-left: 5px;
+
         img {
-        }
-
-        label {
+          width: 24px;
+          margin: auto;
         }
       }
 
-      //-----//
+      label {
+        color: #ecc024;
+        font-size: 1.1em;
+      }
+    }
 
-      .logo {
+    //-----//
+
+    .logo {
+      @include flex;
+      justify-content: center;
+      background-color: #f9f9f9;
+      border-radius: 14px;
+
+      > img {
+        width: 48px;
+        height: 48px;
       }
     }
   }
+}
+
+.clearfix {
+  height: $header-navbar-height;
 }

@@ -4,6 +4,7 @@ import { AppComponent } from './app/app.component';
 import { AccountLayoutComponent } from './areas/account/account-layout/account-layout.component';
 import { LoginComponent } from './areas/account/login/login.component';
 import { SignupComponent } from './areas/account/signup/signup.component';
+import { ContactComponent } from './areas/contact/contact.component';
 import { IndexComponent } from './areas/home/index/index.component';
 import { NotFoundComponent } from './areas/shared/err/not-found/not-found.component';
 import { LayoutComponent } from './areas/shared/layout/layout.component';
@@ -13,13 +14,6 @@ const routes: Routes = [
   {
     // app
     path: '', component: AppComponent, children: [
-      // main 
-      {
-        path: '', component: LayoutComponent, children: [
-          { path: '', component: IndexComponent },
-          { path: 'home', redirectTo: '/' },
-        ]
-      },
       // account
       {
         path: 'account', component: AccountLayoutComponent, children: [
@@ -29,13 +23,28 @@ const routes: Routes = [
           // signup 
           { path: 'signup', component: SignupComponent },
           { path: 'register', redirectTo: 'signup' },
-          
+
           { path: '**', redirectTo: 'login' },
         ]
       },
-      // profile 
+      // main 
       {
-        path: 'profile', component: UserLayoutComponent, children: []
+        path: '', component: LayoutComponent, children: [
+          { path: '', component: IndexComponent },
+          { path: 'home', redirectTo: '/' },
+          // profile 
+          {
+            path: 'profile', component: UserLayoutComponent, children: []
+          },
+          // contact 
+          {
+            path: 'contact', component: ContactComponent, children: []
+          }
+        ]
+      },
+      // tournament
+      {
+        path: 'tournament', redirectTo: '', children: [ ]
       }
     ]
   },
