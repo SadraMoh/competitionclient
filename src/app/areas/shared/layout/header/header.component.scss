@@ -53,22 +53,24 @@
 
         > a {
           background-color: transparent;
-          color: #8f5ff4;
           padding: 4px 8px;
           min-width: 72px;
           @include circle;
           text-align: center;
           border: 1px solid transparent;
           @include transl;
+          color: $text-3;
         }
 
         a:hover {
           border-color: #e7e0f8;
+          color: #8f5ff4;
           @include transs;
         }
 
         > a.active {
           background-color: #f1eaff;
+          color: #8f5ff4;
         }
       }
       // margin

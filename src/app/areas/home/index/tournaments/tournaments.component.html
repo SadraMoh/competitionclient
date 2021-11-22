@@ -1,0 +1,9 @@
+<section class="tournaments">
+  <div class="category-selector">
+    <button class="category active">مسابقه ها</button>
+    <button class="category">تستی</button>
+  </div>
+  <div class="card card-butt">
+    <app-tournament *ngFor="let tournament of tournaments" [tournament]="tournament"></app-tournament>
+  </div>
+</section>

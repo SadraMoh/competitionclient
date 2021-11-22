@@ -4,5 +4,6 @@ export interface Tournament {
   title: string;
   isMultiPlayer: boolean;
   imageUrl: string;
-  rounds?: Round[]
+  rounds?: Round[];
+  fee: number;
 }

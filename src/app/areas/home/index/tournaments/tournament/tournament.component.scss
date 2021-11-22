@@ -1,0 +1,44 @@
+.tournament {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: "challenge title" "challenge information";
+  
+  h3 {
+    grid-area: title;
+  }
+
+  .informations {
+    grid-area: information;
+    
+    .info {
+      .material-icons {
+      }
+
+      .col {
+        h5 {
+        }
+
+        label {
+        }
+      }
+    }
+  }
+
+  .challenge {
+    grid-area: challenge;
+    
+    label {
+    }
+
+    .coin-count {
+      .coin {
+        img {
+        }
+      }
+
+      label {
+      }
+    }
+  }
+}

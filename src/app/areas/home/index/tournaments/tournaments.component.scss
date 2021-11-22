@@ -1,0 +1,42 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.tournaments {
+  @include col;
+
+  .category-selector {
+    margin-left: auto;
+    @include rowr;
+    background-color: $control-backgorund;
+    position: relative;
+    overflow: hidden;
+    border-radius: $card-border-radius $card-border-radius 0 0;
+
+    .category {
+      color: $text-4;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 1.1em;
+      min-width: 90px;
+      border-radius: $card-border-radius 0 0 0;
+      background-color: $control-backgorund;
+      cursor: pointer;
+    }
+
+    .category:hover {
+      background-color: darken($control-backgorund, $amount: 2%);
+    }
+
+    .category.active {
+      background-color: $card-background;
+      color: $text-3;
+      box-shadow: 0 0 6px transparentize(#000, 0.92);
+      position: relative;
+    }
+  }
+
+  .card {
+    border-radius: $card-border-radius 0 $card-border-radius $card-border-radius;
+
+  }
+}

@@ -18,6 +18,10 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { MobileNavigationComponent } from './areas/shared/layout/mobile-navigation/mobile-navigation.component';
 import { ContactComponent } from './areas/contact/contact.component';
 import { ProfileComponent } from './areas/user/profile/profile.component';
+import { TournamentsComponent } from './areas/home/index/tournaments/tournaments.component';
+import { LeaderboardsComponent } from './areas/home/index/leaderboards/leaderboards.component';
+import { HistoryComponent } from './areas/home/index/history/history.component';
+import { TournamentComponent } from './areas/home/index/tournaments/tournament/tournament.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { ProfileComponent } from './areas/user/profile/profile.component';
     MobileNavigationComponent,
     ContactComponent,
     ProfileComponent,
+    TournamentsComponent,
+    LeaderboardsComponent,
+    HistoryComponent,
+    TournamentComponent,
   ],
   imports: [
     BrowserModule,

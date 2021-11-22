@@ -159,45 +159,45 @@ a:active,
 //   color: $text-1;
 // }
 
-// //- Card
+//- Card
 
-// @mixin mat {
-//   background-color: $card-background;
-//   border-radius: $card-border-radius;
-// }
+@mixin mat {
+  background-color: $card-background;
+  border-radius: $card-border-radius;
+}
 
-// .mat {
-//   @include mat;
-// }
+.mat {
+  @include mat;
+}
 
-// .card-shadow {
-//   box-shadow: $card-shadow;
-// }
+.card-shadow {
+  box-shadow: $card-shadow;
+}
 
-// .card-radius {
-//   border-radius: $card-border-radius;
-// }
+.card-radius {
+  border-radius: $card-border-radius;
+}
 
-// .card-padding {
-//   padding: $card-padding;
-// }
+.card-padding {
+  padding: $card-padding;
+}
 
-// .card-border {
-//   border: $card-border-color 1 solid;
-// }
+.card-border {
+  border: $card-border-color 1 solid;
+}
 
-// .card {
-//   @include mat;
-//   padding: $card-padding;
-//   box-shadow: $card-shadow;
-//   overflow: hidden;
-// }
+.card {
+  @include mat;
+  padding: $card-padding;
+  box-shadow: $card-shadow;
+  overflow: hidden;
+}
 
-// .card-butt {
-//   border-bottom: 0;
-//   box-shadow: $card-shadow, 0 8px 0 0 $primary;
-//   margin-bottom: 8px;
-// }
+.card-butt {
+  border-bottom: 0;
+  box-shadow: $card-shadow, 0 8px 0 0 #DfDcDf;
+  margin-bottom: 8px;
+}
 
 // //- form
 
@@ -226,7 +226,6 @@ a:active,
 
 //- layout
 
-
 .container {
   margin-left: auto;
   margin-right: auto;
@@ -236,19 +235,21 @@ a:active,
 
 @media screen and (max-width: $break-3) {
   .container {
-  min-height: calc(100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height});
+    min-height: calc(
+      100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height}
+    );
   }
 }
 
 @media screen and (min-width: $break-1) {
   .container {
-    width: 1500px;
+    width: 1400px;
   }
 }
 
 @media screen and (max-width: $break-1) and (min-width: $break-2) {
   .container {
-    width: 1300px;
+    width: 1200px;
   }
 }
 
@@ -288,3 +289,7 @@ a:active,
 //   width: 100%;
 //   margin-bottom: -8px;
 // }
+
+.page-padding {
+  padding: 20px 0;
+}
