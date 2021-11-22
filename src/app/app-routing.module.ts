@@ -8,6 +8,7 @@ import { ContactComponent } from './areas/contact/contact.component';
 import { IndexComponent } from './areas/home/index/index.component';
 import { NotFoundComponent } from './areas/shared/err/not-found/not-found.component';
 import { LayoutComponent } from './areas/shared/layout/layout.component';
+import { ProfileComponent } from './areas/user/profile/profile.component';
 import { UserLayoutComponent } from './areas/user/user-layout/user-layout.component';
 
 const routes: Routes = [
@@ -34,7 +35,9 @@ const routes: Routes = [
           { path: 'home', redirectTo: '/' },
           // profile 
           {
-            path: 'profile', component: UserLayoutComponent, children: []
+            path: 'profile', component: UserLayoutComponent, children: [
+              { path: '', component: ProfileComponent }
+            ]
           },
           // contact 
           {
