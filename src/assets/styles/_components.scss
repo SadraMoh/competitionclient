@@ -231,6 +231,13 @@ a:active,
   margin-left: auto;
   margin-right: auto;
   @include col;
+  min-height: calc(100vh - #{$header-navbar-height} - #{$footer-height});
+}
+
+@media screen and (max-width: $break-3) {
+  .container {
+  min-height: calc(100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height});
+  }
 }
 
 @media screen and (min-width: $break-1) {

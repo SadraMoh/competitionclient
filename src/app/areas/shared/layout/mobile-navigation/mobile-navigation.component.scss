@@ -43,9 +43,19 @@
   }
 }
 
+.clearfix {
+  height: $mobile-navbar-height;
+  //-
+  display: none;
+}
+
 @media screen and (max-width: $break-3) {
   .mobile-nav {
     display: flex;
+  }
+
+  .clearfix {
+    display: block;
   }
 }
 

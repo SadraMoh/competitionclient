@@ -1,0 +1,14 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.footer {
+  height: $footer-height;
+  background: darken($color: $background, $amount: 4%);
+  @include row;
+
+  > p {
+    margin: auto;
+    color: $text-4;
+  }
+  
+}

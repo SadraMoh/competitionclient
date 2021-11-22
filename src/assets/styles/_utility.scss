@@ -73,6 +73,14 @@
   transition: all ease $seconds;
 }
 
+@mixin transl() {
+  @include trans(0.32s);
+}
+
+@mixin transs {
+  @include trans(0.16s);
+}
+
 @mixin circle() {
   border-radius: 5000px;
 }
@@ -94,6 +102,14 @@
   display: -webkit-box;
   -webkit-line-clamp: $line; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+@mixin maxlinewidth($width: 228px) {
+  max-width: $width;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @mixin grid($width: 220px) {

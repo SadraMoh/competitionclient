@@ -26,25 +26,61 @@
 
     .username {
       color: $text-2;
-      font-size: 1.2em;
-
+      max-width: 228px;
       margin-right: 12px;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      direction: rtl;
     }
   }
 
   //-----------------//
 
   .desktop-nav {
-    visibility: hidden;
-    margin-left: auto;
     @include flex;
+    margin-left: auto;
+    margin-right: 1.5em;
+    //-
+    display: none;
 
     ul {
       @include rowr;
       > li {
+        display: flex;
+        align-items: center;
+
         > a {
+          background-color: transparent;
+          color: #8f5ff4;
+          padding: 4px 8px;
+          min-width: 72px;
+          @include circle;
+          text-align: center;
+          border: 1px solid transparent;
+          @include transl;
+        }
+
+        a:hover {
+          border-color: #e7e0f8;
+          @include transs;
+        }
+
+        > a.active {
+          background-color: #f1eaff;
         }
       }
+      // margin
+      > li:not(:last-child) {
+        margin-left: 0.5em;
+      }
+    }
+  }
+
+  @media screen and (min-width: $break-3) {
+    .desktop-nav {
+      display: flex;
     }
   }
 
