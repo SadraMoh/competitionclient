@@ -12,7 +12,11 @@
 * {
   padding: 0;
   margin: 0;
-  font-family: "iranyekanregular", 'B Yekan';
+  font-family: IRANYekan, "iranyekanregular", "B Yekan", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+
   outline: none;
   border: 0;
   text-align: right;
@@ -33,20 +37,9 @@ img {
   object-position: center;
 }
 
-#modal-group {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 100;
-  @include col;
-  padding: 32px;
-  background-color: rgba(0,0,0,.64);
-}
-
 @media only screen and (max-width: $break-3) {
-  html,body {
+  html,
+  body {
     font-size: 0.9em;
   }
 }

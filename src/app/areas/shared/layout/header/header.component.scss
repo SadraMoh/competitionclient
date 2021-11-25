@@ -2,6 +2,7 @@
 @import "/src/assets/styles/utility";
 
 .header {
+  z-index: 1000;
   @include rowr;
   justify-content: space-between;
   align-items: center;

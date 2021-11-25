@@ -1,25 +1,54 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
 .tournament {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas: "challenge title" "challenge information";
-  
-  h3 {
+  overflow: hidden;
+  border-radius: $card-border-radius;
+  padding: 12px;
+  background: linear-gradient(94.42deg, #e2f95a 0%, #32eb7c 100%);
+  color: white;
+
+  .title {
     grid-area: title;
+    font-size: 1.5em;
+    margin-bottom: 4px;
   }
 
   .informations {
     grid-area: information;
-    
+    @include rowr;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+
     .info {
+      @include rowr;
+
       .material-icons {
+        width: 20px;
+        margin: auto 0;
+        margin-left: 8px;
+      }
+
+      @media screen and (max-width: 432px) {
+        .material-icons {
+          display: none
+        }
       }
 
       .col {
+        @include col;
+
         h5 {
+          font-size: 1em;
         }
 
         label {
+          font-size: .8em;
         }
       }
     }
@@ -27,17 +56,56 @@
 
   .challenge {
     grid-area: challenge;
-    
-    label {
-    }
+    @include col;
+    align-items: center;
+    justify-content: center;
 
-    .coin-count {
-      .coin {
-        img {
-        }
+    .btn {
+      background-color: $card-background;
+      padding: 8px;
+      border-radius: $card-border-radius;
+      // box-shadow: $card-butt;
+      @include col;
+      min-width: 96px;
+      cursor: pointer;
+
+      * {
+        cursor: pointer;
+      }
+      
+      > label {
+        font-size: 1.4em;
+        text-align: center;
+        margin-bottom: 4px;
+        color: #4bcf1f;
+
       }
 
-      label {
+      .coin-count {
+        @include rowr;
+        background-color: #fff3ca;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 0 auto;
+        min-width: 72px;
+
+        .coin {
+          padding: 0 6px;
+          background-color: #ffe99a;
+          align-items: center;
+          @include row;
+
+          img {
+          }
+        }
+
+        label {
+          padding: 0 6px;
+          font-size: 1.1em;
+          color: #ebc84b;
+          text-align: center;
+          margin-bottom: 4px;
+        }
       }
     }
   }

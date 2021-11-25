@@ -1,5 +1,5 @@
 <div class="tournament">
-  <h3>{{ tournament.title }}</h3>
+  <h3 class="title">{{ tournament.title }}</h3>
   <div class="informations">
     <div class="info part-takers">
       <i class="material-icons">people</i>
@@ -9,14 +9,14 @@
       </div>
     </div>
     <div class="info question-count">
-      <i class="material-icons">question</i>
+      <i class="material-icons">help</i>
       <div class="col">
         <h5>20</h5>
         <label>سوال</label>
       </div>
     </div>
     <div class="info difficulty-level">
-      <i class="material-icons">fire</i>
+      <i class="material-icons">local_fire_department</i>
       <div class="col">
         <h5>بسیار آسان</h5>
         <label>درجه سختی</label>
@@ -24,12 +24,14 @@
     </div>
   </div>
   <div class="challenge">
-    <label>شرکت</label>
-    <div class="coin-count">
-      <div class="coin">
-        <img src="/assets/svg/coin.svg" alt="">
+    <button class="btn">
+      <label>شرکت</label>
+      <div class="coin-count">
+        <div class="coin">
+          <img src="/assets/svg/coin.svg" alt="">
+        </div>
+        <label>{{ tournament.fee }}</label>
       </div>
-      <label>{{ tournament.fee }}</label>
-    </div>
+    </button>
   </div>
 </div>

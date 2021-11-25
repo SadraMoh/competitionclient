@@ -4,6 +4,7 @@
 .tournaments {
   @include col;
 
+
   .category-selector {
     margin-left: auto;
     @include rowr;
@@ -37,6 +38,9 @@
 
   .card {
     border-radius: $card-border-radius 0 $card-border-radius $card-border-radius;
-
+    @include col;
+    gap: 8px;
   }
+
 }
+

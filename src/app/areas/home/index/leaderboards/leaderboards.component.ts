@@ -9,6 +9,14 @@ export class LeaderboardsComponent implements OnInit {
 
   constructor() { }
 
+  leads: any[] = [
+    {},
+    {isSelf:true},
+    {},
+    {},
+    {},
+  ]
+  
   ngOnInit(): void {
   }
 

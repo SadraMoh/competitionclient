@@ -1,0 +1,118 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.leaderboards {
+  @include col;
+  padding: 0;
+
+  .header {
+    background-color: $card-background;
+    @include rowr;
+    border-bottom: 1px solid $card-border-color;
+    padding: 10px $card-padding;
+
+    .score {
+      width: 24px;
+    }
+
+    .title {
+      margin-right: 8px;
+      font-size: 1.3em;
+    }
+  }
+
+  .leads {
+    padding: 0;
+    background-color: $control-backgorund;
+
+    .lead {
+      @include rowr;
+      align-items: center;
+      padding: 6px 12px;
+
+      .place {
+        @include flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $card-background;
+        border: 1px solid $card-border-color;
+        border-radius: 8px;
+        font-size: 1.2em;
+        text-align: center;
+        min-width: 2.5ch;
+        margin: auto 0;
+        margin-left: 8px;
+        color: $text-1;
+      }
+
+      img {
+        @include circle;
+        width: 42px;
+        border: 3px solid $background;
+        margin-left: 8px;
+      }
+
+      .name {
+        font-size: 1.2em;
+        color: $text-3;
+      }
+
+      .score {
+        margin-right: auto;
+        background-color: $card-background;
+        padding: 4px;
+        border-radius: 8px;
+        border: 1px solid $card-border-color;
+        color: $text-2;
+        font-size: 1.1em;
+      }
+    }
+
+    .lead.self {
+      background: linear-gradient(
+        270deg,
+        rgba(129, 249, 87, 0.13) 0%,
+        rgba(129, 249, 87, 0.0481) 100%
+      );
+
+      .place {
+        background-color: #d0f5c1;
+        color: #5ed433;
+        border: 1px solid #ccf0c0;
+        font-weight: bold;
+      }
+
+      img {
+        border: 3px solid #c8f0ba;
+      }
+
+      .name {
+        color: #90d478;
+        font-weight: bold;
+      }
+
+      .score {
+        background-color: #d0f5c1;
+        color: #5ed433;
+        border: 1px solid #ccf0c0;
+        font-weight: bold;
+      }
+    }
+
+    .lead:not(.self):hover {
+      background-color: darken($control-backgorund, $amount: 3%);
+    }
+
+    .lead.self:hover {
+      background-color: transparentize(#81f957, 0.9);
+    }
+
+    .lead:not(:last-child) {
+      border-bottom: 1px solid $card-border-color;
+    }
+
+    .lead.self:not(:last-child) {
+      border-bottom: 1px solid #cbe6c2;
+    }
+  }
+}

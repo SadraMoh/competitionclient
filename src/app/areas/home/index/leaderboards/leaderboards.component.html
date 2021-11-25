@@ -1,1 +1,19 @@
-<p>leaderboards works!</p>
+<section class="leaderboards card card-butt">
+
+  <header class="header">
+    <img src="/assets/svg/score.svg" alt="" class="score">
+    <h3 class="title">رنکینگ شما</h3>
+  </header>
+
+  <div class="leads">
+
+    <div class="lead" [class.self]="lead.isSelf" *ngFor="let lead of leads">
+      <div class="place">{{leads.indexOf(lead) + 1}}</div>
+        <img class="avatar" src="/assets/png/avatar.png" alt="">
+      <label class="name">کاربر کاربرزاده</label>
+      <label class="score">14800</label>
+    </div>
+    
+  </div>
+  
+</section>
