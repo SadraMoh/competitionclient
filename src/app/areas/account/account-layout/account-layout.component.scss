@@ -1,0 +1,24 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.account-layout {
+  @include row;
+  align-items: center;
+  min-height: 0;
+  height: 80px;
+}
+
+.content {
+  min-height: calc(100vh - 80px - 80px);
+  max-width: 480px;
+}
+
+.footer {
+  @include flex;
+  color: $text-4;
+  height: 80px;
+
+  p {
+    margin: auto;
+  }
+}

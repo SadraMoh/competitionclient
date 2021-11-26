@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
+import { Signup } from 'src/app/models/account/Signup';
+import User from 'src/app/models/user/User';
+import { AccountService } from 'src/app/services/account.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +12,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  /** the object to send to the login method */
+  readonly attempt: Signup = { fullName: '', telNo: '', password: '',  };
+  
+  @ViewChild('fullName')
+  fullName!: NgModel;
+  
+  @ViewChild('tel')
+  tel!: NgModel;
 
-  ngOnInit(): void {
+  @ViewChild('password')
+  password!: NgModel;
+
+  get isValid(): boolean {
+    return Boolean(this.tel?.valid && this.password?.valid);
   }
 
+  /** @todo [REMOVE] */
+  usr!: User
+
+  constructor(
+    private account: AccountService,
+    private user: UserService
+  ) { }
+
+  ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit(): void {
+
+  }
+
+  signup(): void {
+
+    this.account.signup(this.attempt).subscribe(res => {
+      console.log(res);
+
+      this.user.getUserData().subscribe(res => {
+        this.usr = res.value;
+      });
+    });
+
+  }
 }

@@ -2,24 +2,6 @@
 @import "/src/assets/styles/utility";
 
 .leaderboards {
-  @include col;
-  padding: 0;
-
-  .header {
-    background-color: $card-background;
-    @include rowr;
-    border-bottom: 1px solid $card-border-color;
-    padding: 10px $card-padding;
-
-    .score {
-      width: 24px;
-    }
-
-    .title {
-      margin-right: 8px;
-      font-size: 1.2em;
-    }
-  }
 
   .leads {
     padding: 0;

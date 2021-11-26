@@ -50,7 +50,7 @@ a:active,
   white-space: nowrap;
   background-color: white;
   color: $text-3;
-  box-shadow: 0 6px 0 0 rgba(0, 0 , 0, 0.16);
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.16);
   transform: translateY(-3px);
   @include transl;
   user-select: none;
@@ -62,7 +62,7 @@ a:active,
   /** !!! only spans allowed as content */
   // only the text span
   span:not(.material-icons) {
-    font-size: 1.10em;
+    font-size: 1.1em;
   }
 
   // space between icon and text (only if there is an icon)
@@ -77,6 +77,32 @@ a:active,
   @include trans(0.1s);
 }
 
+.btn-icon {
+  padding: 6px 12px;
+  cursor: pointer;
+  @include rowr;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  white-space: nowrap;
+  background-color: white;
+  color: $text-3;
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.16);
+  transform: translateY(-3px);
+  @include transl;
+  user-select: none;
+}
+
+.btn-icon:hover, .btn-icon:focus {
+  color: $text-1;
+}
+
+.btn-icon:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 0 0 #00000025;
+  @include trans(0.1s);
+}
+
 // color, effects and hierarchy
 
 .btn-primary {
@@ -86,7 +112,7 @@ a:active,
   @include trans();
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:focus {
   background-color: lighten($color: $primary, $amount: 6%);
   box-shadow: 0 6px 0 0 #946aee;
   @include trans(0.2s);
@@ -108,9 +134,12 @@ a:active,
   @include trans();
 }
 
-.btn-outline:hover {
-  $c: darken($color: $card-border-color, $amount: 8%);
-  color:  darken($color: $card-border-color, $amount: 40%);;
+.btn-outline:hover, .btnoutline:focus {
+  $c: darken(
+    $color: $card-border-color,
+    $amount: 8%,
+  );
+  color: darken($color: $card-border-color, $amount: 40%);
   border-color: $c;
   box-shadow: 0 6px 0 0 $c;
 }
@@ -128,7 +157,7 @@ a:active,
   @include trans();
 }
 
-.btn-invis:hover {
+.btn-invis:hover, .btn-invis:focus {
   background-color: transparentize($color: #000, $amount: 0.95);
 }
 
@@ -137,22 +166,19 @@ a:active,
   background-color: transparentize($color: #000, $amount: 0.88);
 }
 
-
-.btn-icon {
-  background-color: transparent;
-  padding: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-  color: $text-3;
-  cursor: pointer;
-  @include trans;
+.btn:disabled , .btn[disabled], .btn.disabled {
+  background-color: #e5e5e5;
+  box-shadow: 0 6px 0 0 #c2c2c2;
+  color: $text-4;
+  @include trans();
+  cursor: not-allowed;
 }
 
-.btn-icon:hover {
-  color: $text-1;
+.btn:disabled:hover , .btn[disabled]:hover, .btn.disabled:hover {
+  background-color: #e5e5e5;
+  box-shadow: 0 6px 0 0 #c2c2c2;
+  color: $text-4;
+  @include trans();
 }
 
 //- Card
@@ -191,29 +217,88 @@ a:active,
 
 .card-butt {
   border-bottom: 0;
-  box-shadow: $card-shadow, 0 8px 0 0 #DfDcDf;
+  box-shadow: $card-shadow, 0 8px 0 0 $card-butt-color;
   margin-bottom: 8px;
 }
 
-.card {
+.board {
+  @include col;
+  overflow: hidden;
+  $padding: $card-padding;
+  padding: 0;
+  border-radius: $card-border-radius;
+  box-shadow: $card-butt, $card-shadow;
+
   .header {
-    
+    padding: 10px $card-padding;
+    background-color: $card-background;
+    @include rowr;
+    border-bottom: 1px solid $card-border-color;
+    min-height: 16px;
+
+    .icon {
+      width: 22px;
+    }
+
+    .title {
+      margin-right: 8px;
+      font-size: 1.2em;
+    }
+  }
+
+  .content {
+    background-color: $control-backgorund;
+    min-height: 16px;
+  }
+
+  .footer {
+    padding: 10px $card-padding;
+    background-color: $card-background;
+    @include rowr;
+    border-top: 1px solid $card-border-color;
+    min-height: 16px;
   }
 }
 
-// //- form
+//- form
 
-// .textbox {
-//   background-color: $control-backgorund;
-//   padding: 6px 8px;
-//   @include placeholder($control-placeholder);
-//   border-radius: 12px;
-//   font-size: 1em;
-//   color: $text-2;
-//   border: 0;
-//   min-width: 50px;
-//   direction: rtl;
-// }
+.gp {
+  @include col;
+  margin-bottom: 8px;
+
+  > label, .lbl {
+    font-size: 1.2em;
+    color: $text-2;
+    margin-bottom: 6px;
+    }
+  
+  .err {
+    margin-top: 4px;
+    color: $err;
+  }
+}
+
+.textbox {
+  background-color: transparent;
+  border: $card-border-color 3px solid;
+  padding: 4px 8px;
+  @include placeholder($control-placeholder);
+  border-radius: 8px;
+  font-size: 1em;
+  color: $text-2;
+  min-width: 50px;
+  direction: rtl;
+  @include transl;
+}
+
+.textbox.has-error {
+  border-color: $err;
+}
+
+.textbox:focus, .textbox:focus-within {
+  border-color: $primary;
+  @include transs;
+}
 
 // .combobox {
 //   background-color: $control-backgorund;
@@ -277,15 +362,19 @@ a:active,
   width: 100%;
 }
 
-// $gap-tween-component: 48px;
+$gap-tween-component: 48px;
 
-// .gap-tween-component-down {
-//   margin-bottom: $gap-tween-component;
-// }
+.gap {
+  gap: 12px;
+}
 
-// .gap-tween-component-up {
-//   margin-top: $gap-tween-component;
-// }
+.gap-tween-component-down {
+  margin-bottom: $gap-tween-component;
+}
+
+.gap-tween-component-up {
+  margin-top: $gap-tween-component;
+}
 
 // .biscuit {
 //   width: 100%;

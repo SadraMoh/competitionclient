@@ -1,28 +1,33 @@
-<div>
-  <div class="from-group">
-    <label for="tel">نام کاربری</label>
-    <input [(ngModel)]="attempt.telNo" type="tel" #tel="ngModel" name="tel" required>
+<div class="login">
 
-    <div *ngIf="password.dirty || password.touched">
+  <h1 style="margin-bottom: 12px;">ورود</h1>
+
+  <div class="gp">
+    <label for="tel">شماره تلفن</label>
+    <input [(ngModel)]="attempt.telNo" [class.has-error]="(tel.dirty || tel.touched) && !tel.valid" class="textbox"
+      type="tel" #tel="ngModel" name="tel" required>
+
+    <ng-container *ngIf="tel.dirty || tel.touched">
       <span class="err" *ngIf="tel.errors?.['required']">لطفا شماره تلفن خود را وارد کنید</span>
-    </div>
+    </ng-container>
 
   </div>
-  <div class="from-group">
+  <div class="gp">
     <label for="password">گذرواژه</label>
-    <input [(ngModel)]="attempt.password" type="password" #password="ngModel" name="password" required>
+    <input [(ngModel)]="attempt.password" [class.has-error]="(password.dirty || password.touched) && !password.valid"
+      class="textbox" type="password" #password="ngModel" name="password" required>
 
-    <div *ngIf="password.dirty || password.touched">
+    <ng-container *ngIf="password.dirty || password.touched">
       <span class="err" *ngIf="password.errors?.['required']">لطفا گذرواژه خود را وارد کنید</span>
-    </div>
+    </ng-container>
 
   </div>
-  <button [disabled]="!isValid" class="login" (click)="login()">ورود</button>
 
+  <a routerLink="/account/forgotpassword">گذرواژه خود را فراموش کرده اید؟</a>
 
-  <div *ngIf="usr">
-    <p>User {{ usr.fullName }} successfully logged in</p>
+  <div class="rowr gap-tween-component-up gap">
+    <button [disabled]="!isValid" class="btn btn-primary login" (click)="login()">ورود</button>
+    <button routerLink="/account/signup" class="btn btn-outline register">ثبت نام</button>
   </div>
-  
-  
+
 </div>
