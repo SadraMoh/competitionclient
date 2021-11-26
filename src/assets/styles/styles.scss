@@ -26,6 +26,12 @@ html,
 body {
   background-color: $background;
   overflow-x: hidden;
+  background-repeat-x: no-repeat;
+  background-size: cover;
+}
+
+body.sky {
+  background-image: url(/assets/svg/skybg.svg);
 }
 
 ul {

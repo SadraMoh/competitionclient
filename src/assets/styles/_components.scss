@@ -50,9 +50,10 @@ a:active,
   white-space: nowrap;
   background-color: white;
   color: $text-3;
-  box-shadow: 0 6px 0 0 #00000025;
+  box-shadow: 0 6px 0 0 rgba(0, 0 , 0, 0.16);
   transform: translateY(-3px);
   @include transl;
+  user-select: none;
 
   > span {
     color: inherit;
@@ -61,7 +62,7 @@ a:active,
   /** !!! only spans allowed as content */
   // only the text span
   span:not(.material-icons) {
-    font-size: 1.15em;
+    font-size: 1.10em;
   }
 
   // space between icon and text (only if there is an icon)
@@ -73,45 +74,52 @@ a:active,
 .btn:active {
   transform: translateY(0);
   box-shadow: 0 3px 0 0 #00000025;
-  @include transs;
+  @include trans(0.1s);
 }
 
 // color, effects and hierarchy
 
 .btn-primary {
   background-color: $primary;
+  box-shadow: 0 6px 0 0 #7e4de5;
   color: $text-d-1;
   @include trans();
 }
 
 .btn-primary:hover {
   background-color: lighten($color: $primary, $amount: 6%);
+  box-shadow: 0 6px 0 0 #946aee;
   @include trans(0.2s);
   color: $text-d-1;
 }
 
 .btn-primary:active {
   @include trans(0.05s);
+  box-shadow: 0 3px 0 0 #946aee;
 }
 
 .btn-outline {
-  background-color: transparent;
-  color: #4b4b4b;
-  border: #4b4b4b 2px solid;
+  background-color: white;
+  color: darken($color: $card-border-color, $amount: 32%);
+  box-shadow: 0 6px 0 0 $card-border-color;
+  border: $card-border-color 2px solid;
   // ! Compensate for border width
   padding: 4px 10px;
   @include trans();
 }
 
 .btn-outline:hover {
-  color: lighten($color: #4b4b4b, $amount: 8%);
-  border-color: lighten($color: #4b4b4b, $amount: 8%);
+  $c: darken($color: $card-border-color, $amount: 8%);
+  color:  darken($color: $card-border-color, $amount: 40%);;
+  border-color: $c;
+  box-shadow: 0 6px 0 0 $c;
 }
 
 .btn-outline:active {
   @include trans(0.05s);
   color: $primary;
   border-color: $primary;
+  box-shadow: 0 3px 0 0 $primary;
 }
 
 .btn-invis {
@@ -185,6 +193,12 @@ a:active,
   border-bottom: 0;
   box-shadow: $card-shadow, 0 8px 0 0 #DfDcDf;
   margin-bottom: 8px;
+}
+
+.card {
+  .header {
+    
+  }
 }
 
 // //- form

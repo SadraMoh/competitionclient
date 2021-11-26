@@ -3,12 +3,12 @@
 
 .footer {
   height: $footer-height;
-  background: darken($color: $background, $amount: 4%);
+  background: rgb(0 0 0 / 8%);
   @include row;
 
   > p {
     margin: auto;
-    color: $text-4;
+    color: rgb(0 0 0 / 40%);
   }
   
 }
