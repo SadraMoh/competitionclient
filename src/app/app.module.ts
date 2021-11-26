@@ -15,7 +15,7 @@ import { AccountLayoutComponent } from './areas/account/account-layout/account-l
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { MobileNavigationComponent } from './areas/shared/layout/mobile-navigation/mobile-navigation.component';
-import { ContactComponent } from './areas/contact/contact.component';
+import { ContactComponent } from './areas/home/contact/contact.component';
 import { ProfileComponent } from './areas/user/profile/profile.component';
 import { TournamentsComponent } from './areas/home/index/tournaments/tournaments.component';
 import { LeaderboardsComponent } from './areas/home/index/leaderboards/leaderboards.component';
@@ -24,6 +24,9 @@ import { TournamentComponent } from './areas/home/index/tournaments/tournament/t
 import { EditProfileComponent } from './areas/user/edit-profile/edit-profile.component';
 import { ChangePasswordComponent } from './areas/user/change-password/change-password.component';
 import { UserLayoutComponent } from './areas/user/user-layout/user-layout.component';
+import { TournamentLayoutComponent } from './areas/tournament/tournament-layout/tournament-layout.component';
+import { TournamentInfoComponent } from './areas/tournament/tournament-info/tournament-info.component';
+import { ChallengeComponent } from './areas/tournament/challenge/challenge.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { UserLayoutComponent } from './areas/user/user-layout/user-layout.compon
     EditProfileComponent,
     ChangePasswordComponent,
     UserLayoutComponent,
+    TournamentLayoutComponent,
+    TournamentInfoComponent,
+    ChallengeComponent,
   ],
   imports: [
     BrowserModule,

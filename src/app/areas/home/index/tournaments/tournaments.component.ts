@@ -27,7 +27,29 @@ export class TournamentsComponent implements OnInit {
       title: 'نام سوم',
       fee: 350,
     },
+    {
+      imageUrl: '',
+      isMultiPlayer: true,
+      title: 'نام چهارم',
+      fee: 300,
+    },
+    {
+      imageUrl: '',
+      isMultiPlayer: true,
+      title: 'نام پنجم',
+      fee: 150,
+    },
   ]
+  
+  get multiplayer() : Tournament[] {
+    return this.tournaments.filter(i => i.isMultiPlayer);
+  }
+
+  get test(): Tournament[] {
+    return this.tournaments.filter(i => !i.isMultiPlayer);
+  }
+
+  multi: boolean = true;
   
   constructor() { }
 

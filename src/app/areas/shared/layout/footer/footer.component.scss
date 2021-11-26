@@ -5,6 +5,7 @@
   height: $footer-height;
   background: rgb(0 0 0 / 8%);
   @include row;
+  margin-top: 20px;
 
   > p {
     margin: auto;

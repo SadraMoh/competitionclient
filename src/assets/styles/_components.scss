@@ -93,7 +93,8 @@ a:active,
   user-select: none;
 }
 
-.btn-icon:hover, .btn-icon:focus {
+.btn-icon:hover,
+.btn-icon:focus {
   color: $text-1;
 }
 
@@ -112,7 +113,8 @@ a:active,
   @include trans();
 }
 
-.btn-primary:hover, .btn-primary:focus {
+.btn-primary:hover,
+.btn-primary:focus {
   background-color: lighten($color: $primary, $amount: 6%);
   box-shadow: 0 6px 0 0 #946aee;
   @include trans(0.2s);
@@ -124,7 +126,7 @@ a:active,
   box-shadow: 0 3px 0 0 #946aee;
 }
 
-//- 
+//-
 .btn-danger {
   color: white;
   background-color: $err;
@@ -132,7 +134,8 @@ a:active,
   @include trans();
 }
 
-.btn-danger:hover, .btn-danger:focus {
+.btn-danger:hover,
+.btn-danger:focus {
   background-color: lighten($color: $err, $amount: 8%);
   box-shadow: 0 6px 0 0 lighten($color: $err, $amount: 2%);
   @include trans(0.2s);
@@ -152,7 +155,8 @@ a:active,
   @include trans();
 }
 
-.btn-success:hover, .btn-success:focus {
+.btn-success:hover,
+.btn-success:focus {
   background-color: lighten($color: $succ, $amount: 8%);
   box-shadow: 0 6px 0 0 lighten($color: $succ, $amount: 2%);
   @include trans(0.2s);
@@ -175,7 +179,8 @@ a:active,
   @include trans();
 }
 
-.btn-outline:hover, .btnoutline:focus {
+.btn-outline:hover,
+.btnoutline:focus {
   $c: darken(
     $color: $card-border-color,
     $amount: 8%,
@@ -198,7 +203,8 @@ a:active,
   @include trans();
 }
 
-.btn-invis:hover, .btn-invis:focus {
+.btn-invis:hover,
+.btn-invis:focus {
   background-color: transparentize($color: #000, $amount: 0.95);
 }
 
@@ -207,7 +213,9 @@ a:active,
   background-color: transparentize($color: #000, $amount: 0.88);
 }
 
-.btn:disabled , .btn[disabled], .btn.disabled {
+.btn:disabled,
+.btn[disabled],
+.btn.disabled {
   background-color: #e5e5e5;
   box-shadow: 0 6px 0 0 #c2c2c2;
   color: $text-4;
@@ -215,7 +223,9 @@ a:active,
   cursor: not-allowed;
 }
 
-.btn:disabled:hover , .btn[disabled]:hover, .btn.disabled:hover {
+.btn:disabled:hover,
+.btn[disabled]:hover,
+.btn.disabled:hover {
   background-color: #e5e5e5;
   box-shadow: 0 6px 0 0 #c2c2c2;
   color: $text-4;
@@ -306,12 +316,13 @@ a:active,
   @include col;
   margin-bottom: 8px;
 
-  > label, .lbl {
+  > label,
+  .lbl {
     font-size: 1.2em;
     color: $text-2;
     margin-bottom: 6px;
-    }
-  
+  }
+
   .err {
     margin-top: 4px;
     color: $err;
@@ -335,7 +346,8 @@ a:active,
   border-color: $err;
 }
 
-.textbox:focus, .textbox:focus-within {
+.textbox:focus,
+.textbox:focus-within {
   border-color: $primary;
   @include transs;
 }
@@ -343,28 +355,30 @@ a:active,
 .textarea {
   @extend .textbox;
   transition-property: border-color;
-  resize: vertical;  
+  resize: vertical;
+
   
-  /* width */
+}
+
+/* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background-color: transparent
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: darken($color: $card-border-color, $amount: 8%) ;
+  @include circle;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-  
+  background: darken($color: $primary, $amount: 8%);
 }
 
 // .combobox {
@@ -384,13 +398,13 @@ a:active,
   margin-left: auto;
   margin-right: auto;
   @include col;
-  min-height: calc(100vh - #{$header-navbar-height} - #{$footer-height});
+  min-height: calc(100vh - #{$header-navbar-height} - #{$footer-height} - 20px);
 }
 
 @media screen and (max-width: $break-3) {
   .container {
     min-height: calc(
-      100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height}
+      100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height} - 20px
     );
   }
 }

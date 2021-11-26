@@ -1,9 +1,14 @@
 <section class="tournaments">
   <div class="category-selector">
-    <button class="category active">مسابقه ها</button>
-    <button class="category">تستی</button>
+    <button class="category active" [class.active]="multi" (click)="multi = true">مسابقه ها</button>
+    <button class="category" [class.active]="!multi" (click)="multi = false">تستی</button>
   </div>
   <div class="card card-butt">
-    <app-tournament *ngFor="let tournament of tournaments" [tournament]="tournament"></app-tournament>
+    <ng-container *ngIf="multi">
+      <app-tournament *ngFor="let m of multiplayer" [tournament]="m"></app-tournament>
+    </ng-container>
+    <ng-container *ngIf="!multi">
+      <app-tournament *ngFor="let t of test" [tournament]="t"></app-tournament>
+    </ng-container>
   </div>
 </section>

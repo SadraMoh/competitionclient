@@ -19,7 +19,7 @@
       padding: 6px 0;
       font-size: 1.1em;
       min-width: 90px;
-      border-radius: $card-border-radius 0 0 0;
+      border-radius: 0;
       background-color: $control-backgorund;
       cursor: pointer;
     }
@@ -30,6 +30,7 @@
 
     .category.active {
       background-color: $card-background;
+      border-radius: $card-border-radius $card-border-radius 0 0;
       color: $text-3;
       box-shadow: 0 0 6px transparentize(#000, 0.92);
       position: relative;

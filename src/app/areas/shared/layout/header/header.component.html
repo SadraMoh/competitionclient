@@ -3,13 +3,13 @@
     <img src="/assets/png/avatar.png" alt="" class="avatar">
     <h4 class="username">کاربر کاربرزاده</h4>
   </div>
-  <nav class="desktop-nav">
+  <nav class="desktop-nav" *ngIf="nav">
     <ul>
       <li>
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true}">خانه</a>
       </li>
       <li>
-        <a routerLink="/user/profile" routerLinkActive="active">پروفایل</a>
+        <a routerLink="/user" routerLinkActive="active">پروفایل</a>
       </li>
       <li>
         <a routerLink="/contact" routerLinkActive="active">تماس باما</a>

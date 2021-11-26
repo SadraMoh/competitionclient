@@ -4,10 +4,13 @@ import { AppComponent } from './app/app.component';
 import { AccountLayoutComponent } from './areas/account/account-layout/account-layout.component';
 import { LoginComponent } from './areas/account/login/login.component';
 import { SignupComponent } from './areas/account/signup/signup.component';
-import { ContactComponent } from './areas/contact/contact.component';
+import { ContactComponent } from './areas/home/contact/contact.component';
 import { IndexComponent } from './areas/home/index/index.component';
 import { NotFoundComponent } from './areas/shared/err/not-found/not-found.component';
 import { LayoutComponent } from './areas/shared/layout/layout.component';
+import { ChallengeComponent } from './areas/tournament/challenge/challenge.component';
+import { TournamentInfoComponent } from './areas/tournament/tournament-info/tournament-info.component';
+import { TournamentLayoutComponent } from './areas/tournament/tournament-layout/tournament-layout.component';
 import { ChangePasswordComponent } from './areas/user/change-password/change-password.component';
 import { EditProfileComponent } from './areas/user/edit-profile/edit-profile.component';
 import { ProfileComponent } from './areas/user/profile/profile.component';
@@ -50,7 +53,11 @@ const routes: Routes = [
       },
       // tournament
       {
-        path: 'tournament', redirectTo: '', children: []
+        path: 'tournament', component: TournamentLayoutComponent, children: [
+          { path: 'info', component: TournamentInfoComponent },
+          { path: 'challenge', component: ChallengeComponent },
+          { path: '**', redirectTo: 'info' },
+        ]
       }
     ]
   },
