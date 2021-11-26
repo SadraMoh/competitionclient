@@ -124,6 +124,47 @@ a:active,
   box-shadow: 0 3px 0 0 #946aee;
 }
 
+//- 
+.btn-danger {
+  color: white;
+  background-color: $err;
+  box-shadow: 0 6px 0 darken($err, 8%), $card-shadow;
+  @include trans();
+}
+
+.btn-danger:hover, .btn-danger:focus {
+  background-color: lighten($color: $err, $amount: 8%);
+  box-shadow: 0 6px 0 0 lighten($color: $err, $amount: 2%);
+  @include trans(0.2s);
+  color: $text-d-1;
+}
+
+.btn-danger:active {
+  @include trans(0.05s);
+  background-color: lighten($err, 8%);
+  box-shadow: 0 3px 0 lighten($err, 2%);
+}
+
+.btn-success {
+  color: white;
+  background-color: $succ;
+  box-shadow: 0 6px 0 darken($succ, 8%), $card-shadow;
+  @include trans();
+}
+
+.btn-success:hover, .btn-success:focus {
+  background-color: lighten($color: $succ, $amount: 8%);
+  box-shadow: 0 6px 0 0 lighten($color: $succ, $amount: 2%);
+  @include trans(0.2s);
+  color: $text-d-1;
+}
+
+.btn-success:active {
+  @include trans(0.05s);
+  background-color: lighten($succ, 8%);
+  box-shadow: 0 3px 0 lighten($succ, 2%);
+}
+
 .btn-outline {
   background-color: white;
   color: darken($color: $card-border-color, $amount: 32%);
@@ -218,7 +259,6 @@ a:active,
 .card-butt {
   border-bottom: 0;
   box-shadow: $card-shadow, 0 8px 0 0 $card-butt-color;
-  margin-bottom: 8px;
 }
 
 .board {
@@ -298,6 +338,33 @@ a:active,
 .textbox:focus, .textbox:focus-within {
   border-color: $primary;
   @include transs;
+}
+
+.textarea {
+  @extend .textbox;
+  transition-property: border-color;
+  resize: vertical;  
+  
+  /* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  
 }
 
 // .combobox {

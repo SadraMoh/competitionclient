@@ -1,0 +1,52 @@
+<div class="profile">
+
+  <div class="image-upload">
+    <label class="upload material-icons">
+      image
+      <input type="file">
+    </label>
+    <img src="/assets/png/avatar.png" alt="" class="avatar">
+  </div>
+
+  <div class="form">
+
+    <div class="gp">
+
+      <label for="fullName">نام و نام خانوادگی</label>
+      <input [(ngModel)]="attempt.fullName" [class.has-error]="(fullName.dirty || fullName.touched) && !fullName.valid"
+        class="textbox" type="text" #fullName="ngModel" name="text" required>
+
+      <ng-container *ngIf="fullName.dirty || fullName.touched">
+        <span class="err" *ngIf="fullName.errors?.['required']">لطفا شماره تلفن خود را وارد کنید</span>
+      </ng-container>
+
+    </div>
+
+    <div class="gp">
+      <label for="bio">توضیحات درباره خود</label>
+      <textarea [(ngModel)]="attempt.bio" [class.has-error]="(bio.dirty || bio.touched) && !bio.valid" class="textarea"
+        #bio="ngModel" name="bio" required>
+    و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را
+    صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند.
+      </textarea>
+
+      <ng-container *ngIf="bio.dirty || bio.touched">
+        <span class="err" *ngIf="bio.errors?.['required']">لطفا گذرواژه خود را وارد کنید</span>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-success" [disabled]="!isValid">
+      تایید
+      <i class="material-icons">check</i>
+    </button>
+    <button class="btn btn-danger" routerLink="/user/profile">
+      لغو
+      <i class="material-icons">block</i>
+    </button>
+  </div>
+
+</div>

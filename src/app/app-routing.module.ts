@@ -8,6 +8,8 @@ import { ContactComponent } from './areas/contact/contact.component';
 import { IndexComponent } from './areas/home/index/index.component';
 import { NotFoundComponent } from './areas/shared/err/not-found/not-found.component';
 import { LayoutComponent } from './areas/shared/layout/layout.component';
+import { ChangePasswordComponent } from './areas/user/change-password/change-password.component';
+import { EditProfileComponent } from './areas/user/edit-profile/edit-profile.component';
 import { ProfileComponent } from './areas/user/profile/profile.component';
 import { UserLayoutComponent } from './areas/user/user-layout/user-layout.component';
 
@@ -33,21 +35,22 @@ const routes: Routes = [
         path: '', component: LayoutComponent, children: [
           { path: '', component: IndexComponent },
           { path: 'home', redirectTo: '/' },
-          // profile 
+          // user 
           {
-            path: 'profile', component: UserLayoutComponent, children: [
-              { path: '', component: ProfileComponent }
+            path: 'user', component: UserLayoutComponent, children: [
+              { path: 'profile', component: ProfileComponent },
+              { path: 'editProfile', component: EditProfileComponent },
+              { path: 'changePassword', component: ChangePasswordComponent},
+              { path: '**', redirectTo: 'profile' },
             ]
           },
           // contact 
-          {
-            path: 'contact', component: ContactComponent, children: []
-          }
+          { path: 'contact', component: ContactComponent }
         ]
       },
       // tournament
       {
-        path: 'tournament', redirectTo: '', children: [ ]
+        path: 'tournament', redirectTo: '', children: []
       }
     ]
   },

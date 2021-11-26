@@ -9,6 +9,8 @@ import { join } from '@fireflysemantics/join';
 import { Signup } from '../models/account/Signup';
 import { DbRes, isDbResValid } from '../models/DbRes';
 import { ApiService } from './ApiService';
+import { ActivatedRoute } from '@angular/router';
+import { Router, NavigationExtras } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class AccountService implements ApiService {
     localStorage.setItem('tkn', v as string);
   }
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient,private router: Router) { }
 
   /**
    * Login method
@@ -86,5 +88,12 @@ export class AccountService implements ApiService {
     }))
   }
 
+  /**
+   * Signout the user and clear their token, redirect to login page
+   */
+  signout() {
+    this.token = "";
+    this.router.navigateByUrl('/account/login');
+  }
 
 }
