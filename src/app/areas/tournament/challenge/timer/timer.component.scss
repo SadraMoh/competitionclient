@@ -1,0 +1,68 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+$clock-size: 72px;
+
+.timer {
+  display: grid;
+  grid-template-columns: auto 1fr ;
+  grid-template-rows: 1fr;
+   
+  .bar {
+    background-color: #E9E9E9;
+    box-shadow: inset 0 0 0 1px #E1E1E1;
+    @include circle;
+    height: 22px;
+    margin: auto 0;
+    margin-left: -12px;
+    @include flex;
+    
+    .progress {
+      @include circle;
+      background: linear-gradient(94.42deg, #F9E95A 0%, #FF8514 100%);
+      width: 50%;
+    }
+  }
+  
+  .timer {
+    position: relative;
+    width: $clock-size;
+    height: $clock-size;
+    @include circle();
+    @include col;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 6px solid #F9E95A;
+    animation-duration: 2.4s;
+    animation-name: timer-glow;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-out;
+    
+    .remaining {
+      font-weight: 100;
+      font-size: 2em;
+      line-height: 1.2em;
+      color: #F0BE0D;
+    }
+    .seconds {
+      font-size: 1em;
+      color: #F0BE0D;
+    }
+  }
+}
+
+@keyframes timer-glow {
+  0% {
+    box-shadow: 0 0 0 3px transparentize(#F3C012, $amount: .92);
+  }
+  
+  50% {
+    box-shadow: 0 0 0 12px transparentize(#F3C012, $amount: .8);
+  }
+  
+  100% {
+    box-shadow: 0 0 0 3px transparentize(#F3C012, $amount: .92);
+  }
+}

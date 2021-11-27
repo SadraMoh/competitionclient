@@ -27,6 +27,9 @@ import { UserLayoutComponent } from './areas/user/user-layout/user-layout.compon
 import { TournamentLayoutComponent } from './areas/tournament/tournament-layout/tournament-layout.component';
 import { TournamentInfoComponent } from './areas/tournament/tournament-info/tournament-info.component';
 import { ChallengeComponent } from './areas/tournament/challenge/challenge.component';
+import { TimerComponent } from './areas/tournament/challenge/timer/timer.component';
+import { SecondsPipe } from './utility/pipes/seconds.pipe';
+import { TournamentFinishedComponent } from './areas/tournament/tournament-finished/tournament-finished.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { ChallengeComponent } from './areas/tournament/challenge/challenge.compo
     TournamentLayoutComponent,
     TournamentInfoComponent,
     ChallengeComponent,
+    TimerComponent,
+    SecondsPipe,
+    TournamentFinishedComponent,
   ],
   imports: [
     BrowserModule,

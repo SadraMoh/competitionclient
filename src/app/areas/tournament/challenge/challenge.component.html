@@ -1,1 +1,48 @@
-<p>challenge works!</p>
+<div class="challenge page-padding">
+
+  <app-timer></app-timer>
+
+  <div class="question card">
+
+    <div class="nofm">
+      <span class="all">16</span>
+      /
+      <span class="count">5</span>
+    </div>
+
+    <div class="description">
+      آیا این یک سوال می باشد؟
+    </div>
+
+  </div>
+
+  <div class="options">
+
+    <div class="option card" [class.selected]="chosenOption == option" *ngFor="let option of options"
+      (click)="selectOption(option)">
+      {{ option.optionText }}
+    </div>
+
+  </div>
+
+  <button class="btn btn-primary" [disabled]="!chosenOption">انتخاب</button>
+
+  <div class="helpers">
+
+    <div class="helper" *ngFor="let helper of helpers" (click)="activateHelper(helper)"
+      [class.active]="activeHelpers.includes(helper)">
+      <img src="/assets/svg/helper/bomb.svg" alt="">
+      <div class="col">
+        <div class="title">
+          {{ helper.title }}
+        </div>
+        <div class="coin">
+          <img src="/assets/svg/coin.svg" alt="">
+          {{ helper.cost }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

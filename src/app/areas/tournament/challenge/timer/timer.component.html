@@ -1,0 +1,9 @@
+<div class="timer">
+  <div class="timer">
+    <h3 class="remaining">{{ milis | seconds: 1 }}</h3>
+    <label class="seconds">ثانیه</label>
+  </div>
+  <div class="bar">
+    <div class="progress" [style.width]="percentage + '%'"></div>
+  </div>
+</div>

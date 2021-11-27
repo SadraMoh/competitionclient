@@ -1,0 +1,153 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.challenge {
+  margin: auto;
+  max-width: 550px;
+  
+  app-timer {
+  }
+
+  .question {
+    margin-top: 24px;
+    border: 2px solid $card-border-color;
+    box-shadow: 0;
+    margin-bottom: 32px;
+
+    .nofm {
+      font-size: 1.2em;
+      color: $text-5;
+      margin-bottom: 8px;
+
+      .all {
+        color: $text-5;
+        font-weight: lighter;
+      }
+
+      .count {
+        color: $text-2;
+        font-weight: bold;
+      }
+    }
+
+    .description {
+      font-size: 1.2em;
+      color: $text-1;
+    }
+  }
+
+  .options {
+    margin-bottom: 40px;
+
+    .option {
+      @include rowr;
+      @include circle;
+      border: 2px solid $card-border-color;
+      padding: 10px;
+      box-shadow: 0;
+      box-shadow: 0 4px 12px transparentize(#000, $amount: 0.8);
+      color: $text-2;
+      font-size: 1em;
+      @include transl;
+      cursor: pointer;
+    }
+
+    .option:before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
+      border: 2px solid $card-border-color;
+      @include circle;
+    }
+
+    .option:hover {
+      background-color: darken($card-background, $amount: 3%);
+      @include transs;
+    }
+
+    .option:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .option.selected,
+    .option.selected::before {
+      border-color: $primary;
+      box-shadow: 0 4px 12px transparentize($primary, $amount: 0.72);
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .helpers {
+    margin-top: 40px;
+    @include col;
+
+    .helper {
+      width: 100%;
+      @include rowr;
+      background-color: white;
+      padding: 8px;
+      border: 2px solid $card-border-color;
+      border-radius: 10px;
+      cursor: pointer;
+      @include transl;
+
+      img {
+        width: 56px;
+        height: 56px;
+        border-radius: 8px;
+      }
+
+      .col {
+        flex: 1;
+        @include rowr;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+
+        .title {
+          color: $text-1;
+          font-size: 1.4em;
+          font-weight: 400;
+          flex: 1;
+        }
+
+        .coin {
+          @include rowr;
+          color: #ecc024;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5em;
+          min-width: 64px;
+
+          img {
+            width: 20px;
+            height: 20px;
+            margin-left: 12px;
+          }
+        }
+      }
+    }
+
+    .helper:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .helper:hover {
+      @include transs;
+      border-color: $primary;
+    }
+
+    .helper.active {
+      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%);
+      -moz-filter: grayscale(100%);
+      -ms-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+    }
+  }
+}

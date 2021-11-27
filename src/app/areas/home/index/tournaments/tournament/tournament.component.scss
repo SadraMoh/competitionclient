@@ -11,6 +11,8 @@
   padding: 12px;
   background: linear-gradient(94.42deg, #e2f95a 0%, #32eb7c 100%);
   color: white;
+  @include transl;
+  cursor: pointer;
 
   .title {
     grid-area: title;
@@ -109,4 +111,9 @@
       }
     }
   }
+}
+
+.tournament:hover {
+  box-shadow: 0 0 0 6px rgba(124, 238, 17, 0.2);
+  @include transs;
 }
