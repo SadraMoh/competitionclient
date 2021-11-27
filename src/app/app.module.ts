@@ -30,6 +30,10 @@ import { ChallengeComponent } from './areas/tournament/challenge/challenge.compo
 import { TimerComponent } from './areas/tournament/challenge/timer/timer.component';
 import { SecondsPipe } from './utility/pipes/seconds.pipe';
 import { TournamentFinishedComponent } from './areas/tournament/tournament-finished/tournament-finished.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { TelnoDirective } from './utility/validators/telno/telno.directive';
+import { ConfirmComponent } from './areas/account/confirm/confirm.component';
+import { ForgotPasswordComponent } from './areas/account/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,9 @@ import { TournamentFinishedComponent } from './areas/tournament/tournament-finis
     TimerComponent,
     SecondsPipe,
     TournamentFinishedComponent,
+    TelnoDirective,
+    ConfirmComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +74,7 @@ import { TournamentFinishedComponent } from './areas/tournament/tournament-finis
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    JwtHelperService,
   ],
   bootstrap: [AppComponent]
 })

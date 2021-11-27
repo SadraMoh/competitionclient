@@ -18,6 +18,7 @@
   .user {
     @include rowr;
     align-items: center;
+    cursor: pointer;
 
     img.avatar {
       @include circle;
@@ -37,6 +38,16 @@
     }
   }
 
+  .enter{
+    @include rowr;
+    align-items: center;
+    
+    > *:first-child {
+      margin-left: 12px
+    }
+    
+  }
+  
   //-----------------//
 
   .desktop-nav {

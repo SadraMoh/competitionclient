@@ -23,20 +23,5 @@ export class UserService implements ApiService {
   ) { }
 
 
-  /** Get the logged in users data */
-  getUserData(): Observable<Res<User>> {
-    const to = join(this.route, 'find');
-
-    if(!this.account.token) throw 'User not logged in';
-
-    return from(new Promise<Res<User>>((res, rej) => {
-      this.client.get<Res<User>>(to).subscribe(result => {
-        if (isResVaild(result))
-          res(result);
-        else
-          rej(result.message);
-      });
-    }))
-  }
-
+  
 }

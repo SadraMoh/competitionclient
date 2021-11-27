@@ -4,6 +4,8 @@ import { Signin } from 'src/app/models/account/Signin';
 import { NgModel } from '@angular/forms';
 import User from 'src/app/models/user/User';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { Res } from 'src/app/models/Res';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +30,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
   /** @todo [REMOVE] */
   usr!: User
 
+  /** is working in the background... */
+  working: boolean = false;
+
+  serverError!: string;
+
   constructor(
     private account: AccountService,
-    private user: UserService
+    private user: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,14 +50,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   login(): void {
 
-    this.account.login(this.attempt).subscribe(res => {
-      console.log(res);
+    // clear error
+    this.serverError = '';
 
-      this.user.getUserData().subscribe(res => {
-        this.usr = res.value;
-      });
-    });
-
+    this.account.login(this.attempt)
+      .subscribe(
+        res => {
+          this.router.navigateByUrl('/');
+        },
+        (err: string) => {
+          this.serverError = err;
+        });
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Signup } from 'src/app/models/account/Signup';
 import User from 'src/app/models/user/User';
 import { AccountService } from 'src/app/services/account.service';
@@ -13,11 +14,11 @@ import { UserService } from 'src/app/services/user.service';
 export class SignupComponent implements OnInit {
 
   /** the object to send to the login method */
-  readonly attempt: Signup = { fullName: '', telNo: '', password: '',  };
-  
+  readonly attempt: Signup = { fullName: '', telNo: '', password: '', };
+
   @ViewChild('fullName')
   fullName!: NgModel;
-  
+
   @ViewChild('tel')
   tel!: NgModel;
 
@@ -31,13 +32,15 @@ export class SignupComponent implements OnInit {
   /** @todo [REMOVE] */
   usr!: User
 
+  serverError!: string;
+
   constructor(
     private account: AccountService,
-    private user: UserService
+    private router: Router    
   ) { }
 
   ngOnInit(): void {
-    
+
   }
 
   ngAfterViewInit(): void {
@@ -45,14 +48,16 @@ export class SignupComponent implements OnInit {
   }
 
   signup(): void {
+    this.serverError = '';
 
-    this.account.signup(this.attempt).subscribe(res => {
-      console.log(res);
-
-      this.user.getUserData().subscribe(res => {
-        this.usr = res.value;
-      });
-    });
+    this.account.signup(this.attempt)
+      .subscribe(
+        res => {
+          this.router.navigateByUrl('/account/login')
+        },
+        (err: string) => {
+          this.serverError = err;
+        });
 
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +11,10 @@ export class HeaderComponent implements OnInit {
   @Input("nav")
   nav: boolean = true;
   
-  constructor() { }
+  constructor(public account: AccountService) { }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -11,6 +11,8 @@ import { DbRes, isDbResValid } from '../models/DbRes';
 import { ApiService } from './ApiService';
 import { ActivatedRoute } from '@angular/router';
 import { Router, NavigationExtras } from "@angular/router";
+import { JwtHelperService } from '@auth0/angular-jwt';
+import User from '../models/user/User';
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +22,41 @@ export class AccountService implements ApiService {
   readonly route = join(environment.api, 'account');
 
   /** Get token from localStorage */
-  public get token(): string | null {
-    return localStorage.getItem('tkn');
+  public get token(): string | undefined {
+    return localStorage.getItem('tkn') as string | undefined;
   }
 
   /** Store token in localStorage */
-  public set token(v: string | null) {
+  public set token(v: string | undefined) {
     localStorage.setItem('tkn', v as string);
   }
 
-  constructor(private client: HttpClient,private router: Router) { }
+  private readonly jwtHelper: JwtHelperService = new JwtHelperService();
+
+  public get isJWTValid(): boolean {
+
+    if (!this.token) return false;
+
+    if (this.jwtHelper.isTokenExpired(this.token)) return false;
+
+    return true;
+
+  }
+
+  public get loggedIn(): boolean {
+    return this.isJWTValid;
+  }
+
+  public get tokenData(): object | undefined {
+    return this.jwtHelper.decodeToken(this.token);
+  }
+
+  public user!: User;
+
+  constructor(
+    private client: HttpClient,
+    private router: Router,
+  ) { }
 
   /**
    * Login method
@@ -43,6 +70,8 @@ export class AccountService implements ApiService {
       this.client.post<Res<Signin>>(to, input).subscribe(result => {
         if (isResVaild(result)) {
           this.token = result.value.token as string;
+          // hydrate user data
+          this.getUserData().subscribe(res => this.user = res.value);
           res(result);
         }
         else
@@ -60,13 +89,19 @@ export class AccountService implements ApiService {
     const to = join(this.route, 'Signup');
 
     return from(new Promise<Res<Signup>>((res, rej) => {
-      this.client.post<DbRes<Signup>>(to, input).subscribe(result => {
-        if (isDbResValid(result))
-          res(result.result);
-        else
-          rej(result.exception);
-
-      });
+      this.client.post<DbRes<Signup>>(to, input)
+        .subscribe(
+          result => {
+            if (isDbResValid(result))
+              res(result.result);
+            else
+              rej(result.result.message);
+          },
+          err => {
+            debugger
+            // @todo FUCKN Handle your ERRORS
+            rej(err.error.errors.Password || err.err.errors.TelNo);
+          });
     }));
   }
 
@@ -94,6 +129,22 @@ export class AccountService implements ApiService {
   signout() {
     this.token = "";
     this.router.navigateByUrl('/account/login');
+  }
+
+  /** Get the logged in users data */
+  getUserData(): Observable<Res<User>> {
+    const to = join(this.route, 'find');
+
+    if (!this.token) throw 'User not logged in';
+
+    return from(new Promise<Res<User>>((res, rej) => {
+      this.client.get<Res<User>>(to).subscribe(result => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      });
+    }))
   }
 
 }

@@ -356,8 +356,6 @@ a:active,
   @extend .textbox;
   transition-property: border-color;
   resize: vertical;
-
-  
 }
 
 /* width */
@@ -367,12 +365,12 @@ a:active,
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background-color: transparent
+  background-color: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: darken($color: $card-border-color, $amount: 8%) ;
+  background: darken($color: $card-border-color, $amount: 8%);
   @include circle;
 }
 
@@ -404,7 +402,8 @@ a:active,
 @media screen and (max-width: $break-3) {
   .container {
     min-height: calc(
-      100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height} - 20px
+      100vh - #{$header-navbar-height} - #{$footer-height} - #{$mobile-navbar-height} -
+        20px
     );
   }
 }
@@ -468,4 +467,20 @@ $gap-tween-component: 48px;
 
 .page-gap {
   gap: 24px;
+}
+
+//- alerts
+
+.alert {
+  border: 2px solid gray;
+  background-color: lightgray;
+  padding: $card-padding;
+  border-radius: 8px;
+  color: $text-4;
+}
+
+.alert.danger {
+  border-color: transparentize($color: $err, $amount: .5);
+  background-color: transparentize($color: $err, $amount: .8);
+  color: $err;
 }

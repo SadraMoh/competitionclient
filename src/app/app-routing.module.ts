@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { AccountLayoutComponent } from './areas/account/account-layout/account-layout.component';
+import { ConfirmComponent } from './areas/account/confirm/confirm.component';
+import { ForgotPasswordComponent } from './areas/account/forgot-password/forgot-password.component';
 import { LoginComponent } from './areas/account/login/login.component';
 import { SignupComponent } from './areas/account/signup/signup.component';
 import { ContactComponent } from './areas/home/contact/contact.component';
@@ -15,6 +17,7 @@ import { ChangePasswordComponent } from './areas/user/change-password/change-pas
 import { EditProfileComponent } from './areas/user/edit-profile/edit-profile.component';
 import { ProfileComponent } from './areas/user/profile/profile.component';
 import { UserLayoutComponent } from './areas/user/user-layout/user-layout.component';
+import { AuthGuard } from './utility/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -29,6 +32,9 @@ const routes: Routes = [
           // signup 
           { path: 'signup', component: SignupComponent },
           { path: 'register', redirectTo: 'signup' },
+          { path: 'confirm', component: ConfirmComponent},
+          // 
+          { path: 'forgotPassword', component: ForgotPasswordComponent},
 
           { path: '**', redirectTo: 'login' },
         ]
@@ -38,12 +44,14 @@ const routes: Routes = [
         path: '', component: LayoutComponent, children: [
           { path: '', component: IndexComponent },
           { path: 'home', redirectTo: '/' },
-          // user 
+          // user   
           {
             path: 'user', component: UserLayoutComponent, children: [
-              { path: 'profile', component: ProfileComponent },
-              { path: 'editProfile', component: EditProfileComponent },
-              { path: 'changePassword', component: ChangePasswordComponent},
+              // allow access to other people's profile even when not logged in
+              { path: 'profile/:id', component: ProfileComponent },
+              { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+              { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthGuard] },
+              { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard] },
               { path: '**', redirectTo: 'profile' },
             ]
           },
@@ -55,7 +63,7 @@ const routes: Routes = [
       {
         path: 'tournament', component: TournamentLayoutComponent, children: [
           { path: 'info', component: TournamentInfoComponent },
-          { path: 'challenge', component: ChallengeComponent },
+          { path: 'challenge', component: ChallengeComponent, canActivate: [AuthGuard] },
           { path: '**', redirectTo: 'info' },
         ]
       }

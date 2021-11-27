@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@auth0/angular-jwt": "^5.0.2",
     "@fireflysemantics/join": "^1.0.14",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

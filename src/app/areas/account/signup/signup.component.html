@@ -3,36 +3,41 @@
   <h1 style="margin-bottom: 12px;">ثبت نام</h1>
 
   <div class="gp">
-    <label for="tel">نام و نام خانوادگی</label>
-    <input [(ngModel)]="attempt.fullName" [class.has-error]="(fullName.dirty || fullName.touched) && !fullName.valid" class="textbox"
-      type="text" #fullName="ngModel" name="fullName" required>
+    <label for="fullName">نام و نام خانوادگی</label>
+    <input [(ngModel)]="attempt.fullName" [class.has-error]="(fullName.dirty || fullName.touched) && !fullName.valid"
+      class="textbox" type="text" #fullName="ngModel" name="fullName" required>
 
     <ng-container *ngIf="fullName.dirty || fullName.touched">
-      <span class="err" *ngIf="tel.errors?.['required']">لطفا نام و نام خانوادگی خود را وارد کنید</span>
+      <span class="err" *ngIf="fullName.errors?.['required']">لطفا نام و نام خانوادگی خود را وارد کنید</span>
     </ng-container>
 
   </div>
   <div class="gp">
     <label for="tel">شماره تلفن</label>
-    <input [(ngModel)]="attempt.telNo" [class.has-error]="(tel.dirty || tel.touched) && !tel.valid" class="textbox"
+    <input [(ngModel)]="attempt.telNo" [class.has-error]="(tel.dirty || tel.touched) && !tel.valid" class="textbox" telno
       type="tel" #tel="ngModel" name="tel" required>
 
     <ng-container *ngIf="tel.dirty || tel.touched">
       <span class="err" *ngIf="tel.errors?.['required']">لطفا شماره تلفن خود را وارد کنید</span>
+      <span class="err" *ngIf="tel.errors?.['telno'] && attempt.telNo">شماره تلفن صحیح نمی باشد</span>
     </ng-container>
 
   </div>
   <div class="gp">
     <label for="password">گذرواژه</label>
-    <input [(ngModel)]="attempt.password" [class.has-error]="(password.dirty || password.touched) && !password.valid" class="textbox"
-      type="password" #password="ngModel" name="password" required>
+    <input [(ngModel)]="attempt.password" [class.has-error]="(password.dirty || password.touched) && !password.valid"
+      class="textbox" type="password" #password="ngModel" name="password" required>
 
     <ng-container *ngIf="password.dirty || password.touched">
-      <span class="err" *ngIf="password.errors?.['required']">لطفا گذرواژه خود را وارد کنید</span>
+      <span class="err" *ngIf="password.errors?.['required']">لطفا یک گذرواژه برای خود انتخاب کنید</span>
     </ng-container>
 
   </div>
-
+  
+  <div *ngIf="serverError" class="alert danger" style="margin-top: 16px;">
+    {{ serverError }}
+  </div>
+  
   <div class="rowr gap-tween-component-up gap">
     <button [disabled]="!isValid" class="btn btn-primary login" (click)="signup()">ثبت نام</button>
     <button routerLink="/account/login" class="btn btn-outline register">ورود</button>

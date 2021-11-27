@@ -1,8 +1,20 @@
 <header class="header">
-  <div class="user">
-    <img src="/assets/png/avatar.png" alt="" class="avatar">
-    <h4 class="username">کاربر کاربرزاده</h4>
-  </div>
+  <ng-container *ngIf="account.loggedIn">
+    <div class="user" routerLink="/user/profile">
+      <img src="/assets/png/avatar.png" alt="" class="avatar">
+      <h4 class="username">کاربر کاربرزاده</h4>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!account.loggedIn">
+    <div class="enter">
+      <button class="btn btn-primary" routerLink="/account/login">
+        ورود
+      </button>
+      <button class="btn btn-outline" routerLink="/account/signup">
+        ثبت نام
+      </button>
+    </div>
+  </ng-container>
   <nav class="desktop-nav" *ngIf="nav">
     <ul>
       <li>
@@ -17,18 +29,21 @@
     </ul>
   </nav>
   <div class="left">
-    <div class="points">
-      <div class="icon">
-        <img src="/assets/svg/score.svg" alt="">
+    <ng-container *ngIf="account.loggedIn">
+      <div class="points">
+        <div class="icon">
+          <img src="/assets/svg/score.svg" alt="">
+        </div>
+        <label>100</label>
       </div>
-      <label>100</label>
-    </div>
-    <div class="coins">
-      <div class="icon">
-        <img src="/assets/svg/coin.svg" alt="">
+      <div class="coins">
+        <div class="icon">
+          <img src="/assets/svg/coin.svg" alt="">
+        </div>
+        <label>120</label>
       </div>
-      <label>120</label>
-    </div>
+    </ng-container>
+
     <a routerLink="/" class="logo">
       <img src="/assets/png/owl.png" alt="" width="48" height="48">
     </a>

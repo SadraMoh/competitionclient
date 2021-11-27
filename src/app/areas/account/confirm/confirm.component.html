@@ -1,0 +1,21 @@
+<div class="confirm">
+
+  <h1 style="margin-bottom: 8px;">احراز</h1>
+  <p style="margin-bottom: 20px;">لطفا کد ارسال شده به تلفن همراه خود را وارد نمایید</p>
+
+  <div class="gp">
+    <label for="code">کد</label>
+    <input [(ngModel)]="attempt.code" [class.has-error]="(code.dirty || code.touched) && !code.valid" class="textbox"
+      type="text" #code="ngModel" name="code" required minlength="4">
+
+    <ng-container *ngIf="code.dirty || code.touched">
+      <span class="err" *ngIf="code.errors?.['required']">لطفا کد را وارد نمایید</span>
+      <span class="err" *ngIf="code.errors?.['minlength'] && attempt.code">لطفا کد را صحیح وارد نمایید</span>
+    </ng-container>
+  </div>
+
+  <div class="rowr gap-tween-component-up gap">
+    <button [disabled]="!isValid" class="btn btn-primary login" (click)="confirm()">ثبت</button>
+  </div>
+
+</div>

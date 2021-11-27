@@ -4,14 +4,16 @@
 
   <div class="gp">
     <label for="tel">شماره تلفن</label>
-    <input [(ngModel)]="attempt.telNo" [class.has-error]="(tel.dirty || tel.touched) && !tel.valid" class="textbox"
+    <input [(ngModel)]="attempt.telNo" [class.has-error]="(tel.dirty || tel.touched) && !tel.valid" class="textbox" telno
       type="tel" #tel="ngModel" name="tel" required>
 
     <ng-container *ngIf="tel.dirty || tel.touched">
       <span class="err" *ngIf="tel.errors?.['required']">لطفا شماره تلفن خود را وارد کنید</span>
+      <span class="err" *ngIf="tel.errors?.['telno'] && attempt.telNo">شماره تلفن صحیح نمی باشد</span>
     </ng-container>
 
   </div>
+  
   <div class="gp">
     <label for="password">گذرواژه</label>
     <input [(ngModel)]="attempt.password" [class.has-error]="(password.dirty || password.touched) && !password.valid"
@@ -25,8 +27,12 @@
 
   <a routerLink="/account/forgotpassword">گذرواژه خود را فراموش کرده اید؟</a>
 
+  <div *ngIf="serverError" class="alert danger" style="margin-top: 16px;">
+    {{ serverError }}
+  </div>
+  
   <div class="rowr gap-tween-component-up gap">
-    <button [disabled]="!isValid" class="btn btn-primary login" (click)="login()">ورود</button>
+    <button [disabled]="!isValid && !working" class="btn btn-primary login" (click)="login()">ورود</button>
     <button routerLink="/account/signup" class="btn btn-outline register">ثبت نام</button>
   </div>
 
