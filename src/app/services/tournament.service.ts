@@ -4,6 +4,7 @@ import { join } from '@fireflysemantics/join';
 import { from, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { isResVaild, Res } from '../models/Res';
+import { AnswerQuestion } from '../models/tournament/AnswerQuestion';
 import { HelperEnum } from '../models/tournament/HelperEnum';
 import { Tournament } from '../models/tournament/Tournament';
 
@@ -53,6 +54,22 @@ export class TournamentService {
 
   }
 
+  /**
+   * check if an answer is correct or not
+   */
+  AnswerQuestion(answer: AnswerQuestion): Observable<Res<AnswerQuestion>> {
+    const to = join(this.route, 'answerQuestion');
+
+    return from(new Promise<Res<AnswerQuestion>>((res, rej) => {
+      this.client.post<Res<AnswerQuestion>>(to, answer).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+  
   /**
    * get all helperEnums
    * @returns all possible gadgets 

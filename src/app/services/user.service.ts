@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import User from 'src/app/models/user/User';
 import { DbRes, isDbResValid } from '../models/DbRes';
 import { ApiService } from './ApiService';
+import { UpdatePassword } from '../models/user/UpdatePassword';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,47 @@ export class UserService implements ApiService {
     private account: AccountService
   ) { }
 
+  find(): Observable<Res<User>> {
+    const to = join(this.route, 'find');
 
+    return from(new Promise<Res<User>>((res, rej) => {
+      this.client.get<Res<User>>(to).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+
+  }
+
+  update(user: User): Observable<Res<User>> {
+    const to = join(this.route, 'update');
+
+    return from(new Promise<Res<User>>((res, rej) => {
+      this.client.post<Res<User>>(to,user).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+
+  }
+
+  UpdatePassword(pass: UpdatePassword): Observable<Res<UpdatePassword>> {
+    const to = join(this.route, 'UpdatePassword');
+
+    return from(new Promise<Res<UpdatePassword>>((res, rej) => {
+      this.client.post<Res<UpdatePassword>>(to,pass).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+
+    
+  }
   
 }

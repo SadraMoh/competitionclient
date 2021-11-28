@@ -12,16 +12,16 @@ export class ChallengeComponent implements OnInit {
   chosenOption!: QuestionOption
   
   options: QuestionOption[] = [
-    { optionText: 'بله این یک سوال می باشد' },
-    { optionText: 'بله این یک سوال می باشد' },
-    { optionText: 'بله این یک سوال می باشد' },
-    { optionText: 'بله این یک سوال می باشد' },
+    { id: 0, optionText: 'بله این یک سوال می باشد' },
+    { id: 0, optionText: 'بله این یک سوال می باشد' },
+    { id: 0, optionText: 'بله این یک سوال می باشد' },
+    { id: 0, optionText: 'بله این یک سوال می باشد' },
   ];
 
   helpers: HelperEnum[] = [
-    {cost: 60, title: 'تایمر'},
-    {cost: 120, title: 'بمب'},
-    {cost: 200, title: 'دوباره'},
+    { id: 0, cost: 60, title: 'تایمر'},
+    { id: 0, cost: 120, title: 'بمب'},
+    { id: 0, cost: 200, title: 'دوباره'},
   ]
   
   activeHelpers: HelperEnum[] = [

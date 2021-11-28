@@ -10,30 +10,35 @@ export class TournamentsComponent implements OnInit {
 
   tournaments: Tournament[] = [
     {
+      id: 0,
       imageUrl: '',
       isMultiPlayer: false,
       title: 'نام اول',
       fee: 100,
     },
     {
+      id: 0,
       imageUrl: '',
       isMultiPlayer: false,
       title: 'نام دوم',
       fee: 250,
     },
     {
+      id: 0,
       imageUrl: '',
       isMultiPlayer: true,
       title: 'نام سوم',
       fee: 350,
     },
     {
+      id: 0,
       imageUrl: '',
       isMultiPlayer: true,
       title: 'نام چهارم',
       fee: 300,
     },
     {
+      id: 0,
       imageUrl: '',
       isMultiPlayer: true,
       title: 'نام پنجم',

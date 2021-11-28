@@ -1,6 +1,7 @@
+import { Id } from "../Id";
 import { Round } from "./Round";
 
-export interface Tournament {
+export interface Tournament extends Id {
   title: string;
   isMultiPlayer: boolean;
   imageUrl: string;
