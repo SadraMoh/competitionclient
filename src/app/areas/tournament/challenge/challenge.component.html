@@ -1,36 +1,36 @@
 <div class="challenge page-padding">
 
-  <app-timer></app-timer>
+  <app-timer [(remaining)]="remainingMilis" [max]="maxTime"></app-timer>
 
   <div class="question card">
 
     <div class="nofm">
-      <span class="all">16</span>
+      <span class="all">{{ rounds?.length }}</span>
       /
-      <span class="count">5</span>
+      <span class="count">{{ roundIndex+1 }}</span>
     </div>
 
     <div class="description">
-      آیا این یک سوال می باشد؟
+      {{ currentRound?.questionText }}
     </div>
 
   </div>
 
   <div class="options">
 
-    <div class="option card" [class.selected]="chosenOption == option" *ngFor="let option of options"
+    <div class="option card" [class.selected]="chosenOption == option" *ngFor="let option of currentRound?.questionOptions"
       (click)="selectOption(option)">
       {{ option.optionText }}
     </div>
 
   </div>
 
-  <button class="btn btn-primary" [disabled]="!chosenOption">انتخاب</button>
+  <button class="btn btn-primary" [disabled]="!chosenOption" (click)="sendAnswer()">انتخاب</button>
 
   <div class="helpers">
 
     <div class="helper" *ngFor="let helper of helpers" (click)="activateHelper(helper)"
-      [class.active]="activeHelpers.includes(helper)">
+      [class.active]="activatedHelpers.includes(helper)">
       <img src="/assets/svg/helper/bomb.svg" alt="">
       <div class="col">
         <div class="title">

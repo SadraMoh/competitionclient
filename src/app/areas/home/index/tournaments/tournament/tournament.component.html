@@ -1,24 +1,31 @@
-<div routerLink="/tournament/info" class="tournament">
+<div [routerLink]="['tournament', 'info', {id: tournament.id}]" class="tournament">
   <h3 class="title">{{ tournament.title }}</h3>
   <div class="informations">
     <div class="info part-takers">
       <i class="material-icons">people</i>
       <div class="col">
-        <h5>126</h5>
+        <h5>{{ tournament.participantsCount }}</h5>
         <label>شرکت کننده</label>
       </div>
     </div>
     <div class="info question-count">
       <i class="material-icons">help</i>
       <div class="col">
-        <h5>20</h5>
+        <h5>{{tournament.roundsCount}}</h5>
         <label>سوال</label>
       </div>
     </div>
     <div class="info difficulty-level">
       <i class="material-icons">local_fire_department</i>
       <div class="col">
-        <h5>بسیار آسان</h5>
+        <h5>
+          {{
+          tournament.difficulty == 0 ? 'ساده'
+          : tournament.difficulty == 1 ? 'متوسط'
+          : tournament.difficulty == 2 ? 'دشوار'
+          : '???'
+          }}
+        </h5>
         <label>درجه سختی</label>
       </div>
     </div>

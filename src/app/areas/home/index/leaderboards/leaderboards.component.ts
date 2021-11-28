@@ -18,6 +18,9 @@ export class LeaderboardsComponent implements OnInit {
   ]
   
   ngOnInit(): void {
+
+    
+    
   }
 
 }

@@ -14,6 +14,10 @@
     </ng-container>
   </div>
 
+  <div *ngIf="serverError" class="alert danger" style="margin-top: 16px;">
+    {{ serverError }}
+  </div>
+  
   <div class="rowr gap-tween-component-up gap">
     <button [disabled]="!isValid" class="btn btn-primary login" (click)="confirm()">ثبت</button>
   </div>

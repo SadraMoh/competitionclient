@@ -14,24 +14,29 @@ export class TimerComponent implements OnInit, OnDestroy {
     return this.milis / this.max * 100;
   }
 
+
+
   /** max number of miliseconds */
   @Input("max")
   max: number = 1000;
 
-  /** remaining miliseconds */
+  // #region remainingMilis
   _milis: number = 1000;
 
   public get milis(): number {
     return this._milis;
   }
 
+  @Input('remaining')
   public set milis(v: number) {
     this._milis = v;
     this.milisChange.emit(v);
   }
 
-  @Output("milisChange")
-  milisChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output("remainingChange")
+  public milisChange: EventEmitter<number> = new EventEmitter<number>();
+  // #endregion remainingMilis
+
 
   @Output("expired")
   expired: EventEmitter<void> = new EventEmitter<void>();
@@ -40,14 +45,14 @@ export class TimerComponent implements OnInit, OnDestroy {
   started: EventEmitter<void> = new EventEmitter<void>();
 
   countdown = interval(1).pipe(take(this.max));
-  countdownSub!: Subscription;
+  countdownSub?: Subscription;
 
   constructor() { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
-    this.countdownSub.unsubscribe();
+    this.countdownSub?.unsubscribe();
   }
 
   public start() {
@@ -60,7 +65,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   public freeze() {
-    this.countdownSub.unsubscribe()
+    this.countdownSub?.unsubscribe()
   }
 
 }

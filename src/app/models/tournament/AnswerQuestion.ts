@@ -6,5 +6,5 @@ export interface AnswerQuestion extends Id {
   responsesTime: number;
   isHelp: boolean;
   helperEnumId?: number;
-  userId: number;
+  userId?: number;
 }
