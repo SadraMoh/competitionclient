@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { join } from '@fireflysemantics/join';
-import { from, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { from, Observable } from 'rxjs';
 import { isResVaild, Res } from '../models/Res';
 import { AnswerQuestion } from '../models/tournament/AnswerQuestion';
 import { enumDictionary, HelperEnum } from '../models/tournament/HelperEnum';
 import { Tournament } from '../models/tournament/Tournament';
 import { TournamentInfo } from '../models/tournament/TournamentInfo';
+import { ApiService } from './ApiService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TournamentService {
+export class TournamentService implements ApiService {
 
   readonly route = join(environment.api, 'tournament');
 

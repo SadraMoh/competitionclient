@@ -30,7 +30,7 @@ export class UserService implements ApiService {
   /**
    * get current user
    */
-   Find(): Observable<Res<User>> {
+   find(): Observable<Res<User>> {
     const to = join(this.route, 'Find');
 
     return from(new Promise<Res<User>>((res, rej) => {
@@ -41,7 +41,6 @@ export class UserService implements ApiService {
           rej(result.message);
       })
     }))
-
   }
   
   /**
@@ -60,7 +59,6 @@ export class UserService implements ApiService {
           rej(result.message);
       })
     }))
-
   }
 
   update(user: User): Observable<Res<User>> {
@@ -74,7 +72,6 @@ export class UserService implements ApiService {
           rej(result.message);
       })
     }))
-
   }
 
   UpdatePassword(pass: UpdatePassword): Observable<Res<UpdatePassword>> {
