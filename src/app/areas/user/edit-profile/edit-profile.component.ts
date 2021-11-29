@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Signup } from 'src/app/models/account/Signup';
@@ -23,6 +23,15 @@ export class EditProfileComponent implements OnInit {
   @ViewChild('fullName')
   fullName!: NgModel;
 
+  @ViewChild('avatarPicker')
+  avatarPicker!: ElementRef<HTMLInputElement>;
+
+  /** either the url of the pre uploaded image, or the base64 of the new chosen avatar */
+  avatar?: any;
+
+  /** the image the user has chosen */
+  chosenFile?: File;
+
   get isValid(): boolean {
     return Boolean(this.fullName?.valid && this.bio?.valid);
   }
@@ -35,18 +44,35 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.user.subscribe(us => {
+      this.avatar = us.profileImageUrl;
       this.user = us;
     });
   }
 
+  avatarPicked() {
+
+    const input = this.avatarPicker.nativeElement;
+
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.avatar = e?.target?.result;
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+
+  }
+
   edit(): void {
-    debugger
 
     const attempt: User = {
       bio: this.user.bio,
       fullName: this.user.fullName,
       id: this.user.id,
-      profileImageUrl: ''
+      profileImageFile: this.chosenFile,
+      profileImageUrl: '',
     }
 
     this.userService.update(attempt)

@@ -38,7 +38,7 @@
 
       @media screen and (max-width: 432px) {
         .material-icons {
-          display: none
+          display: none;
         }
       }
 
@@ -50,7 +50,7 @@
         }
 
         label {
-          font-size: .8em;
+          font-size: 0.8em;
         }
       }
     }
@@ -74,13 +74,12 @@
       * {
         cursor: pointer;
       }
-      
+
       > label {
         font-size: 1.4em;
         text-align: center;
         margin-bottom: 4px;
         color: #4bcf1f;
-
       }
 
       .coin-count {
@@ -116,4 +115,25 @@
 .tournament:hover {
   box-shadow: 0 0 0 6px rgba(124, 238, 17, 0.2);
   @include transs;
+}
+
+.tournament.easy {
+  background: linear-gradient(94.42deg, #e2f95a 0%, #32eb7c 100%);
+  .challenge .btn > label {
+    color: #4bcf1f;
+  }
+}
+
+.tournament.medium {
+  background: linear-gradient(94.42deg, #f9e95a 0%, #ff8514 100%);
+  .challenge .btn > label {
+    color: #fcb334;
+  }
+}
+
+.tournament.hard {
+  background: linear-gradient(94.42deg, #ffa133 0%, #f71b1b 100%);
+  .challenge .btn > label {
+    color: #fb5f27;
+  }
 }

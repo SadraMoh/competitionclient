@@ -1,4 +1,5 @@
-<div [routerLink]="['tournament', 'info', tournament.id]" class="tournament">
+<div [routerLink]="['tournament', 'info', tournament.id]" class="tournament" 
+[ngClass]="{ 'easy': tournament.difficulty == 0,'medium': tournament.difficulty == 1,'hard': tournament.difficulty == 2 }">
   <h3 class="title">{{ tournament.title }}</h3>
   <div class="informations">
     <div class="info part-takers">

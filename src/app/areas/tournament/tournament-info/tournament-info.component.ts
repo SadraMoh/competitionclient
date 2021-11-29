@@ -5,6 +5,8 @@ import { Location } from "@angular/common";
 import { switchMap } from 'rxjs/operators';
 import { Tournament } from 'src/app/models/tournament/Tournament';
 import { TournamentInfo } from 'src/app/models/tournament/TournamentInfo';
+import { AccountService } from 'src/app/services/account.service';
+import User from 'src/app/models/user/User';
 
 @Component({
   selector: 'app-tournament-info',
@@ -17,12 +19,17 @@ export class TournamentInfoComponent implements OnInit {
     private tournamentService: TournamentService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private accountService: AccountService
   ) { }
 
   tournament: TournamentInfo = {} as TournamentInfo;
 
+  user?: User
+
   ngOnInit(): void {
+
+    this.accountService.user.subscribe((res) => this.user = res);
 
     const tournamentId = Number(this.route.snapshot.params['id']);
     this.tournament.id = tournamentId;

@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, Input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { match } from './match.validator';
 
@@ -8,12 +8,29 @@ import { match } from './match.validator';
 })
 export class MatchDirective implements Validator {
 
+  private _matchTo!: string;
+
   @Input('match')
-  matchTo: string = ''
+  public set matchTo(v: string) {
+    this._matchTo = v;
+    this.cd.detectChanges();
+  }
+
+  public get matchTo(): string {
+    return this._matchTo;
+  }
+
+  control?: AbstractControl
+
+  constructor(private cd: ChangeDetectorRef) {
+  }
   
+  /**
+   * validate is called once onload - per instance of directive
+   * this is used to capture the control 
+   */
   validate(control: AbstractControl): ValidationErrors | null {
-    console.log('shouldMatch:', this.matchTo);
-    
+    this.control = control;
     return match(this.matchTo)(control)
   }
 }

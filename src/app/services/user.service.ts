@@ -5,7 +5,7 @@ import { join } from '@fireflysemantics/join';
 import { from, Observable } from 'rxjs';
 import { Signin } from '../models/account/Signin';
 import { isResVaild, Res } from '../models/Res';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
 import User from 'src/app/models/user/User';
 import { DbRes, isDbResValid } from '../models/DbRes';
 import { ApiService } from './ApiService';
@@ -30,8 +30,8 @@ export class UserService implements ApiService {
   /**
    * get current user
    */
-  get(): Observable<Res<User>> {
-    const to = join(this.route, 'get');
+   Find(): Observable<Res<User>> {
+    const to = join(this.route, 'Find');
 
     return from(new Promise<Res<User>>((res, rej) => {
       this.client.get<Res<User>>(to).subscribe((result) => {
@@ -49,8 +49,8 @@ export class UserService implements ApiService {
    * @param id user id
    * @returns user data
    */
-  find(id: number): Observable<Res<User>> {
-    const to = join(this.route, 'find');
+   findById(id: number): Observable<Res<User>> {
+    const to = join(this.route, 'findById');
 
     return from(new Promise<Res<User>>((res, rej) => {
       this.client.post<Res<User>>(to, id).subscribe((result) => {
@@ -88,8 +88,28 @@ export class UserService implements ApiService {
           rej(result.message);
       })
     }))
+  }
 
+  /**
+   * upload an image to the server and get its address
+   * @param file avatar file to upload
+   * @returns uploaded avatar url
+   */
+  uploadAvatar(file: File): Observable<HttpEvent<string>> {
+    const to = join(this.route, 'uploadAvatar');
 
+    let formData = new FormData();
+    formData.append('upload', file);
+
+    let params = new HttpParams();
+
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
+
+    const req = new HttpRequest('POST', to, formData, options);
+    return this.client.request<string>(req);
   }
 
 }

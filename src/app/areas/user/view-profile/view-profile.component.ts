@@ -20,10 +20,10 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit(): void {
 
     this.user.id = Number(this.route.snapshot.params['id']);
-    this.userService.find(this.user.id)
+    this.userService.findById(this.user.id)
       .subscribe(
         (res) => {
-
+          this.user = res.value;
         },
         (err) => {
 

@@ -57,8 +57,7 @@
 
     <div class="leads">
 
-      <!-- @todo aaa -->
-      <div class="lead" [class.self]="lead.fullName == lead.fullName" *ngFor="let lead of tournament.participants">
+      <div class="lead" [class.self]="lead.id == user?.id" *ngFor="let lead of tournament.participants">
         <div class="place"></div>
         <img class="avatar" src="/assets/png/avatar.png" alt="">
         <label class="name">کاربر کاربرزاده</label>

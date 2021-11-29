@@ -3,9 +3,9 @@
   <div class="image-upload">
     <label class="upload material-icons">
       image
-      <input type="file">
+      <input type="file" #avatarPicker accept="image/png, image/jpeg" [(ngModel)]="user.profileImageFile" (change)="avatarPicked()">
     </label>
-    <img src="/assets/png/avatar.png" alt="" class="avatar">
+    <img [src]="avatar" alt="" class="avatar">
   </div>
 
   <div class="form">
@@ -17,7 +17,7 @@
         class="textbox" type="text" #fullName="ngModel" name="text" required>
 
       <ng-container *ngIf="fullName.dirty || fullName.touched">
-        <span class="err" *ngIf="fullName.errors?.['required']">لطفا شماره تلفن خود را وارد کنید</span>
+        <span class="err" *ngIf="fullName.errors?.['required']">لطفا نام و نام خانوادگی خود را وارد نمایید</span>
       </ng-container>
 
     </div>
@@ -25,13 +25,10 @@
     <div class="gp">
       <label for="bio">توضیحات درباره خود</label>
       <textarea [(ngModel)]="user.bio" [class.has-error]="(bio.dirty || bio.touched) && !bio.valid" class="textarea"
-        #bio="ngModel" name="bio" required>
-    و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را
-    صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند.
-      </textarea>
+        #bio="ngModel" name="bio" required></textarea>
 
       <ng-container *ngIf="bio.dirty || bio.touched">
-        <span class="err" *ngIf="bio.errors?.['required']">لطفا گذرواژه خود را وارد کنید</span>
+        <span class="err" *ngIf="bio.errors?.['required']">لطفا توضیحاتی کوتاه درباره خود ارائه دهید</span>
       </ng-container>
 
     </div>
