@@ -1,0 +1,118 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+$gap: 16px;
+
+.tournament-info {
+  @include col;
+
+  .thumbnail {
+    @include flex;
+    border-radius: $card-border-radius;
+    padding: 32px;
+    align-items: center;
+    justify-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: $gap;
+    aspect-ratio: 15/3;
+
+    h1 {
+      position: relative;
+      text-align: center;
+      margin: auto;
+      z-index: 10;
+      color: white;
+      text-shadow: 2px 2px #333;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(8px);
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: $gap;
+
+    .info {
+      border-radius: $card-border-radius;
+      padding: $card-padding;
+      background-color: $card-background;
+      box-shadow: $card-butt, $card-shadow;
+      @include col;
+      gap: 6px;
+      align-items: center;
+
+      * {
+        text-align: center;
+      }
+
+      h5 {
+        font-size: 1.6em;
+      }
+      
+    }
+
+    // .part-takers {
+    //   background: rgb(70, 219, 24);
+    //   background: linear-gradient(
+    //     45deg,
+    //     rgba(70, 219, 24, 1) 0%,
+    //     rgba(24, 244, 241, 1) 100%
+    //   );
+    // }
+
+    // .question-count {
+    //   background: rgb(255, 141, 0);
+    //   background: linear-gradient(
+    //     45deg,
+    //     rgba(255, 141, 0, 1) 0%,
+    //     rgba(224, 30, 220, 1) 100%
+    //   );
+    // }
+
+    // .difficulty-level {
+    //   background: rgb(237, 235, 22);
+    //   background: linear-gradient(
+    //     45deg,
+    //     rgba(237, 235, 22, 1) 0%,
+    //     rgba(244, 24, 24, 1) 100%
+    //   );
+    // }
+
+    // .retake-fee {
+    //   background: rgb(222, 30, 211);
+    //   background: linear-gradient(
+    //     45deg,
+    //     rgba(222, 30, 211, 1) 0%,
+    //     rgba(24, 58, 244, 1) 100%
+    //   );
+    // }
+    
+  }
+
+  .actions {
+    @include row;
+    margin-top: 3 * $gap !important;
+    .btn {
+      width: 50%;
+      min-width: 200px;
+    }
+  }
+  
+  
+  .leaderboards {
+    margin-top: $gap * 4;
+  }
+}

@@ -1,4 +1,72 @@
-<button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;">
-  شرکت در مسابقه
-  <i class="material-icons">bolt</i>
-</button>
+<div class="tournament-info page-padding">
+
+  <div class="thumbnail">
+    <h1 class="title">{{ tournament.title }}</h1>
+    <img class="background" [src]="tournament.imageUrl ?? 'https://img.freepik.com/vrije-vector/digitaal-neonspel-over-banner_1017-19897.jpg?size=626&ext=jpg'" alt="">
+  </div>
+
+  <div class="grid">
+
+    <div class="info part-takers">
+      <i class="material-icons">people</i>
+      <div class="col">
+        <h5>{{ tournament.participants?.length }}</h5>
+        <label>شرکت کننده</label>
+      </div>
+    </div>
+    <div class="info question-count">
+      <i class="material-icons">help</i>
+      <div class="col">
+        <h5>{{tournament.roundsCount}}</h5>
+        <label>سوال</label>
+      </div>
+    </div>
+    <div class="info difficulty-level">
+      <i class="material-icons">local_fire_department</i>
+      <div class="col">
+        <h5>
+          {{ tournament.difficulty | difficulty }}
+        </h5>
+        <label>درجه سختی</label>
+      </div>
+    </div>
+    <div class="info retake-fee">
+      <i class="material-icons">autorenew</i>
+      <div class="col">
+        <h5>
+          {{ tournament.fee }}
+        </h5>
+        <label>هزینه شرکت دوباره</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;">
+      شرکت در مسابقه
+      <i class="material-icons">bolt</i>
+    </button>
+  </div>
+
+  <section class="leaderboards board">
+
+    <header class="header">
+      <img src="/assets/svg/score.svg" alt="" class="icon score">
+      <h3 class="title">عملکرد دیگران</h3>
+    </header>
+
+    <div class="leads">
+
+      <!-- @todo aaa -->
+      <div class="lead" [class.self]="lead.fullName == lead.fullName" *ngFor="let lead of tournament.participants">
+        <div class="place"></div>
+        <img class="avatar" src="/assets/png/avatar.png" alt="">
+        <label class="name">کاربر کاربرزاده</label>
+        <label class="score">14800</label>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

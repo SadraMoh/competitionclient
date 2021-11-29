@@ -1,8 +1,9 @@
+import { Id } from "../Id";
 import { Participant } from "./Participant.";
 import { Round } from "./Round";
 import { TournamentDifficulty } from "./TournamentDifficulty";
 
-export interface TournamentInfo {
+export interface TournamentInfo extends Id {
 
   title: string;
   /** is actual or test */

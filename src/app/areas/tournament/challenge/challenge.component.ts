@@ -50,9 +50,9 @@ export class ChallengeComponent implements OnInit {
   //- helper
 
   helpers: HelperEnum[] = [
-    { id: 0, cost: 60, title: 'تایمر' },
-    { id: 0, cost: 120, title: 'بمب' },
-    { id: 0, cost: 200, title: 'دوباره' },
+    { id: 0, cost: 60, title: 'حذف یک گزینه ' },
+    { id: 0, cost: 200, title: 'شانس دوباره' },
+    { id: 0, cost: 120, title: 'زمان اضافه' },
   ]
 
   activatedHelpers: HelperEnum[] = [

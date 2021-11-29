@@ -4,6 +4,7 @@ import { TournamentService } from 'src/app/services/tournament.service';
 import { Location } from "@angular/common";
 import { switchMap } from 'rxjs/operators';
 import { Tournament } from 'src/app/models/tournament/Tournament';
+import { TournamentInfo } from 'src/app/models/tournament/TournamentInfo';
 
 @Component({
   selector: 'app-tournament-info',
@@ -19,12 +20,13 @@ export class TournamentInfoComponent implements OnInit {
     private location: Location
   ) { }
 
-  tournament!: Tournament
+  tournament: TournamentInfo = {} as TournamentInfo;
 
   ngOnInit(): void {
 
     const tournamentId = Number(this.route.snapshot.params['id']);
-    this.tournamentService.find(tournamentId)
+    this.tournament.id = tournamentId;
+    this.tournamentService.findInfo(tournamentId)
       .subscribe(
         (res) => {
           this.tournament = res.value;
@@ -36,7 +38,7 @@ export class TournamentInfoComponent implements OnInit {
   }
 
   joinChallenge(): void {
-    this.router.navigate(['tournament', 'challenge', { id: this.tournament.id }])
+    this.router.navigate(['tournament', 'challenge', this.tournament.id])
   }
 
 }

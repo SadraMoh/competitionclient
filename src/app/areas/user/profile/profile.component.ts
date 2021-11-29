@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import User from 'src/app/models/user/User';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -10,7 +12,10 @@ export class ProfileComponent implements OnInit {
 
   constructor(private account: AccountService) { }
 
+  user?: User
+
   ngOnInit(): void {
+    this.account.user.subscribe(us => this.user = us);
   }
 
   signout() {

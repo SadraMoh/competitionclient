@@ -5,8 +5,9 @@ import { from, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { isResVaild, Res } from '../models/Res';
 import { AnswerQuestion } from '../models/tournament/AnswerQuestion';
-import { HelperEnum } from '../models/tournament/HelperEnum';
+import { enumDictionary, HelperEnum } from '../models/tournament/HelperEnum';
 import { Tournament } from '../models/tournament/Tournament';
+import { TournamentInfo } from '../models/tournament/TournamentInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +70,7 @@ export class TournamentService {
       })
     }))
   }
-  
+
   /**
    * get all helperEnums
    * @returns all possible gadgets 
@@ -79,8 +80,17 @@ export class TournamentService {
 
     return from(new Promise<Res<HelperEnum[]>>((res, rej) => {
       this.client.get<Res<HelperEnum[]>>(to).subscribe((result) => {
-        if (isResVaild(result))
+        if (isResVaild(result)) {
+
+          result.value = result.value.map(i => {
+            console.log(i);
+
+            i.title = enumDictionary[i.title];
+            return i;
+          })
+
           res(result);
+        }
         else
           rej(result.message);
       })
@@ -88,6 +98,26 @@ export class TournamentService {
 
   }
 
-  
-  
+  /**
+   * method for hydrating tournamentInfo component
+   * @param id tournament id
+   * @returns tournament info and leaderboards
+   */
+  findInfo(id: number): Observable<Res<TournamentInfo>> {
+    const to = join(this.route, 'findInfo');
+
+    return from(new Promise<Res<TournamentInfo>>((res, rej) => {
+      this.client.post<Res<TournamentInfo>>(to, id).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+
+
+  }
+
+
+
 }

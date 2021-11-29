@@ -34,6 +34,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { TelnoDirective } from './utility/validators/telno/telno.directive';
 import { ConfirmComponent } from './areas/account/confirm/confirm.component';
 import { ForgotPasswordComponent } from './areas/account/forgot-password/forgot-password.component';
+import { DifficultyPipe } from './utility/pipes/difficulty.pipe';
+import { ViewProfileComponent } from './areas/user/view-profile/view-profile.component';
+import { MatchDirective } from './utility/validators/match/match.directive';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,9 @@ import { ForgotPasswordComponent } from './areas/account/forgot-password/forgot-
     TelnoDirective,
     ConfirmComponent,
     ForgotPasswordComponent,
+    DifficultyPipe,
+    ViewProfileComponent,
+    MatchDirective,
   ],
   imports: [
     BrowserModule,

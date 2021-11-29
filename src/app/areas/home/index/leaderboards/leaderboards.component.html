@@ -7,13 +7,14 @@
 
   <div class="leads">
 
-    <div class="lead" [class.self]="lead.isSelf" *ngFor="let lead of leads">
+    <div class="lead" [class.self]="lead.isSelf" [routerLink]="['user','profile',lead.userId]"
+      *ngFor="let lead of leads" routerLink="">
       <div class="place">{{leads.indexOf(lead) + 1}}</div>
-        <img class="avatar" src="/assets/png/avatar.png" alt="">
+      <img class="avatar" src="/assets/png/avatar.png" alt="">
       <label class="name">کاربر کاربرزاده</label>
       <label class="score">14800</label>
     </div>
-    
+
   </div>
-  
+
 </section>

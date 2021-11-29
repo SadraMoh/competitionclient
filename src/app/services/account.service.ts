@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable } from 'rxjs';
+import { from, observable, Observable } from 'rxjs';
 import { Signin } from '../models/account/Signin';
 import { Confirm } from '../models/account/Confirm';
 import { environment } from 'src/environments/environment';
@@ -51,7 +51,23 @@ export class AccountService implements ApiService {
     return this.jwtHelper.decodeToken(this.token);
   }
 
-  public user!: User;
+  private _user?: User;
+  public get user(): Observable<User> {
+    return from(new Promise<User>(
+      (res) => {
+        if (this._user)
+          res(this._user)
+        else {
+          this.getUserData()
+            .subscribe(
+              (result) => {
+                this._user = result.value;
+                res(this._user);
+              });
+        }
+      }
+    ));
+  }
 
   constructor(
     private client: HttpClient,
@@ -71,7 +87,7 @@ export class AccountService implements ApiService {
         if (isResVaild(result)) {
           this.token = result.value.token as string;
           // hydrate user data
-          this.getUserData().subscribe(res => this.user = res.value);
+          this.getUserData().subscribe(res => this._user = res.value);
           res(result);
         }
         else
@@ -133,7 +149,7 @@ export class AccountService implements ApiService {
 
   /** Get the logged in users data */
   getUserData(): Observable<Res<User>> {
-    const to = join(this.route, 'find');
+    const to = join(environment.api, 'user', 'find');
 
     if (!this.token) throw 'User not logged in';
 

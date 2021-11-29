@@ -13,7 +13,7 @@
     <div class="gp">
 
       <label for="fullName">نام و نام خانوادگی</label>
-      <input [(ngModel)]="attempt.fullName" [class.has-error]="(fullName.dirty || fullName.touched) && !fullName.valid"
+      <input [(ngModel)]="user.fullName" [class.has-error]="(fullName.dirty || fullName.touched) && !fullName.valid"
         class="textbox" type="text" #fullName="ngModel" name="text" required>
 
       <ng-container *ngIf="fullName.dirty || fullName.touched">
@@ -24,7 +24,7 @@
 
     <div class="gp">
       <label for="bio">توضیحات درباره خود</label>
-      <textarea [(ngModel)]="attempt.bio" [class.has-error]="(bio.dirty || bio.touched) && !bio.valid" class="textarea"
+      <textarea [(ngModel)]="user.bio" [class.has-error]="(bio.dirty || bio.touched) && !bio.valid" class="textarea"
         #bio="ngModel" name="bio" required>
     و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را
     صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند.
@@ -39,7 +39,7 @@
   </div>
 
   <div class="actions">
-    <button class="btn btn-success" [disabled]="!isValid">
+    <button class="btn btn-success" [disabled]="!isValid" (click)="edit()">
       تایید
       <i class="material-icons">check</i>
     </button>

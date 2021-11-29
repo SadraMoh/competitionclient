@@ -1,4 +1,4 @@
-<div [routerLink]="['tournament', 'info', {id: tournament.id}]" class="tournament">
+<div [routerLink]="['tournament', 'info', tournament.id]" class="tournament">
   <h3 class="title">{{ tournament.title }}</h3>
   <div class="informations">
     <div class="info part-takers">
@@ -19,12 +19,7 @@
       <i class="material-icons">local_fire_department</i>
       <div class="col">
         <h5>
-          {{
-          tournament.difficulty == 0 ? 'ساده'
-          : tournament.difficulty == 1 ? 'متوسط'
-          : tournament.difficulty == 2 ? 'دشوار'
-          : '???'
-          }}
+          {{ tournament.difficulty | difficulty }}
         </h5>
         <label>درجه سختی</label>
       </div>

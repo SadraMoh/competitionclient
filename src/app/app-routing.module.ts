@@ -17,6 +17,7 @@ import { ChangePasswordComponent } from './areas/user/change-password/change-pas
 import { EditProfileComponent } from './areas/user/edit-profile/edit-profile.component';
 import { ProfileComponent } from './areas/user/profile/profile.component';
 import { UserLayoutComponent } from './areas/user/user-layout/user-layout.component';
+import { ViewProfileComponent } from './areas/user/view-profile/view-profile.component';
 import { AuthGuard } from './utility/guards/auth.guard';
 
 const routes: Routes = [
@@ -48,7 +49,7 @@ const routes: Routes = [
           {
             path: 'user', component: UserLayoutComponent, children: [
               // allow access to other people's profile even when not logged in
-              { path: 'profile/:id', component: ProfileComponent },
+              { path: 'profile/:id', component: ViewProfileComponent },
               { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
               { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthGuard] },
               { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard] },
@@ -62,8 +63,8 @@ const routes: Routes = [
       // tournament
       {
         path: 'tournament', component: TournamentLayoutComponent, children: [
-          { path: 'info', component: TournamentInfoComponent },
-          { path: 'challenge', component: ChallengeComponent, canActivate: [AuthGuard] },
+          { path: 'info/:id', component: TournamentInfoComponent, },
+          { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard] },
           { path: '**', redirectTo: 'info' },
         ]
       }

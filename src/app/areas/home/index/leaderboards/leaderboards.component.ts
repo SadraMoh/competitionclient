@@ -10,17 +10,17 @@ export class LeaderboardsComponent implements OnInit {
   constructor() { }
 
   leads: any[] = [
-    {},
-    {isSelf:true},
-    {},
-    {},
-    {},
+    { userId: 1, },
+    { userId: 2, isSelf: true },
+    { userId: 3, },
+    { userId: 4, },
+    { userId: 5, },
   ]
-  
+
   ngOnInit(): void {
 
-    
-    
+
+
   }
 
 }
