@@ -123,6 +123,10 @@
     color: #4bcf1f;
   }
 }
+.tournament.easy:hover {
+  box-shadow: 0 0 0 6px rgba(124, 238, 17, 0.2);
+  @include transs;
+}
 
 .tournament.medium {
   background: linear-gradient(94.42deg, #f9e95a 0%, #ff8514 100%);
@@ -130,10 +134,18 @@
     color: #fcb334;
   }
 }
+.tournament.medium:hover {
+  box-shadow: 0 0 0 6px rgba(245, 179, 11, 0.2);
+  @include transs;
+}
 
 .tournament.hard {
   background: linear-gradient(94.42deg, #ffa133 0%, #f71b1b 100%);
   .challenge .btn > label {
     color: #fb5f27;
   }
+}
+.tournament.hard:hover {
+  box-shadow: 0 0 0 6px rgba(238, 17, 17, 0.2);
+  @include transs;
 }

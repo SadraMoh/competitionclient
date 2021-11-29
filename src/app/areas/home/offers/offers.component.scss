@@ -1,0 +1,42 @@
+@import "/src/assets/styles/vars";
+@import "/src/assets/styles/utility";
+
+.offers{
+  @include col;
+
+  .offer {
+    background-color: $card-background;
+    border-radius: $card-border-radius;
+    padding: $card-padding;
+    box-shadow: $card-butt, $card-shadow;
+    @include rowr;
+
+    h2 {
+      color: $text-1;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+
+      .coin {
+        background-color: #f3d17a83;
+        color: #eeb117;
+        padding: 0px 12px;
+        @include circle;
+      }
+      
+    }
+
+    h4 {
+      color: $succ;
+    }
+    
+    .btn {
+      margin: auto auto auto 0;
+    }
+    
+  }
+
+  .offer:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  
+}

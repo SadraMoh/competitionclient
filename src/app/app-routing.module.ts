@@ -8,6 +8,7 @@ import { LoginComponent } from './areas/account/login/login.component';
 import { SignupComponent } from './areas/account/signup/signup.component';
 import { ContactComponent } from './areas/home/contact/contact.component';
 import { IndexComponent } from './areas/home/index/index.component';
+import { OffersComponent } from './areas/home/offers/offers.component';
 import { NotFoundComponent } from './areas/shared/err/not-found/not-found.component';
 import { LayoutComponent } from './areas/shared/layout/layout.component';
 import { ChallengeComponent } from './areas/tournament/challenge/challenge.component';
@@ -57,7 +58,8 @@ const routes: Routes = [
             ]
           },
           // contact 
-          { path: 'contact', component: ContactComponent }
+          { path: 'contact', component: ContactComponent },
+          { path: 'offers', component: OffersComponent}
         ]
       },
       // tournament

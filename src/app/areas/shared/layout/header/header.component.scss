@@ -135,6 +135,7 @@
       @include rowr;
       align-items: center;
       margin-left: 10px;
+      cursor: pointer;
 
       .icon {
         @include row;

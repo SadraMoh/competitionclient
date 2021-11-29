@@ -25,7 +25,7 @@ export class TournamentInfoComponent implements OnInit {
 
   tournament: TournamentInfo = {} as TournamentInfo;
 
-  user?: User
+  public user?: User
 
   ngOnInit(): void {
 

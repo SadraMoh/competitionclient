@@ -37,6 +37,7 @@ import { ForgotPasswordComponent } from './areas/account/forgot-password/forgot-
 import { DifficultyPipe } from './utility/pipes/difficulty.pipe';
 import { ViewProfileComponent } from './areas/user/view-profile/view-profile.component';
 import { MatchDirective } from './utility/validators/match/match.directive';
+import { OffersComponent } from './areas/home/offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { MatchDirective } from './utility/validators/match/match.directive';
     DifficultyPipe,
     ViewProfileComponent,
     MatchDirective,
+    OffersComponent,
   ],
   imports: [
     BrowserModule,
