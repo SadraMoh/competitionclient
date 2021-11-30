@@ -1,7 +1,7 @@
 @import "/src/assets/styles/vars";
 @import "/src/assets/styles/utility";
 
-.offers{
+.offers {
   @include col;
 
   .offer {
@@ -22,21 +22,26 @@
         padding: 0px 12px;
         @include circle;
       }
-      
     }
 
     h4 {
       color: $succ;
+      @include rowr;
+      font-size: 1.2em;
+
+      .toman {
+        margin-right: 6px;
+        font-size: .8em;
+        margin-top: auto;
+      }
     }
-    
+
     .btn {
       margin: auto auto auto 0;
     }
-    
   }
 
   .offer:not(:last-child) {
     margin-bottom: 20px;
   }
-  
 }

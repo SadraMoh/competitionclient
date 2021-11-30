@@ -84,7 +84,6 @@ export class TournamentService implements ApiService {
         if (isResVaild(result)) {
 
           result.value = result.value.map(i => {
-            console.log(i);
 
             i.title = enumDictionary[i.title];
             return i;

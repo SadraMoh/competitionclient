@@ -38,6 +38,7 @@ import { DifficultyPipe } from './utility/pipes/difficulty.pipe';
 import { ViewProfileComponent } from './areas/user/view-profile/view-profile.component';
 import { MatchDirective } from './utility/validators/match/match.directive';
 import { OffersComponent } from './areas/home/offers/offers.component';
+import { PendingChangesGuard } from './utility/guards/pending-changes.guard';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { OffersComponent } from './areas/home/offers/offers.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     JwtHelperService,
+    PendingChangesGuard
   ],
   bootstrap: [AppComponent]
 })

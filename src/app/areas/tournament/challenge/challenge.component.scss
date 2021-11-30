@@ -4,9 +4,6 @@
 .challenge {
   margin: auto;
   max-width: 550px;
-  
-  app-timer {
-  }
 
   .question {
     margin-top: 24px;
@@ -41,6 +38,8 @@
     margin-bottom: 40px;
 
     .option {
+      appearance: none;
+      width: 100%;
       @include rowr;
       align-items: center;
       @include circle;
@@ -51,7 +50,6 @@
       color: $text-2;
       font-size: 1em;
       @include transl;
-      cursor: pointer;
     }
 
     .option:before {
@@ -64,8 +62,9 @@
       @include circle;
     }
 
-    .option:hover {
+    .option:not([disabled]):hover {
       background-color: darken($card-background, $amount: 3%);
+      cursor: pointer;
       @include transs;
     }
 
@@ -78,6 +77,25 @@
       border-color: $primary;
       box-shadow: 0 4px 12px transparentize($primary, $amount: 0.72);
     }
+
+    .option.wrong {
+      border-color: transparent;
+      background-color: #f64b4b;
+      color: white;
+    }
+
+    .option.correct {
+      border-color: transparent;
+      background-color: #75e74d;
+      color: white;
+    }
+
+    .option.wrong::before,
+    .option.correct::before {
+      border: 6px solid white;
+      width: 12px;
+      height: 12px;
+    }
   }
 
   .btn {
@@ -89,7 +107,6 @@
     @include col;
 
     .helper {
-      width: 100%;
       @include rowr;
       background-color: white;
       padding: 8px;
@@ -98,10 +115,13 @@
       cursor: pointer;
       @include transl;
 
-      img {
+      .image {
         width: 56px;
         height: 56px;
         border-radius: 8px;
+        background-image: url("/assets/svg/helper/bomb.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .col {
@@ -135,6 +155,18 @@
       }
     }
 
+    .helper.bomb .image {
+      background-image: url("/assets/svg/helper/bomb.svg");
+    }
+
+    .helper.duplex .image {
+      background-image: url("/assets/svg/helper/duplex.svg");
+    }
+
+    .helper.time .image {
+      background-image: url("/assets/svg/helper/hourglass.svg");
+    }
+
     .helper:not(:last-child) {
       margin-bottom: 12px;
     }
@@ -144,7 +176,7 @@
       border-color: $primary;
     }
 
-    .helper.active {
+    .helper.duplex.active, .helper[disabled] {
       filter: grayscale(100%);
       -webkit-filter: grayscale(100%);
       -moz-filter: grayscale(100%);

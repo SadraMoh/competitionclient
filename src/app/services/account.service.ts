@@ -114,7 +114,6 @@ export class AccountService implements ApiService {
               rej(result.result.message);
           },
           err => {
-            debugger
             // @todo FUCKN Handle your ERRORS
             rej(err.error.errors.Password || err.err.errors.TelNo);
           });

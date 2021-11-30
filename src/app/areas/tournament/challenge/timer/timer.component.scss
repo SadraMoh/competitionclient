@@ -21,6 +21,7 @@ $clock-size: 72px;
       @include circle;
       background: linear-gradient(94.42deg, #F9E95A 0%, #FF8514 100%);
       width: 50%;
+      transition: width ease .08s;
     }
   }
   

@@ -20,6 +20,7 @@ import { ProfileComponent } from './areas/user/profile/profile.component';
 import { UserLayoutComponent } from './areas/user/user-layout/user-layout.component';
 import { ViewProfileComponent } from './areas/user/view-profile/view-profile.component';
 import { AuthGuard } from './utility/guards/auth.guard';
+import { PendingChangesGuard } from './utility/guards/pending-changes.guard';
 
 const routes: Routes = [
   {
@@ -66,7 +67,7 @@ const routes: Routes = [
       {
         path: 'tournament', component: TournamentLayoutComponent, children: [
           { path: 'info/:id', component: TournamentInfoComponent, },
-          { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard] },
+          { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
           { path: '**', redirectTo: 'info' },
         ]
       }

@@ -44,7 +44,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   @Output("started")
   started: EventEmitter<void> = new EventEmitter<void>();
 
-  countdown = interval(1).pipe(take(this.max));
+  countdown = interval(100);
   countdownSub?: Subscription;
 
   constructor() { }
@@ -58,14 +58,21 @@ export class TimerComponent implements OnInit, OnDestroy {
   public start() {
     this.countdownSub?.unsubscribe();
     this.countdownSub = this.countdown.subscribe(() => {
-      this.milis--;
-      if (this.milis == 0)
+      this.milis -= 10;
+      if (this.milis == 0) {
         this.expired.emit()
+        this.freeze();
+      }
     })
   }
 
   public freeze() {
     this.countdownSub?.unsubscribe()
+  }
+
+  /** set timer value to max */
+  public reset() {
+    this.milis = this.max;
   }
 
 }
