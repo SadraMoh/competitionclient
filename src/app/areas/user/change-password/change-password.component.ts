@@ -44,7 +44,7 @@ export class ChangePasswordComponent implements OnInit {
 
   changePassword(): void {
     this.serverError = undefined;
-    this.userService.UpdatePassword(this.attempt)
+    this.userService.updatePassword(this.attempt)
       .subscribe(
         (res) => {
           console.log(res);

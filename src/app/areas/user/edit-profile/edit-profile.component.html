@@ -3,7 +3,7 @@
   <div class="image-upload">
     <label class="upload material-icons">
       image
-      <input type="file" #avatarPicker accept="image/png, image/jpeg" [(ngModel)]="user.profileImageFile" (change)="avatarPicked()">
+      <input type="file" #avatarPicker accept="image/png, image/jpeg" (change)="avatarPicked()">
     </label>
     <img [src]="avatar" alt="" class="avatar">
   </div>

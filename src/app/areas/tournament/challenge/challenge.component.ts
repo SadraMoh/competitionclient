@@ -19,17 +19,6 @@ import { TimerComponent } from './timer/timer.component';
 })
 export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
-  //- time
-
-  isTimeExpired: boolean = false;
-
-  @ViewChild("timer")
-  timer!: TimerComponent
-
-  public readonly maxTime = 1000;
-
-  remainingMilis: number = this.maxTime;
-
   //- tournament
 
   tournament!: Tournament
@@ -42,6 +31,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     id: 0,
     questionId: 1,
     questionText: 'بارگذاری...',
+    responseLifeTime: 10,
     questionOptions: [
       { id: 0, isTrue: false, optionText: 'در حال' },
       { id: 0, isTrue: false, optionText: 'لود کردن' },
@@ -54,9 +44,27 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     return this.rounds.indexOf(this.currentRound);
   }
 
+  isTournamentFinished: boolean = false;
+
+  //- time
+
+  isTimeExpired: boolean = false;
+
+  @ViewChild("timer")
+  timer!: TimerComponent
+
+  remainingMilis: number = 0;
+
+  public get maxTime(): number {
+    return this.currentRound.responseLifeTime * 100
+  }
+
   //- option
 
   chosenOption?: QuestionOption
+
+  /** retrieved from the server */
+  correctAnswerId?: number;
 
   //- helper
 
@@ -70,10 +78,13 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   ]
 
+  hasSecondLife: boolean = false;
+
+  // -
+
   user?: User
 
   /** deleted after every round, is used to determine if the user has sent an answer to the server */
-  correctAnswerId?: number;
 
   public get answerSent(): boolean {
     return Boolean(this.correctAnswerId);
@@ -81,11 +92,6 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   public get isFinalRound(): boolean {
     return this.roundIndex == (this.rounds.length - 1);
-  }
-
-  @HostListener('window:beforeunload', ['$event'])
-  handleClose($event: any) {
-    $event.returnValue = false;
   }
 
   constructor(
@@ -101,7 +107,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     // insert logic to check if there are pending changes here;
     // returning true will navigate without confirmation
     // returning false will show a confirm dialog before navigating away
-    return false;
+    return this.isFinalRound;
   }
 
   ngOnInit(): void {
@@ -114,8 +120,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
         (res) => {
           this.tournament = res.value;
           this.currentRound = this.tournament.rounds?.[0] ?? this.currentRound;
-
-          this.timer.start();
+          this.timer.start(this.maxTime);
         },
         (err) => {
         }
@@ -133,6 +138,19 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   }
 
+  nextRound(): void {
+    this.chosenOption = undefined;
+    this.correctAnswerId = undefined;
+
+    this.currentRound = this.rounds[this.roundIndex + 1];
+
+    this.activatedHelpers = [];
+
+    this.isTimeExpired = false;
+    this.timer.reset();
+    this.timer.start(this.maxTime);
+  }
+
   /** select an option but don't send it yet */
   selectOption(option: QuestionOption): void {
     this.chosenOption = option;
@@ -141,7 +159,16 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   /** accept answer and check if it was correct */
   sendAnswer(): void {
 
+    // !
     if (!this.chosenOption) this.chosenOption = { id: 0 } as QuestionOption;
+
+    if (this.hasSecondLife) {
+      if (!this.chosenOption.isTrue) {
+        this.currentRound.questionOptions = this.currentRound.questionOptions.filter(i => i != this.chosenOption);
+        this.hasSecondLife = false;
+        return;
+      }
+    }
 
     this.timer.freeze();
 
@@ -184,22 +211,9 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   }
 
-  nextRound(): void {
-    this.chosenOption = undefined;
-    this.correctAnswerId = undefined;
-
-    this.currentRound = this.rounds[this.roundIndex + 1];
-
-    this.activatedHelpers = [];
-
-    this.isTimeExpired = false;
-    this.timer.reset();
-    this.timer.start();
-
-  }
-
   finishTournament(): void {
-
+    this.isTournamentFinished = true;
+    this.router.navigate(['tournament', 'info', this.tournament.id])
   }
 
 
@@ -211,8 +225,8 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   // #region
 
   removeOneWrongOption() {
-    const toBlow = this.currentRound.questionOptions.filter(i=> !i.isTrue)[0];
-    this. currentRound.questionOptions = this.currentRound.questionOptions.filter(i => i != toBlow);
+    const toBlow = this.currentRound.questionOptions.filter(i => !i.isTrue)[0];
+    this.currentRound.questionOptions = this.currentRound.questionOptions.filter(i => i != toBlow);
   }
 
   addTime() {
@@ -220,7 +234,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   }
 
   duplex() {
-
+    this.hasSecondLife = true;
   }
 
   // #endregion

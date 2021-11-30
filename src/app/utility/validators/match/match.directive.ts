@@ -13,6 +13,7 @@ export class MatchDirective implements Validator {
   @Input('match')
   public set matchTo(v: string) {
     this._matchTo = v;
+    this.control?.updateValueAndValidity();
     this.cd.detectChanges();
   }
 

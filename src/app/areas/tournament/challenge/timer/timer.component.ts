@@ -14,14 +14,12 @@ export class TimerComponent implements OnInit, OnDestroy {
     return this.milis / this.max * 100;
   }
 
-
-
   /** max number of miliseconds */
   @Input("max")
   max: number = 1000;
 
   // #region remainingMilis
-  _milis: number = 1000;
+  _milis: number = this.max;
 
   public get milis(): number {
     return this._milis;
@@ -55,7 +53,11 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.countdownSub?.unsubscribe();
   }
 
-  public start() {
+  public start(from?: number) {
+
+    if (from)
+      this.milis = from;
+
     this.countdownSub?.unsubscribe();
     this.countdownSub = this.countdown.subscribe(() => {
       this.milis -= 10;

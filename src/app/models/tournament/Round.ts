@@ -5,5 +5,7 @@ export interface Round extends Id {
   /** id for the question */
   questionId: number;
   questionText: string;
+  /** round time in seconds */
+  responseLifeTime: number;
   questionOptions: QuestionOption[];
 }

@@ -23,14 +23,14 @@ export class UserService implements ApiService {
     private account: AccountService
   ) { }
 
-  public get user(): Observable<User>  {
+  public get user(): Observable<User> {
     return this.account.user;
   }
-  
+
   /**
    * get current user
    */
-   find(): Observable<Res<User>> {
+  find(): Observable<Res<User>> {
     const to = join(this.route, 'Find');
 
     return from(new Promise<Res<User>>((res, rej) => {
@@ -42,13 +42,13 @@ export class UserService implements ApiService {
       })
     }))
   }
-  
+
   /**
    * find user by id
    * @param id user id
    * @returns user data
    */
-   findById(id: number): Observable<Res<User>> {
+  findById(id: number): Observable<Res<User>> {
     const to = join(this.route, 'findById');
 
     return from(new Promise<Res<User>>((res, rej) => {
@@ -74,8 +74,8 @@ export class UserService implements ApiService {
     }))
   }
 
-  UpdatePassword(pass: UpdatePassword): Observable<Res<UpdatePassword>> {
-    const to = join(this.route, 'UpdatePassword');
+  updatePassword(pass: UpdatePassword): Observable<Res<UpdatePassword>> {
+    const to = join(this.route, 'updatePassword');
 
     return from(new Promise<Res<UpdatePassword>>((res, rej) => {
       this.client.post<Res<UpdatePassword>>(to, pass).subscribe((result) => {
@@ -88,15 +88,15 @@ export class UserService implements ApiService {
   }
 
   /**
-   * upload an image to the server and get its address
+   * upload an image to the server and set it to the users avatar
    * @param file avatar file to upload
    * @returns uploaded avatar url
    */
-  uploadAvatar(file: File): Observable<HttpEvent<string>> {
-    const to = join(this.route, 'uploadAvatar');
+   uploadProfileImage(file: File): Observable<HttpEvent<string>> {
+    const to = join(this.route, 'uploadProfileImage');
 
     let formData = new FormData();
-    formData.append('upload', file);
+    formData.append('image', file);
 
     let params = new HttpParams();
 
@@ -108,5 +108,6 @@ export class UserService implements ApiService {
     const req = new HttpRequest('POST', to, formData, options);
     return this.client.request<string>(req);
   }
+
 
 }

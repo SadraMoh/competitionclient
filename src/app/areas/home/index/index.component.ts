@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoinboxService } from 'src/app/services/coinbox.service';
 
 @Component({
   selector: 'app-index',
@@ -7,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private coinbox: CoinboxService) { }
 
   ngOnInit(): void {
     // apply sky background-image

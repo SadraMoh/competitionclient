@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, zip } from 'rxjs';
 import { Signup } from 'src/app/models/account/Signup';
 import User from 'src/app/models/user/User';
 import { AccountService } from 'src/app/services/account.service';
@@ -53,6 +54,9 @@ export class EditProfileComponent implements OnInit {
 
     const input = this.avatarPicker.nativeElement;
 
+    this.chosenFile = input.files?.[0];
+    
+    // preview image
     if (input.files && input.files[0]) {
       var reader = new FileReader();
 
@@ -67,18 +71,25 @@ export class EditProfileComponent implements OnInit {
 
   edit(): void {
 
+    const tasks$: Observable<any>[] = [];
+
     const attempt: User = {
       bio: this.user.bio,
       fullName: this.user.fullName,
       id: this.user.id,
-      profileImageFile: this.chosenFile,
       profileImageUrl: '',
     }
 
-    this.userService.update(attempt)
-      .subscribe(
-        (res) => { this.router.navigate(['user', 'profile']) }
-      )
+    tasks$.push(this.userService.update(attempt))
+    
+     if (this.chosenFile)
+      tasks$.push(this.userService.uploadProfileImage(this.chosenFile));
+
+    zip(...tasks$).subscribe(
+      (res) => this.router.navigate(['user', 'profile']),
+      (err) => console.error(err)
+    );
+    
   }
 
 }

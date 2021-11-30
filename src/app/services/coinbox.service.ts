@@ -16,11 +16,11 @@ export class CoinboxService implements ApiService {
 
   constructor(private client: HttpClient) { }
 
-  get(): Observable<Res<Coinbox>> {
+  get(): Observable<Res<Coinbox[]>> {
     const to = join(this.route, 'get');
 
-    return from(new Promise<Res<Coinbox>>((res, rej) => {
-      this.client.get<Res<Coinbox>>(to).subscribe((result) => {
+    return from(new Promise<Res<Coinbox[]>>((res, rej) => {
+      this.client.get<Res<Coinbox[]>>(to).subscribe((result) => {
         if (isResVaild(result))
           res(result);
         else
@@ -28,9 +28,8 @@ export class CoinboxService implements ApiService {
       })
     }))
   }
-  
-  
-   find(id: number): Observable<Res<Coinbox>> {
+
+  find(id: number): Observable<Res<Coinbox>> {
     const to = join(this.route, 'find');
 
     return from(new Promise<Res<Coinbox>>((res, rej) => {
@@ -42,5 +41,5 @@ export class CoinboxService implements ApiService {
       })
     }))
   }
-  
+
 }

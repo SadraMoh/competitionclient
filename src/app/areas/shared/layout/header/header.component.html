@@ -1,8 +1,8 @@
 <header class="header">
   <ng-container *ngIf="account.loggedIn">
     <div class="user" routerLink="/user/profile">
-      <img src="/assets/png/avatar.png" alt="" class="avatar">
-      <h4 class="username">کاربر کاربرزاده</h4>
+      <img [src]="user?.profileImageUrl" alt="" class="avatar">
+      <h4 class="username">{{ user?.fullName}}</h4>
     </div>
   </ng-container>
   <ng-container *ngIf="!account.loggedIn">
