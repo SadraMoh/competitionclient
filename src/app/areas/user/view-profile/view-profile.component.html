@@ -1,6 +1,6 @@
 <div class="profile">
 
-  <img [src]="user?.profileImageUrl" alt="" class="avatar">
+  <img [src]="user?.profileImageUrl" alt="" fallbackImage class="avatar">
 
   <h1 class="name">{{ user?.fullName }}</h1>
 
@@ -10,12 +10,12 @@
 
     <header class="header">
       <img src="/assets/svg/clock.svg" alt="" class="icon score">
-      <h3 class="title">رن</h3>
+      <h3 class="title">تاریخچه</h3>
     </header>
 
     <div class="leads">
 
-      <div class="lead" *ngFor="let hist of history">
+      <div class="lead" *ngFor="let hist of history" [routerLink]="['/', 'tournament','info', hist.tournamentId]">
         <div class="place">{{ hist.rank}}</div>
         <label class="name">{{ hist.tournamentTitle }}</label>
       </div>

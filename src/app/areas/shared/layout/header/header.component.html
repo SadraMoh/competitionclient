@@ -1,7 +1,7 @@
 <header class="header">
   <ng-container *ngIf="account.loggedIn">
     <div class="user" routerLink="/user/profile">
-      <img [src]="user?.profileImageUrl" alt="" class="avatar">
+      <img [src]="user?.profileImageUrl" alt="" fallbackImage class="avatar">
       <h4 class="username">{{ user?.fullName}}</h4>
     </div>
   </ng-container>
@@ -34,13 +34,13 @@
         <div class="icon">
           <img src="/assets/svg/score.svg" alt="">
         </div>
-        <label>100</label>
+        <label>{{ user?.spoils?.scores }}</label>
       </div>
       <div class="coins" routerLink="/offers">
         <div class="icon">
           <img src="/assets/svg/coin.svg" alt="">
         </div>
-        <label>120</label>
+        <label>{{ user?.spoils?.coins }}</label>
       </div>
     </ng-container>
 

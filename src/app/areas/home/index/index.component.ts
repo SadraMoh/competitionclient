@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/services/account.service';
 import { CoinboxService } from 'src/app/services/coinbox.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { CoinboxService } from 'src/app/services/coinbox.service';
 })
 export class IndexComponent implements OnInit, OnDestroy {
 
-  constructor(private coinbox: CoinboxService) { }
+  constructor(public accountService: AccountService) { }
 
   ngOnInit(): void {
     // apply sky background-image

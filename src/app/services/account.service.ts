@@ -105,16 +105,15 @@ export class AccountService implements ApiService {
     const to = join(this.route, 'Signup');
 
     return from(new Promise<Res<Signup>>((res, rej) => {
-      this.client.post<DbRes<Signup>>(to, input)
+      this.client.post<Res<Signup>>(to, input)
         .subscribe(
           result => {
-            if (isDbResValid(result))
-              res(result.result);
+            if (isResVaild(result))
+              res(result);
             else
-              rej(result.result.message);
+              rej((result as any).result.message);
           },
           err => {
-            // @todo FUCKN Handle your ERRORS
             rej(err.error.errors.Password || err.err.errors.TelNo);
           });
     }));
@@ -143,6 +142,7 @@ export class AccountService implements ApiService {
    */
   signout() {
     this.token = "";
+    this._user = undefined;
     this.router.navigateByUrl('/account/login');
   }
 

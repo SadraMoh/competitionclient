@@ -1,6 +1,7 @@
 import { Id } from "../Id";
 
-export interface AnswerQuestion extends Id {
+export interface AnswerQuestion {
+  roundId: number;
   questionId: number;
   /** the chosen option */
   optionId?: number;

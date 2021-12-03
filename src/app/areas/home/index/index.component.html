@@ -22,6 +22,6 @@
     <img class="big-coin" src="/assets/svg/bigCoin.svg" alt="">
   </div>
 
-  <app-history></app-history>
+  <app-history *ngIf="accountService.loggedIn"></app-history>
 
 </div>

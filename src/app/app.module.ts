@@ -39,6 +39,7 @@ import { ViewProfileComponent } from './areas/user/view-profile/view-profile.com
 import { MatchDirective } from './utility/validators/match/match.directive';
 import { OffersComponent } from './areas/home/offers/offers.component';
 import { PendingChangesGuard } from './utility/guards/pending-changes.guard';
+import { FallbackImageDirective } from './utility/directives/fallback-image.directive';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { PendingChangesGuard } from './utility/guards/pending-changes.guard';
     ViewProfileComponent,
     MatchDirective,
     OffersComponent,
+    FallbackImageDirective,
   ],
   imports: [
     BrowserModule,

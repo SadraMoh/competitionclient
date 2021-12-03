@@ -41,4 +41,40 @@
     margin: 0 auto;
     margin-top: 32px;
   }
+
+  .leads {
+    min-width: 300px;
+
+    .lead {
+      @include rowr;
+      align-items: center;
+      padding: 6px 12px;
+      cursor: pointer;
+
+      .place {
+        @include flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $card-background;
+        border: 1px solid $card-border-color;
+        border-radius: 8px;
+        font-size: 1.2em;
+        text-align: center;
+        min-width: 2.5ch;
+        margin: auto 0;
+        margin-left: 8px;
+        color: $text-1;
+        cursor: pointer;
+      }
+
+      .name {
+        font-size: 1em;
+        color: $text-3;
+      }
+    }
+
+    .lead:not(.self):hover {
+      background-color: darken($control-backgorund, $amount: 3%);
+    }
+  }
 }

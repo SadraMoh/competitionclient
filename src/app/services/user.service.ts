@@ -82,11 +82,28 @@ export class UserService implements ApiService {
 
 
   /**
+  * get user history
+  * @returns user history array
+  */
+  history(userId: number): Observable<Res<History[]>> {
+    const to = join(this.route, 'history');
+
+    return from(new Promise<Res<History[]>>((res, rej) => {
+      this.client.post<Res<History[]>>(to, userId).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+
+  /**
   * get logged in user history
   * @returns user history array
   */
-  history(): Observable<Res<History[]>> {
-    const to = join(this.route, 'history');
+  currentHistory(): Observable<Res<History[]>> {
+    const to = join(this.route, 'currentHistory');
 
     return from(new Promise<Res<History[]>>((res, rej) => {
       this.client.get<Res<History[]>>(to).subscribe((result) => {

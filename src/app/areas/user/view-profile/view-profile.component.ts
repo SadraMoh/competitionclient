@@ -33,15 +33,15 @@ export class ViewProfileComponent implements OnInit {
         }
       )
 
-    // this.userService.history(this.user.id)
-    //   .subscribe(
-    //     (res) => {
-    //       this.history = res.value;
-    //     },
-    //     (err) => {
+    this.userService.history(this.user.id)
+      .subscribe(
+        (res) => {
+          this.history = res.value;
+        },
+        (err) => {
 
-    //     }
-    //   )
+        }
+      )
 
   }
 

@@ -2,7 +2,9 @@
 
   <div class="thumbnail">
     <h1 class="title">{{ tournament.title }}</h1>
-    <img class="background" [src]="tournament.imageUrl ?? 'https://img.freepik.com/vrije-vector/digitaal-neonspel-over-banner_1017-19897.jpg?size=626&ext=jpg'" alt="">
+    <img class="background"
+      [src]="tournament.imageUrl ?? 'https://img.freepik.com/vrije-vector/digitaal-neonspel-over-banner_1017-19897.jpg?size=626&ext=jpg'"
+      alt="">
   </div>
 
   <div class="grid">
@@ -57,11 +59,12 @@
 
     <div class="leads">
 
-      <div class="lead" [class.self]="lead.id == user?.id" *ngFor="let lead of tournament.participants">
-        <div class="place"></div>
+      <div class="lead" [class.self]="lead.id == user?.id" *ngFor="let lead of tournament.participants"
+        [routerLink]="['/', 'user','profile', lead.id]">
+        <div class="place">{{ tournament.participants.indexOf(lead) + 1 }}</div>
         <img class="avatar" src="/assets/png/avatar.png" alt="">
-        <label class="name">کاربر کاربرزاده</label>
-        <label class="score">14800</label>
+        <label class="name">{{ lead.fullName }}</label>
+        <label class="score">{{ lead.score }}</label>
       </div>
 
     </div>

@@ -177,11 +177,10 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     const answer: AnswerQuestion = {
       optionId: this.chosenOption.id,
       isHelp: this.activatedHelpers.length > 0,
-      helperEnumId: this.activatedHelpers?.[0]?.id ?? 0,
+      helperEnumId: this.activatedHelpers?.[0]?.id ?? undefined,
       questionId: this.currentRound.questionId,
       responsesTime: this.remainingMilis,
-      userId: this.user?.id,
-      id: this.currentRound.id
+      roundId: this.currentRound.id,
     }
 
     this.tournamentService.AnswerQuestion(answer)

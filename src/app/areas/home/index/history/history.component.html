@@ -1,7 +1,7 @@
 <div class="history board">
 
   <div class="header">
-    
+
     <img class="icon" src="/assets/svg/clock.svg" alt="">
 
     <h3 class="title">
@@ -12,10 +12,19 @@
 
   <div class="content">
 
-    <p class="no-history">
+    <div class="leads" *ngIf="history.length > 0">
+
+      <div class="lead" *ngFor="let hist of history" [routerLink]="['/', 'tournament','info', hist.tournamentId]">
+        <div class="place">{{ hist.rank}}</div>
+        <label class="name">{{ hist.tournamentTitle }}</label>
+      </div>
+
+    </div>
+
+    <p class="no-history" *ngIf="history.length == 0">
       شما هنوز در هیچ مسابقه ای شرکت نکرده اید
     </p>
-    
+
   </div>
 
 </div>

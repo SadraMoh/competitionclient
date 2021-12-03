@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: '[DOMAIN HERE]'
+  api: 'https://api.pars-link.ir/api'
 };

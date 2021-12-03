@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.user.subscribe(us => this.user = us);
 
-    this.userService.history()
+    this.userService.currentHistory()
       .subscribe(
         res => {
           this.history = res.value;

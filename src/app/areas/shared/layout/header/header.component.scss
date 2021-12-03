@@ -108,7 +108,8 @@
       @include rowr;
       align-items: center;
       margin-left: 10px;
-
+      min-width: 64px;
+      
       .icon {
         @include row;
         height: 24px;
@@ -136,6 +137,7 @@
       align-items: center;
       margin-left: 10px;
       cursor: pointer;
+      min-width: 64px;
 
       .icon {
         @include row;
