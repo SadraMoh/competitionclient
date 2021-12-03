@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import User from 'src/app/models/user/User';
+import { History } from 'src/app/models/user/History';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,6 +18,8 @@ export class ViewProfileComponent implements OnInit {
 
   user: User = {} as User;
 
+  history: History[] = [];
+
   ngOnInit(): void {
 
     this.user.id = Number(this.route.snapshot.params['id']);
@@ -29,6 +32,16 @@ export class ViewProfileComponent implements OnInit {
 
         }
       )
+
+    // this.userService.history(this.user.id)
+    //   .subscribe(
+    //     (res) => {
+    //       this.history = res.value;
+    //     },
+    //     (err) => {
+
+    //     }
+    //   )
 
   }
 

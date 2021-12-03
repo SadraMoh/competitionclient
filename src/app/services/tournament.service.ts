@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { from, Observable } from 'rxjs';
 import { isResVaild, Res } from '../models/Res';
 import { AnswerQuestion } from '../models/tournament/AnswerQuestion';
-import { enumDictionary, HelperEnum } from '../models/tournament/HelperEnum';
+import { enumDictionary, HelperEnum } from '../models/helper/HelperEnum';
 import { Tournament } from '../models/tournament/Tournament';
 import { TournamentInfo } from '../models/tournament/TournamentInfo';
 import { ApiService } from './ApiService';
@@ -70,32 +70,6 @@ export class TournamentService implements ApiService {
           rej(result.message);
       })
     }))
-  }
-
-  /**
-   * get all helperEnums
-   * @returns all possible gadgets 
-   */
-  helperEnums(): Observable<Res<HelperEnum[]>> {
-    const to = join(this.route, 'helperEnums');
-
-    return from(new Promise<Res<HelperEnum[]>>((res, rej) => {
-      this.client.get<Res<HelperEnum[]>>(to).subscribe((result) => {
-        if (isResVaild(result)) {
-
-          result.value = result.value.map(i => {
-
-            i.title = enumDictionary[i.title];
-            return i;
-          })
-
-          res(result);
-        }
-        else
-          rej(result.message);
-      })
-    }))
-
   }
 
   /**

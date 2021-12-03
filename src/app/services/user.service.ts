@@ -10,6 +10,7 @@ import User from 'src/app/models/user/User';
 import { DbRes, isDbResValid } from '../models/DbRes';
 import { ApiService } from './ApiService';
 import { UpdatePassword } from '../models/user/UpdatePassword';
+import { History } from '../models/user/History';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,42 @@ export class UserService implements ApiService {
     }))
   }
 
+  // /**
+  // * get user history
+  // * @param userId user id
+  // * @returns history array
+  // */
+  // history(userId: number): Observable<Res<History[]>> {
+  //   const to = join(this.route, 'history');
+
+  //   return from(new Promise<Res<History[]>>((res, rej) => {
+  //     this.client.post<Res<History[]>>(to, userId).subscribe((result) => {
+  //       if (isResVaild(result))
+  //         res(result);
+  //       else
+  //         rej(result.message);
+  //     })
+  //   }))
+  // }
+
+
+  /**
+  * get logged in user history
+  * @returns user history array
+  */
+  history(): Observable<Res<History[]>> {
+    const to = join(this.route, 'history');
+
+    return from(new Promise<Res<History[]>>((res, rej) => {
+      this.client.get<Res<History[]>>(to).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+
   update(user: User): Observable<Res<User>> {
     const to = join(this.route, 'update');
 
@@ -92,7 +129,7 @@ export class UserService implements ApiService {
    * @param file avatar file to upload
    * @returns uploaded avatar url
    */
-   uploadProfileImage(file: File): Observable<HttpEvent<string>> {
+  uploadProfileImage(file: File): Observable<HttpEvent<string>> {
     const to = join(this.route, 'uploadProfileImage');
 
     let formData = new FormData();

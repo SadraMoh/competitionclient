@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AnswerQuestion } from 'src/app/models/tournament/AnswerQuestion';
-import { HelperEnum, HelperType } from 'src/app/models/tournament/HelperEnum';
+import { HelperEnum, HelperType } from 'src/app/models/helper/HelperEnum';
 import { QuestionOption } from 'src/app/models/tournament/QuestionOption';
 import { Round } from 'src/app/models/tournament/Round';
 import { Tournament } from 'src/app/models/tournament/Tournament';
@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { ComponentCanDeactivate } from 'src/app/utility/guards/pending-changes.guard';
 import { TimerComponent } from './timer/timer.component';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-challenge',
@@ -96,6 +97,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   constructor(
     private tournamentService: TournamentService,
+    private helperService: HelperService,
     private accountService: AccountService,
     private route: ActivatedRoute,
     private router: Router,
@@ -126,7 +128,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
         }
       );
 
-    this.tournamentService.helperEnums()
+    this.helperService.helperEnums()
       .subscribe(
         (res) => {
           this.helpers = res.value;
