@@ -53,7 +53,7 @@
   <section class="leaderboards board">
 
     <header class="header">
-      <img src="/assets/svg/score.svg" alt="" class="icon score">
+      <img src="./assets/svg/score.svg" alt="" class="icon score">
       <h3 class="title">عملکرد دیگران</h3>
     </header>
 
@@ -62,7 +62,7 @@
       <div class="lead" [class.self]="lead.id == user?.id" *ngFor="let lead of tournament.participants"
         [routerLink]="['/', 'user','profile', lead.id]">
         <div class="place">{{ tournament.participants.indexOf(lead) + 1 }}</div>
-        <img class="avatar" src="/assets/png/avatar.png" alt="">
+        <img class="avatar" src="./assets/png/avatar.png" alt="">
         <label class="name">{{ lead.fullName }}</label>
         <label class="score">{{ lead.score }}</label>
       </div>

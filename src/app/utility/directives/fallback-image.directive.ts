@@ -13,7 +13,7 @@ export class FallbackImageDirective {
   @HostListener('error')
   loadFallbackOnError() {
     const element: HTMLImageElement = <HTMLImageElement>this.eRef.nativeElement;
-    element.src = this.fallbackImage || '/assets/png/avatar.png';
+    element.src = this.fallbackImage || './assets/png/avatar.png';
   }
 
 }

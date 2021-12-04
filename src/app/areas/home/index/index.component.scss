@@ -9,7 +9,7 @@
   grid-template-areas: "bigcoin title" "bigcoin text";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  background: url(/assets/svg/coin-banner-bg.svg),  linear-gradient(94.42deg, $gold 0%, #f9d726 100%) ;
+  background: url("/assets/svg/coin-banner-bg.svg"),  linear-gradient(94.42deg, $gold 0%, #f9d726 100%) ;
   background-position: left;
   background-size: contain;
   background-repeat: no-repeat;
