@@ -7,9 +7,9 @@ export interface HelperEnum {
 
 export const enumDictionary: any = {
   // 1
-  "DeleteOneOption": "حذف یک گزینه",
+  "DeleteFalseOption": "حذف یک گزینه",
   // 2
-  "Again": "شانس دوباره",
+  "AgainRound": "شانس دوباره",
   // 3
   "AddLifeTime": "زمان اضافه",
 }

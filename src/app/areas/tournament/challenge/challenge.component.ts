@@ -12,6 +12,7 @@ import { TournamentService } from 'src/app/services/tournament.service';
 import { ComponentCanDeactivate } from 'src/app/utility/guards/pending-changes.guard';
 import { TimerComponent } from './timer/timer.component';
 import { HelperService } from 'src/app/services/helper.service';
+import { HelpRequest } from 'src/app/models/helper/HelpRequest';
 
 @Component({
   selector: 'app-challenge',
@@ -196,6 +197,23 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   }
 
   activateHelper(helper: HelperEnum): void {
+
+    // check if activation is possible
+    const canActivate = (this.user?.spoils?.coins ?? 0) > helper.cost;
+    if (!canActivate) {
+      alert('سکه های شما کافی نمی باشد')
+      return
+    };
+
+    const request: HelpRequest = {
+      heleprEnumId: helper.id,
+      questionId: this.currentRound.questionId,
+    }
+
+    // request and update user spoils
+    this.helperService.helpRequest(request)
+      .subscribe(_ => this.accountService.user.subscribe(res => this.user = res));
+
     this.activatedHelpers.push(helper);
 
     switch (helper.id) {

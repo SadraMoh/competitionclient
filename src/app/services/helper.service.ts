@@ -7,6 +7,7 @@ import { isResVaild, Res } from '../models/Res';
 import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
 import { ApiService } from './ApiService';
 import { enumDictionary, HelperEnum } from '../models/helper/HelperEnum';
+import { HelpRequest } from '../models/helper/HelpRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +44,17 @@ export class HelperService implements ApiService {
   
     }
   
+    helpRequest(request: HelpRequest): Observable<Res<HelpRequest>> {
+      const to = join(this.route, 'HelpRequest');
+  
+      return from(new Promise<Res<HelpRequest>>((res, rej) => {
+        this.client.post<Res<HelpRequest>>(to, request).subscribe((result) => {
+          if (isResVaild(result)) 
+            res(result);
+          else
+            rej(result.message);
+        })
+      }))
+    }
+    
 }

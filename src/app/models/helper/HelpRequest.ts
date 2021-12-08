@@ -1,5 +1,5 @@
 export interface HelpRequest {
-  helperEnumId: number;
+  heleprEnumId: number;
   questionId: number;
   userId?: number;
   /** [Receive Only] */
