@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Confirm } from 'src/app/models/account/Confirm';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-confirm',
@@ -11,7 +14,7 @@ export class ConfirmComponent implements OnInit {
   @ViewChild('code')
   code!: NgModel;
 
-  attempt: any = { code: '' };
+  attempt: Confirm = { auth: '', telNo: '' };
 
   serverError!: string;
 
@@ -19,13 +22,26 @@ export class ConfirmComponent implements OnInit {
     return Boolean(this.code?.valid);
   }
 
-  constructor() { }
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.attempt.telNo = this.route.snapshot.params['telNo'];
   }
 
   confirm() {
-
+    this.accountService.confirm(this.attempt)
+      .subscribe(
+        (res) => {
+          this.router.navigate(['/','account','login'])
+        },
+        (rej) => {
+          this.serverError = rej.message;
+        }
+      )
   }
 
 }

@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
     this.account.signup(this.attempt)
       .subscribe(
         res => {
-          this.router.navigateByUrl('/account/confirm')
+          this.router.navigate(['/', 'account', 'confirm', this.attempt.telNo])
         },
         (err: string) => {
           this.serverError = err;

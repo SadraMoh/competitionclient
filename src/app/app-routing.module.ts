@@ -35,7 +35,7 @@ const routes: Routes = [
           // signup 
           { path: 'signup', component: SignupComponent },
           { path: 'register', redirectTo: 'signup' },
-          { path: 'confirm', component: ConfirmComponent},
+          { path: 'confirm/:telNo', component: ConfirmComponent},
           // 
           { path: 'forgotPassword', component: ForgotPasswordComponent},
 
