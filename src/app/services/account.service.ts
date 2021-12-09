@@ -111,7 +111,7 @@ export class AccountService implements ApiService {
             if (isResVaild(result))
               res(result);
             else
-              rej((result as any).result.message);
+              rej(result.message);
           },
           err => {
             rej(err.error.errors.Password || err.err.errors.TelNo);

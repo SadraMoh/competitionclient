@@ -14,5 +14,7 @@ export interface Tournament extends Id {
   fee: number;
   /** has the current user attended this tournament before */
   hasAttended?: boolean;
+  /** 8.07:34:17.0794045 ${days}.${hours}:${minutes}:${seconds} */
+  deadline?: string;
   participantsCount: number;
 }

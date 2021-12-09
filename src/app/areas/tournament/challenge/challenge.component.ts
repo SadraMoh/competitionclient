@@ -42,6 +42,9 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     ],
   };
 
+  /** is added to on next round */
+  roundCount: number = 1;
+  
   public get roundIndex(): number {
     return this.rounds.indexOf(this.currentRound);
   }
@@ -145,8 +148,12 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     this.chosenOption = undefined;
     this.correctAnswerId = undefined;
 
+    let previousRoundId = this.currentRound.id;
     this.currentRound = this.rounds[this.roundIndex + 1];
 
+    if(previousRoundId != this.currentRound.id)
+      this.roundCount++;
+    
     this.activatedHelpers = [];
 
     this.isTimeExpired = false;
@@ -184,6 +191,11 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
       roundId: this.currentRound.id,
     }
 
+    if(this.isTimeExpired) {
+      answer.responsesTime = null as any;
+      answer.optionId = null as any;
+    }
+    
     this.tournamentService.AnswerQuestion(answer)
       .subscribe(
         (res) => {
@@ -237,8 +249,8 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
 
   timeUp(): void {
-    this.sendAnswer();
     this.isTimeExpired = true;
+    this.sendAnswer();
   }
 
   // #region

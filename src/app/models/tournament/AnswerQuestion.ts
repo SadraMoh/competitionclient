@@ -5,7 +5,7 @@ export interface AnswerQuestion {
   questionId: number;
   /** the chosen option */
   optionId?: number;
-  responsesTime: number;
+  responsesTime?: number;
   isHelp: boolean;
   helperEnumId?: number;
   userId?: number;

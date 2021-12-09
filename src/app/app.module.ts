@@ -40,6 +40,8 @@ import { MatchDirective } from './utility/validators/match/match.directive';
 import { OffersComponent } from './areas/home/offers/offers.component';
 import { PendingChangesGuard } from './utility/guards/pending-changes.guard';
 import { FallbackImageDirective } from './utility/directives/fallback-image.directive';
+import { RemainingPipe } from './utility/pipes/remaining.pipe';
+import { DeadlinePipe } from './utility/pipes/deadline.pipe';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { FallbackImageDirective } from './utility/directives/fallback-image.dire
     MatchDirective,
     OffersComponent,
     FallbackImageDirective,
+    RemainingPipe,
+    DeadlinePipe,
   ],
   imports: [
     BrowserModule,

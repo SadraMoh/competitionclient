@@ -1,7 +1,10 @@
 <div class="tournament-info page-padding">
 
   <div class="thumbnail">
-    <h1 class="title">{{ tournament.title }}</h1>
+    <div class="text">
+      <h1 class="title">{{ tournament.title }}</h1>
+      <h3 class="deadline"> {{ tournament.deadline ?? '' | deadline }} باقی مانده </h3>
+    </div>
     <img class="background"
       [src]="tournament.imageUrl ?? 'https://img.freepik.com/vrije-vector/digitaal-neonspel-over-banner_1017-19897.jpg?size=626&ext=jpg'"
       alt="">

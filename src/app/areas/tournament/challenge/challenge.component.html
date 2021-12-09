@@ -4,10 +4,13 @@
 
   <div class="question card">
 
-    <div class="nofm">
-      <span class="all">{{ rounds?.length }}</span>
-      /
-      <span class="count">{{ roundIndex+1 }}</span>
+    <div class="round-info">
+      <span class="round"> راند {{ roundCount}}</span>
+      <div class="nofm">
+        <span class="all">{{ rounds?.length }}</span>
+        /
+        <span class="count">{{ roundIndex+1 }}</span>
+      </div>
     </div>
 
     <div class="description">
@@ -22,7 +25,7 @@
       [class.wrong]="answerSent && chosenOption == option && correctAnswerId != option.id"
       [class.correct]="answerSent && correctAnswerId == option.id" *ngFor="let option of currentRound?.questionOptions"
       (click)="selectOption(option)">
-      
+
       {{ option.optionText }}
     </button>
 
@@ -44,8 +47,7 @@
 
     <button class="helper" *ngFor="let helper of helpers" (click)="activateHelper(helper)"
       [ngClass]="{ 'bomb': helper.id == 1, 'duplex': helper.id == 2, 'time': helper.id == 3}"
-      [class.active]="activatedHelpers.includes(helper)"
-      [disabled]="answerSent">
+      [class.active]="activatedHelpers.includes(helper)" [disabled]="answerSent || isTimeExpired">
       <div class="image"></div>
       <div class="col">
         <div class="title">

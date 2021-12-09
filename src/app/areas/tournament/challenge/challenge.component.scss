@@ -11,19 +11,27 @@
     box-shadow: 0;
     margin-bottom: 32px;
 
-    .nofm {
-      font-size: 1.2em;
-      color: $text-5;
-      margin-bottom: 8px;
-
-      .all {
+    .round-info {
+      @include row;
+      
+      .nofm {
+        font-size: 1.2em;
         color: $text-5;
-        font-weight: lighter;
+        margin-bottom: 8px;
+
+        .all {
+          color: $text-5;
+          font-weight: lighter;
+        }
+
+        .count {
+          color: $text-2;
+          font-weight: bold;
+        }
       }
 
-      .count {
-        color: $text-2;
-        font-weight: bold;
+      .round {
+        margin-right: auto;
       }
     }
 
@@ -176,7 +184,8 @@
       border-color: $primary;
     }
 
-    .helper.duplex.active, .helper[disabled] {
+    .helper.duplex.active,
+    .helper[disabled] {
       filter: grayscale(100%);
       -webkit-filter: grayscale(100%);
       -moz-filter: grayscale(100%);

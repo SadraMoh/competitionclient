@@ -15,6 +15,7 @@ export interface TournamentInfo extends Id {
   /** has the current user attended this tournament before */
   hasAttended?: boolean;
   difficulty: TournamentDifficulty;
-
+  /** 8.07:34:17.0794045 ${days}.${hours}:${minutes}:${seconds} */
+  deadline: string;
   participants: Participant[];
 }

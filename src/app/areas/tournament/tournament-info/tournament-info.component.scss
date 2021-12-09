@@ -17,13 +17,30 @@ $gap: 16px;
     margin-bottom: $gap;
     aspect-ratio: 15/3;
 
-    h1 {
+    .text {
+      @include col;
+      align-items: center;
+      justify-items: center;
       position: relative;
-      text-align: center;
       margin: auto;
-      z-index: 10;
-      color: white;
-      text-shadow: 2px 2px #333;
+
+      .title {
+        position: relative;
+        text-align: center;
+        z-index: 10;
+        color: white;
+        text-shadow: 2px 2px #333;
+        direction: rtl;
+      }
+
+      .deadline {
+        position: relative;
+        text-align: center;
+        z-index: 10;
+        margin-top: 4px;
+        color: transparentize($color: white, $amount: 0.08);
+        direction: rtl;
+      }
     }
 
     .background {

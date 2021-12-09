@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private account: AccountService,
-    private router: Router    
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +57,8 @@ export class SignupComponent implements OnInit {
         },
         (err: string) => {
           this.serverError = err;
+          if (err == "کاربر قبلا ثبت شده است")
+            this.router.navigate(['/', 'account', 'confirm', this.attempt.telNo])
         });
 
   }
