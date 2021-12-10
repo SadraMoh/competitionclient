@@ -42,7 +42,9 @@
         <h5>
           {{ tournament.fee }}
         </h5>
-        <label>هزینه شرکت دوباره</label>
+        <label>
+          هزینه شرکت دوباره
+        </label>
       </div>
     </div>
   </div>
@@ -50,7 +52,13 @@
   <div class="actions">
     <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;">
       شرکت در مسابقه
-      <i class="material-icons">bolt</i>
+      <i class="material-icons" *ngIf="!tournament.hasAttended">bolt</i>
+      <span *ngIf="tournament.hasAttended" class="fee">
+        (
+        <img src="./assets/svg/coin.svg">
+        <span>{{ tournament.fee }}</span>
+        )
+      </span>
     </button>
   </div>
 

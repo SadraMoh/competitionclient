@@ -1,6 +1,13 @@
 @import "/src/assets/styles/vars";
 @import "/src/assets/styles/utility";
 
+:host ::ng-deep .tournament .countdown {
+  color: white !important;
+  background-color: transparentize($card-background, .8) !important;
+  font-size: 0.7em !important;
+  font-weight: lighter;
+}
+
 .tournament {
   display: grid;
   grid-template-columns: auto 1fr;

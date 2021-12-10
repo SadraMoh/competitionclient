@@ -6,9 +6,9 @@
   display: inline-flex;
   position: relative;
   z-index: 10;
-  font-size: 0.8em !important;
+  font-size: 0.8em;
   direction: rtl;
-  color: #333 !important;
+  color: #333;
   gap: 4px;
   background-color: transparentize($card-background, 0.5);
   padding: 2px 8px 3px 8px;

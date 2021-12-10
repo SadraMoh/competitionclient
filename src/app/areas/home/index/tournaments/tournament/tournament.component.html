@@ -32,7 +32,7 @@
   <div class="challenge">
     <button class="btn">
       <label>شرکت</label>
-      <div class="coin-count">
+      <div class="coin-count" *ngIf="tournament.hasAttended">
         <div class="coin">
           <img src="./assets/svg/coin.svg" alt="">
         </div>
