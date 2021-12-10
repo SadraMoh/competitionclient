@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  content: string = '';
+
+  constructor(
+    private configService: ConfigService
+  ) { }
 
   ngOnInit(): void {
+
+    this.configService.aboutText()
+      .subscribe(
+        res => {
+          this.content = res.value;
+        }
+      )
+
   }
 
 }
