@@ -1,6 +1,9 @@
 <div [routerLink]="['tournament', 'info', tournament.id]" class="tournament" 
 [ngClass]="{ 'easy': tournament.difficulty == 0,'medium': tournament.difficulty == 1,'hard': tournament.difficulty == 2 }">
-  <h3 class="title">{{ tournament.title }}</h3>
+  <h3 class="title">
+    <app-countdown [deadline]="tournament.deadline"></app-countdown>
+    {{ tournament.title }}
+  </h3>
   <div class="informations">
     <div class="info part-takers">
       <i class="material-icons">people</i>

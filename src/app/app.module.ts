@@ -42,6 +42,7 @@ import { PendingChangesGuard } from './utility/guards/pending-changes.guard';
 import { FallbackImageDirective } from './utility/directives/fallback-image.directive';
 import { RemainingPipe } from './utility/pipes/remaining.pipe';
 import { DeadlinePipe } from './utility/pipes/deadline.pipe';
+import { CountdownComponent } from './utility/atomic/countdown/countdown.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { DeadlinePipe } from './utility/pipes/deadline.pipe';
     FallbackImageDirective,
     RemainingPipe,
     DeadlinePipe,
+    CountdownComponent,
   ],
   imports: [
     BrowserModule,

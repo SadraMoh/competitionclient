@@ -3,7 +3,8 @@
   <div class="thumbnail">
     <div class="text">
       <h1 class="title">{{ tournament.title }}</h1>
-      <h3 class="deadline"> {{ tournament.deadline ?? '' | deadline }} باقی مانده </h3>
+      <!-- <h3 class="deadline"> {{ tournament.deadline ?? '' | deadline }} باقی مانده </h3> -->
+      <app-countdown [deadline]="tournament.deadline"></app-countdown>
     </div>
     <img class="background"
       [src]="tournament.imageUrl ?? 'https://img.freepik.com/vrije-vector/digitaal-neonspel-over-banner_1017-19897.jpg?size=626&ext=jpg'"

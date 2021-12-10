@@ -1,0 +1,9 @@
+<div class="countdown">
+  <span class="days" *ngIf="days">{{ days | number : '0.0-0'}}</span>
+  :
+  <span class="hours" *ngIf="hours">{{ hours | number : '0.0-0'}}</span>
+  :
+  <span class="minutes" *ngIf="minutes">{{ minutes | number : '0.0-0'}}</span>
+  :
+  <span class="seconds" *ngIf="seconds">{{ seconds | number : '0.0-0'}}</span>
+</div>
