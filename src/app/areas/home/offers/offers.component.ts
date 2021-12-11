@@ -12,25 +12,14 @@ export class OffersComponent implements OnInit {
 
   constructor(
     private coinbox: CoinboxService,
-    private configService: ConfigService
   ) { }
 
   offers?: Coinbox[]
-
-  content: string = '';
 
   ngOnInit(): void {
     this.coinbox.get().subscribe(
       res => this.offers = res.value
     )
-
-    this.configService.coinText()
-      .subscribe(
-        res => {
-          this.content = res.value;
-        }
-      )
-
   }
 
 }

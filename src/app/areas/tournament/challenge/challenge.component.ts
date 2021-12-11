@@ -196,13 +196,12 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
       answer.optionId = null as any;
     }
     
+    this.correctAnswerId = this.currentRound.questionOptions.find(i => i.isTrue)?.id;
+    
     this.tournamentService.AnswerQuestion(answer)
       .subscribe(
         (res) => {
-          this.correctAnswerId = res.value.correctOptionId;
-        },
-        (err) => {
-
+          // this.correctAnswerId = res.value.correctOptionId;
         }
       )
 
