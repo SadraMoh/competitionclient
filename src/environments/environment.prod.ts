@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://api.pars-link.ir/api'
+  api: 'https://3pe-game.ir/api'
 };
