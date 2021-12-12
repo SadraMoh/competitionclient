@@ -42,4 +42,32 @@ export class CoinboxService implements ApiService {
     }))
   }
 
+   buy(id: number): Observable<Res<Coinbox>> {
+    const to = join(this.route, 'buy');
+
+    return from(new Promise<Res<Coinbox>>((res, rej) => {
+      this.client.post<Res<Coinbox>>(to, id).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+
+  confirm(id: number): Observable<Res<Coinbox>> {
+    const to = join(this.route, 'buy');
+
+    return from(new Promise<Res<Coinbox>>((res, rej) => {
+      this.client.post<Res<Coinbox>>(to, id).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+
+  
+
 }

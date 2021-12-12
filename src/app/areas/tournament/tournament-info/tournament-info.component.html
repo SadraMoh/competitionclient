@@ -7,8 +7,8 @@
       <app-countdown [deadline]="tournament.deadline"></app-countdown>
     </div>
     <img class="background"
-      [src]="tournament.imageUrl ?? 'https://img.freepik.com/vrije-vector/digitaal-neonspel-over-banner_1017-19897.jpg?size=626&ext=jpg'"
-      alt="">
+      [src]="tournament.imageUrl ?? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPszLjwHwAGBQLCWYHKqAAAAABJRU5ErkJggg=='"
+      alt="tournament thumbnail">
   </div>
 
   <div class="grid">
@@ -50,16 +50,24 @@
   </div>
 
   <div class="actions">
-    <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;">
-      شرکت در مسابقه
-      <i class="material-icons" *ngIf="!tournament.hasAttended">bolt</i>
-      <span *ngIf="tournament.hasAttended" class="fee">
+
+    <ng-template #notAttendedButton>
+      <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;" *ngIf="tournament.hasAttended">
+        شروع مسابقه
+        <i class="material-icons">bolt</i>
+      </button>
+    </ng-template>
+
+    <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;" *ngIf="tournament.hasAttended; else notAttendedButton">
+      شروع مجدد
+      <span class="fee">
         (
         <img src="./assets/svg/coin.svg">
         <span>{{ tournament.fee }}</span>
         )
       </span>
     </button>
+
   </div>
 
   <section class="leaderboards board">

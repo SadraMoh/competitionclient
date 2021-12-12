@@ -1,5 +1,5 @@
 export enum TournamentDifficulty {
-  easy = 0,
-  medium = 1,
-  hard = 2
+  easy = 1,
+  medium = 2,
+  hard = 3
 }

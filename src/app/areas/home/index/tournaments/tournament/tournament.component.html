@@ -1,5 +1,5 @@
-<div [routerLink]="['tournament', 'info', tournament.id]" class="tournament" 
-[ngClass]="{ 'easy': tournament.difficulty == 0,'medium': tournament.difficulty == 1,'hard': tournament.difficulty == 2 }">
+<div [routerLink]="['tournament', 'info', tournament.id]" class="tournament"
+  [ngClass]="{ 'easy': tournament.difficulty == 1 || tournament.difficulty == null ,'medium': tournament.difficulty == 2,'hard': tournament.difficulty == 3 }">
   <h3 class="title">
     <app-countdown [deadline]="tournament.deadline"></app-countdown>
     {{ tournament.title }}

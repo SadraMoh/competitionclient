@@ -9,6 +9,7 @@ import { SignupComponent } from './areas/account/signup/signup.component';
 import { ContactComponent } from './areas/home/contact/contact.component';
 import { IndexComponent } from './areas/home/index/index.component';
 import { OffersComponent } from './areas/home/offers/offers.component';
+import { PurchaseComponent } from './areas/home/purchase/purchase.component';
 import { NotFoundComponent } from './areas/shared/err/not-found/not-found.component';
 import { LayoutComponent } from './areas/shared/layout/layout.component';
 import { ChallengeComponent } from './areas/tournament/challenge/challenge.component';
@@ -60,7 +61,10 @@ const routes: Routes = [
           },
           // contact 
           { path: 'contact', component: ContactComponent },
-          { path: 'offers', component: OffersComponent}
+
+          // coins
+          { path: 'offers', component: OffersComponent},
+          { path: 'purchase', component: PurchaseComponent},
         ]
       },
       // tournament
@@ -68,7 +72,7 @@ const routes: Routes = [
         path: 'tournament', component: TournamentLayoutComponent, children: [
           { path: 'info/:id', component: TournamentInfoComponent, },
           { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
-          { path: '**', redirectTo: 'info' },
+          { path: '**', redirectTo: '../' },
         ]
       }
     ]

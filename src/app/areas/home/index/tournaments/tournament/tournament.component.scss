@@ -2,11 +2,25 @@
 @import "/src/assets/styles/utility";
 
 :host ::ng-deep .tournament .countdown {
-  color: white !important;
-  background-color: transparentize($card-background, .8) !important;
+  background-color: $card-background !important;
   font-size: 0.7em !important;
   font-weight: lighter;
+  padding: 0px 8px 1px 8px !important; 
+  margin-bottom: 2px;
 }
+
+:host ::ng-deep .tournament.easy .countdown span {
+  color: #4bcf1f !important;
+}
+
+:host ::ng-deep .tournament.medium .countdown span {
+  color: #fcb334 !important;
+}
+
+:host ::ng-deep .tournament.hard .countdown span {
+  color: #fb5f27 !important;
+}
+
 
 .tournament {
   display: grid;
@@ -22,6 +36,7 @@
   cursor: pointer;
 
   .title {
+    @include col;
     grid-area: title;
     font-size: 1.5em;
     margin-bottom: 4px;
@@ -113,6 +128,7 @@
           color: #ebc84b;
           text-align: center;
           margin-bottom: 4px;
+          flex: 1;
         }
       }
     }

@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DifficultyPipe implements PipeTransform {
 
   readonly dictionary = [
+    '??',
     'ساده',
     'متوسط',
     'دشوار',

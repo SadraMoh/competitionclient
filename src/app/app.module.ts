@@ -43,6 +43,7 @@ import { FallbackImageDirective } from './utility/directives/fallback-image.dire
 import { RemainingPipe } from './utility/pipes/remaining.pipe';
 import { DeadlinePipe } from './utility/pipes/deadline.pipe';
 import { CountdownComponent } from './utility/atomic/countdown/countdown.component';
+import { PurchaseComponent } from './areas/home/purchase/purchase.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { CountdownComponent } from './utility/atomic/countdown/countdown.compone
     RemainingPipe,
     DeadlinePipe,
     CountdownComponent,
+    PurchaseComponent,
   ],
   imports: [
     BrowserModule,

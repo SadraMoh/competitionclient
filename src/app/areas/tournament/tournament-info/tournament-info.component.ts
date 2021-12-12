@@ -45,6 +45,11 @@ export class TournamentInfoComponent implements OnInit {
   }
 
   joinChallenge(): void {
+
+    if ((this.user?.spoils?.coins ?? 0) <= 0) {
+      this.router.navigate(['offers'])
+    }
+
     this.router.navigate(['tournament', 'challenge', this.tournament.id])
   }
 

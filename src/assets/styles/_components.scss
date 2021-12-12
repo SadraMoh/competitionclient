@@ -484,3 +484,9 @@ $gap-tween-component: 48px;
   background-color: transparentize($color: $err, $amount: .8);
   color: $err;
 }
+
+.noresult {
+  text-align: center;
+  color: $text-3;
+  padding: $card-padding;
+}

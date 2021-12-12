@@ -88,8 +88,23 @@ export class TournamentService implements ApiService {
           rej(result.message);
       })
     }))
+  }
 
+  /**
+   * purchase tournament and repeat it
+   * @returns tournament info and leaderboards
+   */
+   repeat(): Observable<Res<TournamentInfo>> {
+    const to = join(this.route, 'repeat');
 
+    return from(new Promise<Res<TournamentInfo>>((res, rej) => {
+      this.client.get<Res<TournamentInfo>>(to).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
   }
 
 
