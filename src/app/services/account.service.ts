@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, observable, Observable } from 'rxjs';
+import { from, fromEvent, observable, Observable } from 'rxjs';
 import { Signin } from '../models/account/Signin';
 import { Confirm } from '../models/account/Confirm';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,7 @@ import { join } from '@fireflysemantics/join';
 import { Signup } from '../models/account/Signup';
 import { DbRes, isDbResValid } from '../models/DbRes';
 import { ApiService } from './ApiService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Event } from '@angular/router';
 import { Router, NavigationExtras } from "@angular/router";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import User from '../models/user/User';
@@ -53,21 +53,23 @@ export class AccountService implements ApiService {
   }
 
   private _user?: User;
-  public get user(): Observable<User> {
-    return from(new Promise<User>(
-      (res) => {
-        if (this._user)
-          res(this._user)
-        else {
-          this.getUserData()
-            .subscribe(
-              (result) => {
-                this._user = result.value;
-                res(this._user);
-              });
-        }
-      }
-    ));
+
+  public userChanged: EventEmitter<User> = new EventEmitter<User>();
+
+  public get user(): EventEmitter<User> {
+
+    this.getUserData()
+        .subscribe(
+          (result) => {
+            this._user = result.value;
+            this.userChanged.emit(result.value)
+          });
+
+    return this.userChanged;
+  }
+
+  public set user(v: EventEmitter<User>) {
+
   }
 
   constructor(

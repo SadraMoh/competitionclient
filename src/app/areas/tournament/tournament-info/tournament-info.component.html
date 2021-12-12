@@ -58,7 +58,7 @@
       </button>
     </ng-template>
 
-    <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;" *ngIf="tournament.hasAttended; else notAttendedButton">
+    <button (click)="repeatChallenge()" class="btn btn-primary" style="margin: auto;" *ngIf="tournament.hasAttended; else notAttendedButton">
       شروع مجدد
       <span class="fee">
         (

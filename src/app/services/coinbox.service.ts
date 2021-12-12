@@ -6,6 +6,7 @@ import { from, Observable } from 'rxjs';
 import { ApiService } from './ApiService';
 import { isResVaild, Res } from '../models/Res';
 import { Coinbox } from '../models/coinbox/Coinbox';
+import { CoinConfirm } from '../models/coinbox/CoinConfirm';
 
 @Injectable({
   providedIn: 'root'
@@ -42,21 +43,18 @@ export class CoinboxService implements ApiService {
     }))
   }
 
-   buy(offer: Coinbox): Observable<Res<Coinbox>> {
+  buy(offerId: number): Observable<string> {
     const to = join(this.route, 'buy');
 
-    return from(new Promise<Res<Coinbox>>((res, rej) => {
-      this.client.post<Res<Coinbox>>(to, offer).subscribe((result) => {
-        if (isResVaild(result))
-          res(result);
-        else
-          rej(result.message);
+    return from(new Promise<string>((res, rej) => {
+      this.client.post<string>(to, offerId, { responseType: 'text' as any }).subscribe((result) => {
+        res(result);
       })
     }))
   }
 
-  confirm(id: number): Observable<Res<Coinbox>> {
-    const to = join(this.route, 'buy');
+  confirm(id: CoinConfirm): Observable<Res<Coinbox>> {
+    const to = join(this.route, 'confirm');
 
     return from(new Promise<Res<Coinbox>>((res, rej) => {
       this.client.post<Res<Coinbox>>(to, id).subscribe((result) => {
@@ -68,6 +66,6 @@ export class CoinboxService implements ApiService {
     }))
   }
 
-  
+
 
 }

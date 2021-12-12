@@ -22,18 +22,15 @@ export class OffersComponent implements OnInit {
     )
   }
 
-  buy(offer: Coinbox) {
+  buy(offerId: number) {
 
-    this.coinbox.buy(offer)
+    this.coinbox.buy(offerId)
       .subscribe(
         (res) => {
-
-        },
-        (rej) => {
-          
+          window.location.href = res;
         }
       )
-    
+
   }
 
 }

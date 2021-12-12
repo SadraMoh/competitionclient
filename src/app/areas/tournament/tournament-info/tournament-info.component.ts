@@ -45,12 +45,25 @@ export class TournamentInfoComponent implements OnInit {
   }
 
   joinChallenge(): void {
+    this.router.navigate(['tournament', 'challenge', this.tournament.id])
+  }
+
+  repeatChallenge(): void {
 
     if ((this.user?.spoils?.coins ?? 0) <= 0) {
       this.router.navigate(['offers'])
     }
 
-    this.router.navigate(['tournament', 'challenge', this.tournament.id])
+    this.tournamentService.repeat(this.tournament.id)
+      .subscribe(
+        (res) => {
+          this.router.navigate(['tournament', 'challenge', this.tournament.id])
+        },
+        (rej) => {
+          this.router.navigate(['offers'])
+        }
+      )
+
   }
 
 }

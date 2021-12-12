@@ -1,9 +1,20 @@
 <div class="purchase page-padding">
-  <div class="card card-butt">
-    <p class="alert success">
-      متاسفانه در خرید مشکلی پیش آمده
+  <div class="card card-butt" dir="rtl">
+
+    <p class="noresult" *ngIf="!serverSuccess && !serverError">
+      در حال دریافت اطلاعات...
     </p>
 
-    <button class="btn btn-primary">صفحه اول</button>
+    <p class="alert success" *ngIf="serverSuccess">
+      {{ serverSuccess }}
+    </p>
+
+    <p class="alert danger" *ngIf="serverError">
+      {{ serverError }}
+    </p>
+
+    <button class="btn btn-primary" style="margin:auto; margin-top: 20px;"
+      [disabled]="!serverSuccess && !serverError" 
+      routerLink="/">صفحه اول</button>
   </div>
 </div>

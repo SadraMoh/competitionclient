@@ -64,7 +64,7 @@ const routes: Routes = [
 
           // coins
           { path: 'offers', component: OffersComponent},
-          { path: 'purchase', component: PurchaseComponent},
+          { path: 'Purchase', component: PurchaseComponent},
         ]
       },
       // tournament
