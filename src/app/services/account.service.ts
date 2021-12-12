@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router, NavigationExtras } from "@angular/router";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import User from '../models/user/User';
+import { SendPassword } from '../models/account/SendPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -154,6 +155,20 @@ export class AccountService implements ApiService {
 
     return from(new Promise<Res<User>>((res, rej) => {
       this.client.get<Res<User>>(to).subscribe(result => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      });
+    }))
+  }
+
+  /** Get new password */
+  sendPassword(telNo: SendPassword): Observable<Res<SendPassword>> {
+    const to = join(this.route, 'sendPassword');
+
+    return from(new Promise<Res<SendPassword>>((res, rej) => {
+      this.client.post<Res<SendPassword>>(to, telNo).subscribe(result => {
         if (isResVaild(result))
           res(result);
         else

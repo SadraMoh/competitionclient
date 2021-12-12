@@ -22,4 +22,18 @@ export class OffersComponent implements OnInit {
     )
   }
 
+  buy(offer: Coinbox) {
+
+    this.coinbox.buy(offer)
+      .subscribe(
+        (res) => {
+
+        },
+        (rej) => {
+          
+        }
+      )
+    
+  }
+
 }

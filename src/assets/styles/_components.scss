@@ -485,6 +485,18 @@ $gap-tween-component: 48px;
   color: $err;
 }
 
+.alert.success {
+  border-color: transparentize($color: $succ, $amount: .5);
+  background-color: transparentize($color: $succ, $amount: .8);
+  color: $succ;
+}
+
+.alert.warning {
+  border-color: transparentize($color: $warn, $amount: .5);
+  background-color: transparentize($color: $warn, $amount: .8);
+  color: $warn;
+}
+
 .noresult {
   text-align: center;
   color: $text-3;
