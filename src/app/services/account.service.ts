@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, fromEvent, observable, Observable } from 'rxjs';
+import { from, fromEvent, observable, Observable, of } from 'rxjs';
 import { Signin } from '../models/account/Signin';
 import { Confirm } from '../models/account/Confirm';
 import { environment } from 'src/environments/environment';
@@ -153,7 +153,7 @@ export class AccountService implements ApiService {
   getUserData(): Observable<Res<User>> {
     const to = join(environment.api, 'user', 'find');
 
-    if (!this.token) throw 'User not logged in';
+    if (!this.token) return of();
 
     return from(new Promise<Res<User>>((res, rej) => {
       this.client.get<Res<User>>(to).subscribe(result => {
