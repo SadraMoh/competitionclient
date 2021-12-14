@@ -63,7 +63,7 @@ const routes: Routes = [
           { path: 'contact', component: ContactComponent },
 
           // coins
-          { path: 'offers', component: OffersComponent},
+          { path: 'offers', component: OffersComponent , canActivate: [AuthGuard] },
           { path: 'Purchase', component: PurchaseComponent},
         ]
       },

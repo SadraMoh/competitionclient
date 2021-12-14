@@ -243,7 +243,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   finishTournament(): void {
     this.isTournamentFinished = true;
-    this.router.navigate(['tournament', 'info', this.tournament.id])
+    this.router.navigate(['tournament', 'info', this.tournament.id], { replaceUrl: true })
   }
 
 
