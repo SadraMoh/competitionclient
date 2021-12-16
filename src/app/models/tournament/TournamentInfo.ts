@@ -9,12 +9,12 @@ export interface TournamentInfo extends Id {
   /** is actual or test */
   isMultiPlayer: boolean;
   imageUrl: string;
-  roundsCount?: number;
   /** retake fee */
   fee: number;
   /** has the current user attended this tournament before */
   hasAttended?: boolean;
   difficulty: TournamentDifficulty;
+  roundsCount?: number;
   /** 8.07:34:17.0794045 ${days}.${hours}:${minutes}:${seconds} */
   deadline: string;
   participants: Participant[];
