@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AnswerQuestion } from 'src/app/models/tournament/AnswerQuestion';
 import { HelperEnum, HelperType } from 'src/app/models/helper/HelperEnum';
+import { Question } from 'src/app/models/tournament/Question';
 import { QuestionOption } from 'src/app/models/tournament/QuestionOption';
 import { Round } from 'src/app/models/tournament/Round';
 import { Tournament } from 'src/app/models/tournament/Tournament';
@@ -25,29 +26,23 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   tournament!: Tournament
 
-  public get rounds(): Round[] {
-    return this.tournament?.rounds ?? [];
+  currentRound!: Round;
+
+  public get questions(): Question[] {
+    return this.currentRound.questions ?? [];
   }
 
-  currentRound: Round = {
-    id: 0,
-    questionId: 1,
-    questionText: 'بارگذاری...',
-    responseLifeTime: 10,
-    questionOptions: [
-      { id: 0, isTrue: false, optionText: 'در حال' },
-      { id: 0, isTrue: false, optionText: 'لود کردن' },
-      { id: 0, isTrue: false, optionText: 'جواب های' },
-      { id: 0, isTrue: false, optionText: 'این سوال' },
-    ],
-  };
-
-  /** is added to on next round */
-  roundCount: number = 1;
-  
-  public get roundIndex(): number {
-    return this.rounds.indexOf(this.currentRound);
+  public set questions(v: Question[]) {
+    this.currentRound.questions = v;
   }
+
+  currentQuestion!: Question
+
+  public get nextQuestion(): Question | undefined {
+    return this.questions[this.questions.indexOf(this.currentQuestion) + 1]
+  }
+
+  isFinalQuestion: boolean = false;
 
   isTournamentFinished: boolean = false;
 
@@ -61,7 +56,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   remainingMilis: number = 0;
 
   public get maxTime(): number {
-    return this.currentRound.responseLifeTime * 100
+    return this.currentQuestion.responseLifeTime * 100
   }
 
   //- option
@@ -74,9 +69,9 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   //- helper
 
   helpers: HelperEnum[] = [
-    { id: 1, cost: 60, title: 'حذف یک گزینه ' },
-    { id: 2, cost: 200, title: 'شانس دوباره' },
-    { id: 3, cost: 120, title: 'زمان اضافه' },
+    { id: 1, cost: 0, title: 'حذف یک گزینه ' },
+    { id: 2, cost: 0, title: 'شانس دوباره' },
+    { id: 3, cost: 0, title: 'زمان اضافه' },
   ]
 
   activatedHelpers: HelperEnum[] = [
@@ -95,10 +90,6 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     return Boolean(this.correctAnswerId);
   }
 
-  public get isFinalRound(): boolean {
-    return this.roundIndex == (this.rounds.length - 1);
-  }
-
   constructor(
     private tournamentService: TournamentService,
     private helperService: HelperService,
@@ -113,7 +104,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     // insert logic to check if there are pending changes here;
     // returning true will navigate without confirmation
     // returning false will show a confirm dialog before navigating away
-    return this.isFinalRound;
+    return this.isTournamentFinished;
   }
 
   ngOnInit(): void {
@@ -144,16 +135,18 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   }
 
-  nextRound(): void {
+  toNextQuestion(): void {
     this.chosenOption = undefined;
     this.correctAnswerId = undefined;
 
     let previousRoundId = this.currentRound.id;
-    this.currentRound = this.rounds[this.roundIndex + 1];
 
-    if(previousRoundId != this.currentRound.id)
-      this.roundCount++;
-    
+    this.currentQuestion = this.nextQuestion ?? this.currentQuestion;
+
+    // if there is no next question, it means it's the last question
+    if (!this.nextQuestion)
+      this.isFinalQuestion = true;
+
     this.activatedHelpers = [];
 
     this.isTimeExpired = false;
@@ -172,9 +165,10 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     // !
     if (!this.chosenOption) this.chosenOption = { id: 0 } as QuestionOption;
 
+    // remove chosen question if the question was wrong but the user had a second life
     if (this.hasSecondLife) {
       if (!this.chosenOption.isTrue) {
-        this.currentRound.questionOptions = this.currentRound.questionOptions.filter(i => i != this.chosenOption);
+        this.currentQuestion.questionOptions = this.currentQuestion.questionOptions.filter(i => i != this.chosenOption);
         this.hasSecondLife = false;
         return;
       }
@@ -186,18 +180,18 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
       optionId: this.chosenOption.id,
       isHelp: this.activatedHelpers.length > 0,
       helperEnumId: this.activatedHelpers?.[0]?.id ?? undefined,
-      questionId: this.currentRound.questionId,
+      questionId: this.currentQuestion.questionId,
       responsesTime: this.remainingMilis,
       roundId: this.currentRound.id,
     }
 
-    if(this.isTimeExpired) {
+    if (this.isTimeExpired) {
       answer.responsesTime = null as any;
       answer.optionId = null as any;
     }
-    
-    this.correctAnswerId = this.currentRound.questionOptions.find(i => i.isTrue)?.id;
-    
+
+    this.correctAnswerId = this.currentQuestion.questionOptions.find(i => i.isTrue)?.id;
+
     this.tournamentService.AnswerQuestion(answer)
       .subscribe(
         (res) => {
@@ -218,7 +212,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
     const request: HelpRequest = {
       heleprEnumId: helper.id,
-      questionId: this.currentRound.questionId,
+      questionId: this.currentQuestion.questionId,
     }
 
     // request and update user spoils
@@ -255,8 +249,8 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   // #region
 
   removeOneWrongOption() {
-    const toBlow = this.currentRound.questionOptions.filter(i => !i.isTrue)[0];
-    this.currentRound.questionOptions = this.currentRound.questionOptions.filter(i => i != toBlow);
+    const toBlow = this.currentQuestion.questionOptions.filter(i => !i.isTrue)[0];
+    this.currentQuestion.questionOptions = this.currentQuestion.questionOptions.filter(i => i != toBlow);
   }
 
   addTime() {
