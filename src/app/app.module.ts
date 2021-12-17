@@ -29,7 +29,6 @@ import { TournamentInfoComponent } from './areas/tournament/tournament-info/tour
 import { ChallengeComponent } from './areas/tournament/challenge/challenge.component';
 import { TimerComponent } from './areas/tournament/challenge/timer/timer.component';
 import { SecondsPipe } from './utility/pipes/seconds.pipe';
-import { TournamentFinishedComponent } from './areas/tournament/tournament-finished/tournament-finished.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TelnoDirective } from './utility/validators/telno/telno.directive';
 import { ConfirmComponent } from './areas/account/confirm/confirm.component';
@@ -71,7 +70,6 @@ import { PurchaseComponent } from './areas/home/purchase/purchase.component';
     ChallengeComponent,
     TimerComponent,
     SecondsPipe,
-    TournamentFinishedComponent,
     TelnoDirective,
     ConfirmComponent,
     ForgotPasswordComponent,

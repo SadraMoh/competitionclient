@@ -14,6 +14,7 @@ export interface TournamentInfo extends Id {
   /** has the current user attended this tournament before */
   hasAttended?: boolean;
   difficulty: TournamentDifficulty;
+  questionCount?: number;
   roundsCount?: number;
   /** 8.07:34:17.0794045 ${days}.${hours}:${minutes}:${seconds} */
   deadline: string;

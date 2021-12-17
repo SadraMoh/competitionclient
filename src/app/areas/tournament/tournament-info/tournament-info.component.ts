@@ -70,7 +70,7 @@ export class TournamentInfoComponent implements OnInit {
 
     debugger
 
-    if ((this.user?.spoils?.coins ?? 0) <= this.tournament.fee) {
+    if ((this.user?.spoils?.coins ?? 0) < this.tournament.fee) {
       // insufficient funds
       this.router.navigate(['offers', { nofunds: true }])
       return;
