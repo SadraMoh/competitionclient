@@ -17,5 +17,6 @@ export interface TournamentInfo extends Id {
   roundsCount?: number;
   /** 8.07:34:17.0794045 ${days}.${hours}:${minutes}:${seconds} */
   deadline: string;
-  participants: Participant[];
+  participants?: Participant[];
+  rounds?: Round[];
 }

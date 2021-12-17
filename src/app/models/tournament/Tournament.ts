@@ -1,4 +1,5 @@
 import { Id } from "../Id";
+import { Participant } from "./Participant.";
 import { Round } from "./Round";
 import { TournamentDifficulty } from "./TournamentDifficulty";
 
@@ -16,5 +17,6 @@ export interface Tournament extends Id {
   deadline?: string;
   roundsCount?: number;
   participantsCount: number;
+  participants?: Participant[];
   rounds?: Round[];
 }

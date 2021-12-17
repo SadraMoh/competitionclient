@@ -5,11 +5,17 @@
   <div class="question card">
 
     <div class="round-info">
-      <!-- <span class="round"> راند {{ round }}</span> -->
+      <span class="round"> راند {{ roundPlace }}</span>
+      <div class="nofm">
+        <span class="all">{{ questions.length }}</span>
+        /
+        <span class="count">{{ questions.indexOf(currentQuestion) +1 }}</span>
+      </div>
+
     </div>
 
     <div class="description">
-      {{ currentQuestion.questionText }}
+      {{ currentQuestion?.questionText }}
     </div>
 
   </div>
@@ -18,22 +24,30 @@
 
     <button class="option card" [disabled]="answerSent" [class.selected]="chosenOption == option"
       [class.wrong]="answerSent && chosenOption == option && correctAnswerId != option.id"
-      [class.correct]="answerSent && correctAnswerId == option.id" *ngFor="let option of currentQuestion.questionOptions"
-      (click)="selectOption(option)">
+      [class.correct]="answerSent && correctAnswerId == option.id"
+      *ngFor="let option of currentQuestion?.questionOptions" (click)="selectOption(option)">
 
       {{ option.optionText }}
     </button>
 
   </div>
 
-  <button class="btn btn-primary" *ngIf="!answerSent" [disabled]="!chosenOption" (click)="sendAnswer()">انتخاب</button>
+  <button class="btn btn-primary" *ngIf="!answerSent" [disabled]="!chosenOption"
+    (click)="acceptAnswer()">انتخاب</button>
 
   <button class="btn btn-primary" *ngIf="answerSent && !isFinalQuestion" (click)="toNextQuestion()">
     <span class="material-icons">chevron_right</span>
     سوال بعدی
   </button>
 
-  <button class="btn btn-primary" *ngIf="answerSent && isFinalQuestion" (click)="finishTournament()">
+  <button class="btn btn-primary" [disabled]="gettingNewRound" style="margin-bottom: 16px;" *ngIf="answerSent && isFinalQuestion && nextRound"
+    (click)="playNextRound()">
+    <span class="material-icons">keyboard_tab</span>
+    راند بعدی
+  </button>
+
+  <button class="btn" [ngClass]="{ 'btn-outline': nextRound, 'btn-primary': !nextRound }" [disabled]="gettingNewRound && nextRound"
+    *ngIf="answerSent && isFinalQuestion" (click)="finishRound()">
     <span class="material-icons">done</span>
     اتمام مسابقه
   </button>

@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { AnswerQuestion } from 'src/app/models/tournament/AnswerQuestion';
 import { HelperEnum, HelperType } from 'src/app/models/helper/HelperEnum';
 import { Question } from 'src/app/models/tournament/Question';
@@ -24,12 +24,21 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   //- tournament
 
-  tournament!: Tournament
+  tournament?: Tournament
+  tournamentId!: number;
 
   currentRound!: Round;
 
+  public get roundPlace(): number {
+    return (this.tournament?.rounds?.findIndex(i => i.id == this.currentRound.id) ?? 0) + 1;
+  }
+
+  public get nextRound(): Round | undefined {
+    return this.tournament?.rounds?.find(i => !i.hasAttended && i.id != this.currentRound.id);
+  }
+
   public get questions(): Question[] {
-    return this.currentRound.questions ?? [];
+    return this.currentRound?.questions ?? [];
   }
 
   public set questions(v: Question[]) {
@@ -42,7 +51,9 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     return this.questions[this.questions.indexOf(this.currentQuestion) + 1]
   }
 
-  isFinalQuestion: boolean = false;
+  public get isFinalQuestion(): boolean {
+    return !Boolean(this.nextQuestion) && Boolean(this.currentRound);
+  }
 
   isTournamentFinished: boolean = false;
 
@@ -56,14 +67,14 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   remainingMilis: number = 0;
 
   public get maxTime(): number {
-    return this.currentQuestion.responseLifeTime * 100
+    return this.currentQuestion?.responseLifeTime * 100
   }
 
   //- option
 
   chosenOption?: QuestionOption
 
-  /** retrieved from the server */
+  /** set on accept answer */
   correctAnswerId?: number;
 
   //- helper
@@ -85,10 +96,13 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   user?: User
 
   /** deleted after every round, is used to determine if the user has sent an answer to the server */
-
   public get answerSent(): boolean {
     return Boolean(this.correctAnswerId);
   }
+
+  answers: AnswerQuestion[] = [];
+
+  hydrated: boolean = false;
 
   constructor(
     private tournamentService: TournamentService,
@@ -111,25 +125,36 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
     this.accountService.user.subscribe((res) => { this.user = res })
 
-    const tournamentId = Number(this.route.snapshot.params['id']);
-    this.tournamentService.find(tournamentId)
+    this.tournamentId = Number(this.route.snapshot.params['tournamentId']);
+    const roundId = Number(this.route.snapshot.params['roundId']);
+
+    const round$ = this.tournamentService.startRound(roundId)
+    round$.subscribe(
+      (res) => {
+        this.currentRound = res.value;
+        this.currentQuestion = this.currentRound.questions[0];
+
+      }
+    )
+
+    const helper$ = this.helperService.helperEnums()
+    helper$.subscribe(
+      (res) => {
+        this.helpers = res.value;
+      }
+    )
+
+    forkJoin([round$, helper$]).subscribe(i => {
+      this.hydrated = true;
+      this.isTimeExpired = false;
+      this.timer.reset();
+      this.timer.start(this.maxTime);
+    })
+
+    this.tournamentService.find(this.tournamentId)
       .subscribe(
-        (res) => {
+        res => {
           this.tournament = res.value;
-          this.currentRound = this.tournament.rounds?.[0] ?? this.currentRound;
-          this.timer.start(this.maxTime);
-        },
-        (err) => {
-        }
-      );
-
-    this.helperService.helperEnums()
-      .subscribe(
-        (res) => {
-          this.helpers = res.value;
-        },
-        (err) => {
-
         }
       )
 
@@ -139,13 +164,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     this.chosenOption = undefined;
     this.correctAnswerId = undefined;
 
-    let previousRoundId = this.currentRound.id;
-
     this.currentQuestion = this.nextQuestion ?? this.currentQuestion;
-
-    // if there is no next question, it means it's the last question
-    if (!this.nextQuestion)
-      this.isFinalQuestion = true;
 
     this.activatedHelpers = [];
 
@@ -160,7 +179,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   }
 
   /** accept answer and check if it was correct */
-  sendAnswer(): void {
+  acceptAnswer(): void {
 
     // !
     if (!this.chosenOption) this.chosenOption = { id: 0 } as QuestionOption;
@@ -179,7 +198,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     const answer: AnswerQuestion = {
       optionId: this.chosenOption.id,
       isHelp: this.activatedHelpers.length > 0,
-      helperEnumId: this.activatedHelpers?.[0]?.id ?? undefined,
+      helperEnumId: this.activatedHelpers?.[0]?.id ?? null,
       questionId: this.currentQuestion.questionId,
       responsesTime: this.remainingMilis,
       roundId: this.currentRound.id,
@@ -192,7 +211,8 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
     this.correctAnswerId = this.currentQuestion.questionOptions.find(i => i.isTrue)?.id;
 
-    this.tournamentService.AnswerQuestion(answer).subscribe()
+    this.answers.push(answer);
+    // this.tournamentService.AnswerQuestion(answer).subscribe()
 
   }
 
@@ -230,15 +250,57 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   }
 
-  finishTournament(): void {
-    this.isTournamentFinished = true;
-    this.router.navigate(['tournament', 'info', this.tournament.id], { replaceUrl: true })
+  finishRound(): void {
+    this.tournamentService.finishRound(this.answers)
+      .subscribe(
+        res => {
+          this.isTournamentFinished = true;
+          this.router.navigate(['/', 'tournament', 'info', this.tournamentId]);
+        }
+      );
   }
 
+  gettingNewRound: boolean = false;
+  playNextRound() {
+    this.gettingNewRound = true;
+
+    this.tournamentService.finishRound(this.answers)
+      .subscribe(
+        res => {
+          this.isTournamentFinished = true;
+          if (!this.nextRound) return;
+
+          // mark currentRound as attended
+          if (this.tournament && this.tournament.rounds)
+            this.tournament.rounds[this.tournament?.rounds?.findIndex(i => i.id == this.currentRound.id)].hasAttended = true;
+
+          // refresh current component with new route parameters
+          // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+          //   this.router.navigate(['tournament', 'challenge', this.tournamentId, this.nextRound?.id]));
+
+          this.router.navigate(['tournament', 'challenge', this.tournamentId, this.nextRound?.id, { prev: this.currentRound.id }], { skipLocationChange: true })
+            .then(_ => {
+              this.tournamentService.startRound(this.nextRound?.id as number)
+                .subscribe(newRound => {
+
+                  this.currentRound = newRound.value;
+                  this.currentQuestion = this.questions[0];
+
+                  this.gettingNewRound= false;
+                  
+                  this.toNextQuestion();
+                });
+
+            });
+
+        }
+      );
+
+  }
 
   timeUp(): void {
     this.isTimeExpired = true;
-    this.sendAnswer();
+    this.acceptAnswer();
   }
 
   // #region

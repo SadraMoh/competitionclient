@@ -99,6 +99,57 @@ $gap: 16px;
     // }
   }
 
+  .rounds-title {
+    color: $text-2;
+    font-size: 1.5em;
+    margin-top: $gap * 2;
+  }
+
+  .rounds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $gap;
+    margin-top: $gap;
+
+    .round {
+      @include rowr;
+      align-items: center;
+      gap: $gap;
+      cursor: pointer;
+
+      .round-title {
+        background-color: #eee;
+        padding: 4px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 1em;
+        color: $text-4;
+        width: 2ch;
+      }
+
+      .score {
+        padding: 4px;
+        border-radius: 12px;
+        font-size: 1em;
+        text-align: center;
+        margin-right: auto;
+        color: #64ec24;
+        background-color: #b9f5a4;
+        width: 2ch;
+      }
+    }
+
+    .round.played {
+      background-color: #eee;
+      cursor: not-allowed;
+
+      .round-title {
+        background-color: transparent;
+        border: 1px solid #ccc;
+      }
+    }
+  }
+
   .actions {
     @include row;
     margin-top: 3 * $gap !important;

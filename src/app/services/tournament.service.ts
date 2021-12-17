@@ -9,6 +9,7 @@ import { enumDictionary, HelperEnum } from '../models/helper/HelperEnum';
 import { Tournament } from '../models/tournament/Tournament';
 import { TournamentInfo } from '../models/tournament/TournamentInfo';
 import { ApiService } from './ApiService';
+import { Round } from '../models/tournament/Round';
 
 @Injectable({
   providedIn: 'root'
@@ -56,46 +57,46 @@ export class TournamentService implements ApiService {
 
   }
 
-  /**
-   * check if an answer is correct or not
-   */
-  AnswerQuestion(answer: AnswerQuestion): Observable<Res<AnswerQuestion>> {
-    const to = join(this.route, 'answerQuestion');
+  // /**
+  //  * check if an answer is correct or not
+  //  */
+  // AnswerQuestion(answer: AnswerQuestion): Observable<Res<AnswerQuestion>> {
+  //   const to = join(this.route, 'answerQuestion');
 
-    return from(new Promise<Res<AnswerQuestion>>((res, rej) => {
-      this.client.post<Res<AnswerQuestion>>(to, answer).subscribe((result) => {
-        if (isResVaild(result))
-          res(result);
-        else
-          rej(result.message);
-      })
-    }))
-  }
+  //   return from(new Promise<Res<AnswerQuestion>>((res, rej) => {
+  //     this.client.post<Res<AnswerQuestion>>(to, answer).subscribe((result) => {
+  //       if (isResVaild(result))
+  //         res(result);
+  //       else
+  //         rej(result.message);
+  //     })
+  //   }))
+  // }
 
-  /**
-   * method for hydrating tournamentInfo component
-   * @param id tournament id
-   * @returns tournament info and leaderboards
-   */
-  findInfo(id: number): Observable<Res<TournamentInfo>> {
-    const to = join(this.route, 'findInfo');
+  // /**
+  //  * method for hydrating tournamentInfo component
+  //  * @param id tournament id
+  //  * @returns tournament info and leaderboards
+  //  */
+  // findInfo(id: number): Observable<Res<TournamentInfo>> {
+  //   const to = join(this.route, 'findInfo');
 
-    return from(new Promise<Res<TournamentInfo>>((res, rej) => {
-      this.client.post<Res<TournamentInfo>>(to, id).subscribe((result) => {
-        if (isResVaild(result))
-          res(result);
-        else
-          rej(result.message);
-      })
-    }))
-  }
+  //   return from(new Promise<Res<TournamentInfo>>((res, rej) => {
+  //     this.client.post<Res<TournamentInfo>>(to, id).subscribe((result) => {
+  //       if (isResVaild(result))
+  //         res(result);
+  //       else
+  //         rej(result.message);
+  //     })
+  //   }))
+  // }
 
   /**
    * purchase tournament and repeat it
    * @returns tournament info and leaderboards
    */
-   repeat(tournamentId: number): Observable<Res<TournamentInfo>> {
-    const to = join(this.route, 'repeat');
+  repeatTournament(tournamentId: number): Observable<Res<TournamentInfo>> {
+    const to = join(this.route, 'repeatTournament');
 
     return from(new Promise<Res<TournamentInfo>>((res, rej) => {
       this.client.post<Res<TournamentInfo>>(to, tournamentId).subscribe((result) => {
@@ -107,6 +108,44 @@ export class TournamentService implements ApiService {
     }))
   }
 
+  startRound(roundId: number): Observable<Res<Round>> {
+    const to = join(this.route, 'startRound');
+
+    return from(new Promise<Res<Round>>((res, rej) => {
+      this.client.post<Res<Round>>(to, roundId).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+
+  repeatRound(roundId: number): Observable<Res<Round>> {
+    const to = join(this.route, 'repeatRound');
+
+    return from(new Promise<Res<Round>>((res, rej) => {
+      this.client.post<Res<Round>>(to, roundId).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+
+  finishRound(answers: AnswerQuestion[]): Observable<Res<Round>> {
+    const to = join(this.route, 'finishRound');
+
+    return from(new Promise<Res<Round>>((res, rej) => {
+      this.client.post<Res<Round>>(to, answers).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
 
 
 }

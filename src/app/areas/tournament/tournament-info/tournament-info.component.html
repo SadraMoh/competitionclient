@@ -16,7 +16,7 @@
     <div class="info part-takers">
       <i class="material-icons">people</i>
       <div class="col">
-        <h5>{{ tournament.participants?.length }}</h5>
+        <h5>{{ tournament.participantsCount }}</h5>
         <label>شرکت کننده</label>
       </div>
     </div>
@@ -49,24 +49,43 @@
     </div>
   </div>
 
-  <div class="actions">
+  <h2 class="rounds-title" dir="rtl">
+    راند ها
+    <span>
+      (
+      {{ tournament.roundsCount }}
+      )
+    </span>
+  </h2>
+  <div class="rounds">
+    <button class="round card card-butt" (click)="startRound(round.id)" [disabled]="round.hasAttended"
+      [class.played]="round.hasAttended" *ngFor="let round of tournament.rounds">
+      <h4 class="round-title">{{ (tournament.rounds?.indexOf(round) ?? 0) + 1 }}</h4>
+      <span *ngIf="round.hasAttended">بازی شده</span>
+      <span *ngIf="!round.hasAttended">شروع</span>
+      <label *ngIf="round.hasAttended" class="score">{{ round.score }}</label>
+    </button>
+  </div>
 
-    <ng-template #notAttendedButton>
-      <button (click)="joinChallenge()" class="btn btn-primary" style="margin: auto;">
-        شروع مسابقه
-        <i class="material-icons">bolt</i>
+  <div class="actions" *ngIf="tournament.rounds">
+
+    <button *ngIf="firstAvailableRound; else repeatChallengeButton" (click)="startRound(firstAvailableRound.id)"
+      class="btn btn-primary" style="margin: auto;">
+      شروع مسابقه
+      <i class="material-icons">bolt</i>
+    </button>
+
+    <ng-template #repeatChallengeButton>
+      <button (click)="repeatTournament()" class="btn btn-primary" style="margin: auto;">
+        شروع مجدد
+        <span class="fee">
+          (
+          <img src="./assets/svg/coin.svg">
+          <span>{{ tournament.fee }}</span>
+          )
+        </span>
       </button>
     </ng-template>
-
-    <button (click)="repeatChallenge()" class="btn btn-primary" style="margin: auto;" *ngIf="tournament.hasAttended; else notAttendedButton">
-      شروع مجدد
-      <span class="fee">
-        (
-        <img src="./assets/svg/coin.svg">
-        <span>{{ tournament.fee }}</span>
-        )
-      </span>
-    </button>
 
   </div>
 
@@ -77,7 +96,7 @@
       <h3 class="title">عملکرد دیگران</h3>
     </header>
 
-    <div class="leads">
+    <div class="leads" *ngIf="tournament.participants">
 
       <div class="lead" [class.self]="lead.id == user?.id" *ngFor="let lead of tournament.participants"
         [routerLink]="['/', 'user','profile', lead.id]">
