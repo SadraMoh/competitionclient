@@ -56,7 +56,7 @@
 
     <button class="helper" *ngFor="let helper of helpers" (click)="activateHelper(helper)"
       [ngClass]="{ 'bomb': helper.id == 1, 'duplex': helper.id == 2, 'time': helper.id == 3}"
-      [class.active]="activatedHelpers.includes(helper)" [disabled]="answerSent || isTimeExpired">
+      [class.active]="activatedHelpers.includes(helper)" [disabled]="answerSent || isTimeExpired || !hydrated">
       <div class="image"></div>
       <div class="col">
         <div class="title">

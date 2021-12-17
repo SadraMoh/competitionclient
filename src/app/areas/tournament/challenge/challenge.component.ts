@@ -30,7 +30,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   currentRound!: Round;
 
   public get roundPlace(): number {
-    return (this.tournament?.rounds?.findIndex(i => i.id == this.currentRound.id) ?? 0) + 1;
+    return (this.tournament?.rounds?.findIndex(i => i.id == this.currentRound?.id) ?? 0) + 1;
   }
 
   public get nextRound(): Round | undefined {
@@ -287,7 +287,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
                   this.currentQuestion = this.questions[0];
 
                   this.gettingNewRound= false;
-                  
+
                   this.toNextQuestion();
                 });
 
