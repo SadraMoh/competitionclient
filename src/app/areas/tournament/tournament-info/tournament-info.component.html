@@ -23,8 +23,8 @@
     <div class="info question-count">
       <i class="material-icons">help</i>
       <div class="col">
-        <h5>{{tournament.questionCount}}</h5>
-        <label>سوال</label>
+        <h5>{{ tournament.roundsCount }}</h5>
+        <label>راند</label>
       </div>
     </div>
     <div class="info difficulty-level">
@@ -51,11 +51,6 @@
 
   <h2 class="rounds-title" dir="rtl">
     راند ها
-    <span>
-      (
-      {{ tournament.roundsCount }}
-      )
-    </span>
   </h2>
   <div class="rounds">
     <button class="round card card-butt" (click)="startRound(round)" [class.played]="round.hasAttended"

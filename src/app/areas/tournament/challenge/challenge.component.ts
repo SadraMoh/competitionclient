@@ -288,6 +288,8 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
                   this.gettingNewRound= false;
 
+                  this.answers = [];
+                  
                   this.toNextQuestion();
                 });
 
