@@ -51,8 +51,19 @@ export class TournamentInfoComponent implements OnInit {
       );
   }
 
-  startRound(roundId: number): void {
-    this.router.navigate(['tournament', 'challenge', this.tournament.id, roundId])
+  startRound(round: Round): void {
+    if (round.hasAttended) {
+      this.tournamentService.repeatRound(round.id)
+        .subscribe(
+          res => {
+            this.router.navigate(['tournament', 'challenge', this.tournament.id, round.id])
+          },
+          rej => {
+            this.router.navigate(['offers', { nofunds: true }])
+          });
+    }
+    else
+      this.router.navigate(['tournament', 'challenge', this.tournament.id, round.id])
   }
 
   repeatTournament(): void {
@@ -61,7 +72,7 @@ export class TournamentInfoComponent implements OnInit {
 
     if ((this.user?.spoils?.coins ?? 0) <= this.tournament.fee) {
       // insufficient funds
-      this.router.navigate(['offers'])
+      this.router.navigate(['offers', { nofunds: true }])
       return;
     }
 

@@ -140,12 +140,22 @@ $gap: 16px;
     }
 
     .round.played {
-      background-color: #eee;
-      cursor: not-allowed;
+      background-color: #efefef;
 
       .round-title {
         background-color: transparent;
         border: 1px solid #ccc;
+      }
+
+      .coin {
+        @include row;
+        align-items: center;
+        background-color: #f5e3a4;
+        color: #ba8719;
+        padding: 4px;
+        border-radius: 12px;
+        font-size: 1em;
+        text-align: center;
       }
     }
   }

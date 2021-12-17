@@ -58,18 +58,22 @@
     </span>
   </h2>
   <div class="rounds">
-    <button class="round card card-butt" (click)="startRound(round.id)" [disabled]="round.hasAttended"
-      [class.played]="round.hasAttended" *ngFor="let round of tournament.rounds">
+    <button class="round card card-butt" (click)="startRound(round)" [class.played]="round.hasAttended"
+      *ngFor="let round of tournament.rounds">
       <h4 class="round-title">{{ (tournament.rounds?.indexOf(round) ?? 0) + 1 }}</h4>
-      <span *ngIf="round.hasAttended">بازی شده</span>
+      <span *ngIf="round.hasAttended">شرکت دوباره</span>
       <span *ngIf="!round.hasAttended">شروع</span>
       <label *ngIf="round.hasAttended" class="score">{{ round.score }}</label>
+      <label *ngIf="round.hasAttended" class="coin">
+        <img src="./assets/svg/coin.svg">
+        <span>{{ tournament.fee }}</span>
+      </label>
     </button>
   </div>
 
   <div class="actions" *ngIf="tournament.rounds">
 
-    <button *ngIf="firstAvailableRound; else repeatChallengeButton" (click)="startRound(firstAvailableRound.id)"
+    <button *ngIf="firstAvailableRound; else repeatChallengeButton" (click)="startRound(firstAvailableRound)"
       class="btn btn-primary" style="margin: auto;">
       شروع مسابقه
       <i class="material-icons">bolt</i>

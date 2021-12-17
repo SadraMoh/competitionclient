@@ -1,5 +1,9 @@
 <div class="offers page-padding">
 
+  <div class="alert danger" style="margin-bottom: 16px;" *ngIf="nofunds">
+    تعداد سکه های شما کافی نمی باشد
+  </div>
+  
   <div class="offer alpha" *ngFor="let offer of offers">
 
     <div class="col">
