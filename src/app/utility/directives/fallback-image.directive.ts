@@ -8,11 +8,12 @@ export class FallbackImageDirective {
   @Input()
   fallbackImage!: string;
 
-  constructor(private eRef: ElementRef) { }
+  constructor(private eRef: ElementRef<HTMLImageElement>) { }
 
   @HostListener('error')
   loadFallbackOnError() {
     const element: HTMLImageElement = <HTMLImageElement>this.eRef.nativeElement;
+    element.setAttribute('failedToLoad', element.src);
     element.src = this.fallbackImage || './assets/png/avatar.png';
   }
 

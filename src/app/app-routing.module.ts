@@ -71,7 +71,7 @@ const routes: Routes = [
       {
         path: 'tournament', component: TournamentLayoutComponent, children: [
           { path: 'info/:id', component: TournamentInfoComponent, },
-          { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
+          { path: 'challenge/:tournamentId/:roundId', component: ChallengeComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
           { path: '**', redirectTo: '../' },
         ]
       }

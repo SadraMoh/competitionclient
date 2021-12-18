@@ -7,6 +7,7 @@ import { Tournament } from 'src/app/models/tournament/Tournament';
 import { TournamentInfo } from 'src/app/models/tournament/TournamentInfo';
 import { AccountService } from 'src/app/services/account.service';
 import User from 'src/app/models/user/User';
+import { Round } from 'src/app/models/tournament/Round';
 
 @Component({
   selector: 'app-tournament-info',
@@ -23,9 +24,15 @@ export class TournamentInfoComponent implements OnInit {
     private accountService: AccountService
   ) { }
 
-  tournament: TournamentInfo = {} as TournamentInfo;
+  tournament: Tournament = {} as Tournament;
 
   public user?: User
+
+
+  public get firstAvailableRound(): Round | undefined {
+    return this.tournament.rounds?.find(i => !i.hasAttended);
+  }
+
 
   ngOnInit(): void {
 
@@ -33,7 +40,7 @@ export class TournamentInfoComponent implements OnInit {
 
     const tournamentId = Number(this.route.snapshot.params['id']);
     this.tournament.id = tournamentId;
-    this.tournamentService.findInfo(tournamentId)
+    this.tournamentService.find(tournamentId)
       .subscribe(
         (res) => {
           this.tournament = res.value;
@@ -44,23 +51,38 @@ export class TournamentInfoComponent implements OnInit {
       );
   }
 
-  joinChallenge(): void {
-    this.router.navigate(['tournament', 'challenge', this.tournament.id])
+  startRound(round: Round): void {
+    if (round.hasAttended) {
+      this.tournamentService.repeatRound(round.id)
+        .subscribe(
+          res => {
+            this.router.navigate(['tournament', 'challenge', this.tournament.id, round.id])
+          },
+          rej => {
+            this.router.navigate(['offers', { nofunds: true }])
+          });
+    }
+    else
+      this.router.navigate(['tournament', 'challenge', this.tournament.id, round.id])
   }
 
-  repeatChallenge(): void {
+  repeatTournament(): void {
 
-    if ((this.user?.spoils?.coins ?? 0) <= 0) {
-      this.router.navigate(['offers'])
+    debugger
+
+    if ((this.user?.spoils?.coins ?? 0) < this.tournament.fee) {
+      // insufficient funds
+      this.router.navigate(['offers', { nofunds: true }])
+      return;
     }
 
-    this.tournamentService.repeat(this.tournament.id)
+    this.tournamentService.repeatTournament(this.tournament.id)
       .subscribe(
         (res) => {
-          this.router.navigate(['tournament', 'challenge', this.tournament.id])
+          this.ngOnInit();
         },
         (rej) => {
-          this.router.navigate(['offers'])
+          this.router.navigate(['offers', { nofunds: true }])
         }
       )
 

@@ -1,7 +1,7 @@
 <section class="leaderboards board">
 
   <header class="header">
-    <img src="./assets/svg/score.svg" alt="" class="icon score">
+    <img src="./assets/svg/score.svg" alt="رنکینگ ها" class="icon score">
     <h3 class="title">رنکینگ شما</h3>
   </header>
 
@@ -10,7 +10,7 @@
     <div class="lead" [class.self]="lead.userId == user?.id" [routerLink]="['user','profile',lead.userId]"
       *ngFor="let lead of leads" routerLink="">
       <div class="place">{{leads.indexOf(lead) + 1}}</div>
-      <img class="avatar" [src]="lead.imageUrl" fallbackImage alt="">
+      <img class="avatar" [src]="lead.imageUrl" fallbackImage alt="عکس پروفایل کاربر">
       <label class="name">{{ lead.fullName }}</label>
       <label class="score">{{ lead.rank }}</label>
     </div>
