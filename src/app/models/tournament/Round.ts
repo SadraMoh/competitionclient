@@ -1,11 +1,6 @@
 import { Id } from "../Id";
-import { QuestionOption } from "./QuestionOption";
+import { Question } from "./Question";
 
 export interface Round extends Id {
-  /** id for the question */
-  questionId: number;
-  questionText: string;
-  /** round time in seconds */
-  responseLifeTime: number;
-  questionOptions: QuestionOption[];
+  questions: Question[]
 }

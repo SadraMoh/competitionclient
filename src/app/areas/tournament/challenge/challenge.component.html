@@ -5,7 +5,7 @@
   <div class="question card">
 
     <div class="round-info">
-      <span class="round"> راند {{ roundCount}}</span>
+      <span class="round"> راند {{ roundIndex + 1}}</span>
       <div class="nofm">
         <span class="all">{{ rounds?.length }}</span>
         /
@@ -14,7 +14,7 @@
     </div>
 
     <div class="description">
-      {{ currentRound?.questionText }}
+      {{ currentQuestion?.questionText }}
     </div>
 
   </div>
@@ -23,7 +23,7 @@
 
     <button class="option card" [disabled]="answerSent" [class.selected]="chosenOption == option"
       [class.wrong]="answerSent && chosenOption == option && correctAnswerId != option.id"
-      [class.correct]="answerSent && correctAnswerId == option.id" *ngFor="let option of currentRound?.questionOptions"
+      [class.correct]="answerSent && correctAnswerId == option.id" *ngFor="let option of currentQuestion?.questionOptions"
       (click)="selectOption(option)">
 
       {{ option.optionText }}
@@ -33,7 +33,7 @@
 
   <button class="btn btn-primary" *ngIf="!answerSent" [disabled]="!chosenOption" (click)="sendAnswer()">انتخاب</button>
 
-  <button class="btn btn-primary" *ngIf="answerSent && !isFinalRound" (click)="nextRound()">
+  <button class="btn btn-primary" *ngIf="answerSent && !isFinalRound" (click)="nextQuestion()">
     <span class="material-icons">chevron_right</span>
     سوال بعدی
   </button>
