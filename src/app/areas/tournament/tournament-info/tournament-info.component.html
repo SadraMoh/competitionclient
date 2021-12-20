@@ -55,23 +55,28 @@
   <div class="rounds">
     <button class="round card card-butt" (click)="startRound(round)" [class.played]="round.hasAttended"
       *ngFor="let round of tournament.rounds">
-      <h4 class="round-title">{{ (tournament.rounds?.indexOf(round) ?? 0) + 1 }}</h4>
+      <h4 class="round-title">
+        {{ (tournament.rounds?.indexOf(round) ?? 0) + 1 }}
+      </h4>
 
       <span *ngIf="!round.hasAttended">شروع</span>
-      <span *ngIf="round.hasAttended">شرکت دوباره</span>
 
       <ng-container *ngIf="round.hasAttended">
         <div class="stats">
-          <label class="wrong">{{ round.isFalseResponseCount }}</label>
           <label class="correct"> {{ round.isTrueResponseCount }} </label>
-          <label class="score">{{ round.score }}</label>
+          <label class="wrong">{{ round.isFalseResponseCount }}</label>
+          <label class="score">
+            <img src="./assets/svg/score.svg">
+            <span>{{ round.score }}</span>
+          </label>
           <label class="coin">
+            <span class="material-icons">refresh</span>
             <img src="./assets/svg/coin.svg">
             <span>{{ tournament.fee }}</span>
           </label>
         </div>
       </ng-container>
-      
+
     </button>
   </div>
 

@@ -287,40 +287,33 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   playNextRound() {
     this.gettingNewRound = true;
 
-    this.tournamentService.finishRound(this.answers)
-      .subscribe(
-        res => {
-          this.isTournamentFinished = true;
-          if (!this.nextRound) return;
+    this.isTournamentFinished = true;
+    if (!this.nextRound) return;
 
-          // mark currentRound as attended
-          if (this.tournament && this.tournament.rounds)
-            this.tournament.rounds[this.tournament?.rounds?.findIndex(i => i.id == this.currentRound.id)].hasAttended = true;
+    // mark currentRound as attended
+    if (this.tournament && this.tournament.rounds)
+      this.tournament.rounds[this.tournament?.rounds?.findIndex(i => i.id == this.currentRound.id)].hasAttended = true;
 
-          // refresh current component with new route parameters
-          // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-          //   this.router.navigate(['tournament', 'challenge', this.tournamentId, this.nextRound?.id]));
+    // refresh current component with new route parameters
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    //   this.router.navigate(['tournament', 'challenge', this.tournamentId, this.nextRound?.id]));
 
-          this.router.navigate(['tournament', 'challenge', this.tournamentId, this.nextRound?.id, { prev: this.currentRound.id }], { skipLocationChange: true })
-            .then(_ => {
-              this.tournamentService.startRound(this.nextRound?.id as number)
-                .subscribe(newRound => {
+    this.router.navigate(['tournament', 'challenge', this.tournamentId, this.nextRound?.id, { prev: this.currentRound.id }], { skipLocationChange: true })
+      .then(_ => {
+        this.tournamentService.startRound(this.nextRound?.id as number)
+          .subscribe(newRound => {
 
-                  this.currentRound = newRound.value;
-                  this.currentQuestion = this.questions[0];
+            this.currentRound = newRound.value;
+            this.currentQuestion = this.questions[0];
 
-                  this.gettingNewRound = false;
+            this.gettingNewRound = false;
 
-                  this.answers = [];
+            this.answers = [];
 
-                  this.toNextQuestion();
-                });
+            this.toNextQuestion();
+          });
 
-            });
-
-        }
-      );
-
+      });
   }
 
   timeUp(): void {
