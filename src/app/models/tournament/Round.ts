@@ -7,4 +7,5 @@ export interface Round extends Id {
   isTrueResponseCount: number;
   isFalseResponseCount: number;
   questions: Question[];
+  time?: string;
 }

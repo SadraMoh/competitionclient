@@ -65,6 +65,7 @@
         <div class="stats">
           <label class="correct"> {{ round.isTrueResponseCount }} </label>
           <label class="wrong">{{ round.isFalseResponseCount }}</label>
+          <label class="time">{{ round.time ?? '00:00' }}</label>
           <label class="score">
             <img src="./assets/svg/score.svg">
             <span>{{ round.score }}</span>

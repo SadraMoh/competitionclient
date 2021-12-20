@@ -149,6 +149,12 @@ $gap: 16px;
           width: 2ch;
         }
 
+        .time {
+          color: $text-4;
+          background-color: transparent;
+          border: 1px solid $text-3;          
+        }
+        
         .correct {
           color: $succ;
           background-color: transparentize($succ, $amount: 0.8);
