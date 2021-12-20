@@ -11,51 +11,51 @@ import { TournamentService } from 'src/app/services/tournament.service';
 export class TournamentsComponent implements OnInit {
 
   tournaments: Tournament[] = [
-    {
-      id: 0,
-      imageUrl: '',
-      isMultiPlayer: false,
-      title: 'نام اول',
-      fee: 100,
-      difficulty: TournamentDifficulty.easy,
-      participantsCount: 7,
-    },
-    {
-      id: 0,
-      imageUrl: '',
-      isMultiPlayer: false,
-      title: 'نام دوم',
-      fee: 250,
-      difficulty: TournamentDifficulty.hard,
-      participantsCount: 20,
-    },
-    {
-      id: 0,
-      imageUrl: '',
-      isMultiPlayer: true,
-      title: 'نام سوم',
-      fee: 350,
-      difficulty: TournamentDifficulty.medium,
-      participantsCount: 123,
-    },
-    {
-      id: 0,
-      imageUrl: '',
-      isMultiPlayer: true,
-      title: 'نام چهارم',
-      fee: 300,
-      difficulty: TournamentDifficulty.medium,
-      participantsCount: 12,
-    },
-    {
-      id: 0,
-      imageUrl: '',
-      isMultiPlayer: true,
-      title: 'نام پنجم',
-      fee: 150,
-      difficulty: TournamentDifficulty.easy,
-      participantsCount: 10,
-    },
+    // {
+    //   id: 0,
+    //   imageUrl: '',
+    //   isMultiPlayer: false,
+    //   title: 'نام اول',
+    //   fee: 100,
+    //   difficulty: TournamentDifficulty.easy,
+    //   participantsCount: 7,
+    // },
+    // {
+    //   id: 0,
+    //   imageUrl: '',
+    //   isMultiPlayer: false,
+    //   title: 'نام دوم',
+    //   fee: 250,
+    //   difficulty: TournamentDifficulty.hard,
+    //   participantsCount: 20,
+    // },
+    // {
+    //   id: 0,
+    //   imageUrl: '',
+    //   isMultiPlayer: true,
+    //   title: 'نام سوم',
+    //   fee: 350,
+    //   difficulty: TournamentDifficulty.medium,
+    //   participantsCount: 123,
+    // },
+    // {
+    //   id: 0,
+    //   imageUrl: '',
+    //   isMultiPlayer: true,
+    //   title: 'نام چهارم',
+    //   fee: 300,
+    //   difficulty: TournamentDifficulty.medium,
+    //   participantsCount: 12,
+    // },
+    // {
+    //   id: 0,
+    //   imageUrl: '',
+    //   isMultiPlayer: true,
+    //   title: 'نام پنجم',
+    //   fee: 150,
+    //   difficulty: TournamentDifficulty.easy,
+    //   participantsCount: 10,
+    // },
   ]
 
   get multiplayer(): Tournament[] {
@@ -73,6 +73,8 @@ export class TournamentsComponent implements OnInit {
     private tournamentService: TournamentService
   ) { }
 
+  hydrated: boolean = false;
+  
   ngOnInit(): void {
 
     // hydrate tournaments
@@ -80,6 +82,7 @@ export class TournamentsComponent implements OnInit {
       .subscribe(
         (res) => {
           this.tournaments = res.value;
+          this.hydrated = true;
         },
         (err) => { }
       )

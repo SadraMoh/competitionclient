@@ -6,15 +6,25 @@
   </header>
 
   <div class="leads">
+    <ng-container *ngIf="hydrated; else loading">
 
-    <div class="lead" [class.self]="lead.userId == user?.id" [routerLink]="['user','profile',lead.userId]"
-      *ngFor="let lead of leads" routerLink="">
-      <div class="place">{{leads.indexOf(lead) + 1}}</div>
-      <img class="avatar" [src]="lead.imageUrl" fallbackImage alt="عکس پروفایل کاربر">
-      <label class="name">{{ lead.fullName }}</label>
-      <label class="score">{{ lead.rank }}</label>
-    </div>
+      <div class="lead" [class.self]="lead.userId == user?.id" [routerLink]="['user','profile',lead.userId]"
+        *ngFor="let lead of leads" routerLink="">
+        <div class="place">{{leads.indexOf(lead) + 1}}</div>
+        <img class="avatar" [src]="lead.imageUrl" fallbackImage alt="عکس پروفایل کاربر">
+        <label class="name">{{ lead.fullName }}</label>
+        <label class="score">{{ lead.rank }}</label>
+      </div>
+
+    </ng-container>
+    
+    <ng-template #loading>
+      <span class="noresult">
+        در حال بارگذاری...
+      </span>
+    </ng-template>
 
   </div>
+
 
 </section>

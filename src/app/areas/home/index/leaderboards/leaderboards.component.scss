@@ -6,6 +6,7 @@
   .leads {
     padding: 0;
     background-color: $control-backgorund;
+    @include col;
 
     .lead {
       @include rowr;

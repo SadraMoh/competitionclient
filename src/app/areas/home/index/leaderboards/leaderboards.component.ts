@@ -29,6 +29,8 @@ export class LeaderboardsComponent implements OnInit {
 
   user?: User
 
+  hydrated: boolean = false;
+  
   ngOnInit(): void {
 
     this.accountService.user.subscribe(res => this.user = res);
@@ -37,6 +39,7 @@ export class LeaderboardsComponent implements OnInit {
       .subscribe(
         (res) => {
           this.leads = res.value;
+          this.hydrated  =  true;
         }
       )
 

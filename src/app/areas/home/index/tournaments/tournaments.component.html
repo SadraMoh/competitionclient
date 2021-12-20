@@ -4,17 +4,27 @@
     <button class="category" [class.active]="!multi" (click)="multi = false">آزمایشی</button>
   </div>
   <div class="card card-butt">
-    <ng-container *ngIf="multi">
-      <app-tournament *ngFor="let m of multiplayer" [tournament]="m"></app-tournament>
-      <span *ngIf="multiplayer.length == 0" class="noresult">
-        فعلا هیچ مسابقه ای قابل دسترس نمیباشد
-      </span>
+
+    <ng-container *ngIf="hydrated; else loading">
+      <ng-container *ngIf="multi">
+        <app-tournament *ngFor="let m of multiplayer" [tournament]="m"></app-tournament>
+        <span *ngIf="multiplayer.length == 0" class="noresult">
+          فعلا هیچ مسابقه ای قابل دسترس نمیباشد
+        </span>
+      </ng-container>
+      <ng-container *ngIf="!multi">
+        <app-tournament *ngFor="let t of test" [tournament]="t"></app-tournament>
+        <span *ngIf="test.length == 0" class="noresult">
+          فعلا هیچ مسابقه آزمایشی قابل دسترس نمیباشد
+        </span>
+      </ng-container>
     </ng-container>
-    <ng-container *ngIf="!multi">
-      <app-tournament *ngFor="let t of test" [tournament]="t"></app-tournament>
-      <span *ngIf="test.length == 0" class="noresult">
-        فعلا هیچ مسابقه آزمایشی قابل دسترس نمیباشد
+
+    <ng-template #loading>
+      <span class="noresult">
+        در حال بارگذاری...
       </span>
-    </ng-container>
+    </ng-template>
+
   </div>
 </section>

@@ -498,6 +498,7 @@ $gap-tween-component: 48px;
 }
 
 .noresult {
+  direction: rtl;
   text-align: center;
   color: $text-3;
   padding: $card-padding;
