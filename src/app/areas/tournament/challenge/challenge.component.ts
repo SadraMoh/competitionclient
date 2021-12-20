@@ -221,6 +221,28 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     this.answers.push(answer);
     // this.tournamentService.AnswerQuestion(answer).subscribe()
 
+    // check if last question was answered
+    if (!this.nextQuestion)
+      this.lastQuestionAnswered()
+
+  }
+
+  scores?: Round
+
+  lastQuestionAnswered() {
+
+    this.roundCompleteModal.show();
+    this.timer.freeze();
+
+    this.tournamentService.finishRound(this.answers)
+      .subscribe(
+        res => {
+          this.isTournamentFinished = true;
+          this.scores = res.value;
+
+
+        }
+      );
   }
 
   activateHelper(helper: HelperEnum): void {
@@ -258,14 +280,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   }
 
   finishRound(): void {
-    this.tournamentService.finishRound(this.answers)
-      .subscribe(
-        res => {
-          this.isTournamentFinished = true;
-          this.router.navigate(['/', 'tournament', 'info', this.tournamentId]);
-
-        }
-      );
+    this.router.navigate(['/', 'tournament', 'info', this.tournamentId]);
   }
 
   gettingNewRound: boolean = false;
@@ -329,4 +344,15 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   }
 
   // #endregion
+
+  closeModal(): void {
+
+    this.scores = undefined;
+
+    this.roundCompleteModal.hide()
+    this.timer.start();
+
+  }
+
 }
+
