@@ -221,10 +221,6 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     this.answers.push(answer);
     // this.tournamentService.AnswerQuestion(answer).subscribe()
 
-
-    if (!this.nextQuestion)
-      this.roundCompleteModal.show()
-
   }
 
   activateHelper(helper: HelperEnum): void {
@@ -267,6 +263,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
         res => {
           this.isTournamentFinished = true;
           this.router.navigate(['/', 'tournament', 'info', this.tournamentId]);
+
         }
       );
   }
