@@ -13,7 +13,7 @@
 
     .round-info {
       @include row;
-      
+
       .nofm {
         font-size: 1.2em;
         color: $text-5;
@@ -195,5 +195,63 @@
       -ms-filter: grayscale(100%);
       -o-filter: grayscale(100%);
     }
+  }
+}
+
+.results {
+  @include col;
+
+  .title {
+    font-size: 1.8em;
+    color: $text-2;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 1em;
+    color: $text-4;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .results-content {
+    @include rowr;
+    justify-content: space-evenly;
+
+    .counter {
+      @include col;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      border-radius: 10px;
+
+      .counter-value {
+        font-size: 1.8em;
+        margin-bottom: 4px;
+      }
+
+      .counter-title {
+        text-align: center;
+        font-size: 0.9em;
+        min-width: 72px;
+      }
+    }
+
+    .counter.correct {
+      background-color: transparentize($succ, $amount: 0.8);
+      color: $succ;
+    }
+
+    .counter.wrong {
+      background-color: transparentize($err, $amount: 0.8);
+      color: $err;
+    }
+  }
+
+  .result-actions {
+    @include col;
+    margin-top: 32px;
+    align-items: center;
   }
 }

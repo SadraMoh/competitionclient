@@ -14,6 +14,7 @@ import { ComponentCanDeactivate } from 'src/app/utility/guards/pending-changes.g
 import { TimerComponent } from './timer/timer.component';
 import { HelperService } from 'src/app/services/helper.service';
 import { HelpRequest } from 'src/app/models/helper/HelpRequest';
+import { ModalComponent } from 'src/app/utility/atomic/modal/modal.component';
 
 @Component({
   selector: 'app-challenge',
@@ -106,6 +107,9 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
   answers: AnswerQuestion[] = [];
 
   hydrated: boolean = false;
+
+  @ViewChild("roundComplete")
+  roundCompleteModal!: ModalComponent
 
   constructor(
     private tournamentService: TournamentService,
@@ -217,6 +221,10 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     this.answers.push(answer);
     // this.tournamentService.AnswerQuestion(answer).subscribe()
 
+
+    if (!this.nextQuestion)
+      this.roundCompleteModal.show()
+
   }
 
   activateHelper(helper: HelperEnum): void {
@@ -289,10 +297,10 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
                   this.currentRound = newRound.value;
                   this.currentQuestion = this.questions[0];
 
-                  this.gettingNewRound= false;
+                  this.gettingNewRound = false;
 
                   this.answers = [];
-                  
+
                   this.toNextQuestion();
                 });
 

@@ -43,6 +43,8 @@ import { RemainingPipe } from './utility/pipes/remaining.pipe';
 import { DeadlinePipe } from './utility/pipes/deadline.pipe';
 import { CountdownComponent } from './utility/atomic/countdown/countdown.component';
 import { PurchaseComponent } from './areas/home/purchase/purchase.component';
+import { ModalComponent } from './utility/atomic/modal/modal.component';
+import { ModalContainerComponent } from './utility/atomic/modal-container/modal-container.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { PurchaseComponent } from './areas/home/purchase/purchase.component';
     DeadlinePipe,
     CountdownComponent,
     PurchaseComponent,
+    ModalComponent,
+    ModalContainerComponent,
   ],
   imports: [
     BrowserModule,

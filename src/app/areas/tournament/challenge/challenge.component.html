@@ -40,14 +40,14 @@
     سوال بعدی
   </button>
 
-  <button class="btn btn-primary" [disabled]="gettingNewRound" style="margin-bottom: 16px;" *ngIf="answerSent && isFinalQuestion && nextRound"
-    (click)="playNextRound()">
+  <button class="btn btn-primary" [disabled]="gettingNewRound" style="margin-bottom: 16px;"
+    *ngIf="answerSent && isFinalQuestion && nextRound" (click)="playNextRound()">
     <span class="material-icons">keyboard_tab</span>
     راند بعدی
   </button>
 
-  <button class="btn" [ngClass]="{ 'btn-outline': nextRound, 'btn-primary': !nextRound }" [disabled]="gettingNewRound && nextRound"
-    *ngIf="answerSent && isFinalQuestion" (click)="finishRound()">
+  <button class="btn" [ngClass]="{ 'btn-outline': nextRound, 'btn-primary': !nextRound }"
+    [disabled]="gettingNewRound && nextRound" *ngIf="answerSent && isFinalQuestion" (click)="finishRound()">
     <span class="material-icons">done</span>
     اتمام مسابقه
   </button>
@@ -72,3 +72,23 @@
   </div>
 
 </div>
+
+<modal #roundComplete [size]="1">
+  <div class="card results">
+    <h2 class="title">اتمام راند 1</h2>
+    <h4 class="subtitle">عملکرد شما</h4>
+    <div class="results-content">
+      <div class="counter correct">
+        <h5 class="counter-value">3</h5>
+        <label class="counter-title">پاسخ صحیح</label>
+      </div>
+      <div class="counter wrong">
+        <h5 class="counter-value">3</h5>
+        <label class="counter-title">پاسخ اشتباه</label>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button class="btn btn-primary" (click)="roundComplete.hide()">بستن</button>
+    </div>
+  </div>
+</modal>
