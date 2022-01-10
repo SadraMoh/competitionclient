@@ -110,6 +110,9 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
 
   @ViewChild("roundComplete")
   roundCompleteModal!: ModalComponent
+  
+  @ViewChild("nocoins")
+  nocoins!: ModalComponent
 
   constructor(
     private tournamentService: TournamentService,
@@ -250,7 +253,7 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     // check if activation is possible
     const canActivate = (this.user?.spoils?.coins ?? 0) > helper.cost;
     if (!canActivate) {
-      alert('سکه های شما کافی نمی باشد')
+      this.nocoins.show();
       return
     };
 
@@ -343,8 +346,6 @@ export class ChallengeComponent implements OnInit, ComponentCanDeactivate {
     this.scores = undefined;
 
     this.roundCompleteModal.hide()
-    this.timer.start();
-
   }
 
 }

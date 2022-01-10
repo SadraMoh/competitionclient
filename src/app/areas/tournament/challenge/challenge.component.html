@@ -73,6 +73,18 @@
 
 </div>
 
+<modal #nocoins>
+  <div class="card col gap">
+    <div>
+      <h3>ناکافی!</h3>
+      <p>
+        سکه های شما کافی نمی باشد
+      </p>
+    </div>
+    <button class="btn btn-primary" (click)="nocoins.hide()">باشه</button>
+  </div>
+</modal>
+
 <modal #roundComplete [size]="1">
   <div class="card results">
 
@@ -91,6 +103,7 @@
           <label class="counter-title">پاسخ اشتباه</label>
         </div>
       </div>
+      <h2 class="title" style="margin-top: 8px;">{{ scores?.time }}</h2>
       <div class="result-actions">
         <button class="btn btn-primary" (click)="closeModal()">بستن</button>
       </div>

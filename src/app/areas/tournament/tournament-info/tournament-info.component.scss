@@ -244,6 +244,13 @@ $gap: 16px;
         color: $text-3;
       }
 
+      .time {
+        direction: rtl;
+        padding: 2px 8px;
+        font-size: .8em;
+        color: $text-4;
+      }
+      
       .score {
         margin-right: auto;
         background-color: $card-background;

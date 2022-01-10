@@ -21,7 +21,7 @@
     cursor: pointer;
 
     img.avatar {
-      @include circle;
+      border-radius: 8px;
       width: 48px;
       height: 48px;
     }

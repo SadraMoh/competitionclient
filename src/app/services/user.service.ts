@@ -119,11 +119,11 @@ export class UserService implements ApiService {
     const to = join(this.route, 'update');
 
     return from(new Promise<Res<User>>((res, rej) => {
-      this.client.post<Res<User>>(to, user).subscribe((result) => {
-        if (isResVaild(result))
-          res(result);
+      this.client.post<DbRes<Res<User>>>(to, user).subscribe((result) => {
+        if (isDbResValid(result))
+          res(result.result.value);
         else
-          rej(result.message);
+          rej(result);
       })
     }))
   }

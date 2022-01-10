@@ -8,8 +8,10 @@ import { ConfigService } from 'src/app/services/config.service';
 })
 export class ContactComponent implements OnInit {
 
-  content: string = '';
+  contact: string = '';
 
+  guide: string = '';
+  
   constructor(
     private configService: ConfigService
   ) { }
@@ -19,7 +21,14 @@ export class ContactComponent implements OnInit {
     this.configService.aboutText()
       .subscribe(
         res => {
-          this.content = res.value;
+          this.contact = res.value;
+        }
+      )
+
+    this.configService.guide()
+      .subscribe(
+        res => {
+          this.guide = res.value;
         }
       )
 

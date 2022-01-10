@@ -5,4 +5,5 @@ export interface Participant extends Id {
   fullName: string;
   score: string;
   responseLifeTime: number;
+  time?: string;
 }

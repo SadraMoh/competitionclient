@@ -43,4 +43,18 @@ export class ConfigService implements ApiService  {
     }))
   }
   
+  /** get guidetext */
+  guide(): Observable<Res<string>> {
+    const to = join(this.route, 'guide');
+
+    return from(new Promise<Res<string>>((res, rej) => {
+      this.client.get<Res<string>>(to).subscribe((result) => {
+        if (isResVaild(result))
+          res(result);
+        else
+          rej(result.message);
+      })
+    }))
+  }
+  
 }

@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, zip } from 'rxjs';
+import { from, Observable, zip } from 'rxjs';
 import { Signup } from 'src/app/models/account/Signup';
 import User from 'src/app/models/user/User';
 import { AccountService } from 'src/app/services/account.service';
 import { UserService } from 'src/app/services/user.service';
+import { ModalComponent } from 'src/app/utility/atomic/modal/modal.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -26,6 +27,9 @@ export class EditProfileComponent implements OnInit {
 
   @ViewChild('avatarPicker')
   avatarPicker!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('success')
+  success!: ModalComponent;
 
   /** either the url of the pre uploaded image, or the base64 of the new chosen avatar */
   avatar?: any;
@@ -55,7 +59,7 @@ export class EditProfileComponent implements OnInit {
     const input = this.avatarPicker.nativeElement;
 
     this.chosenFile = input.files?.[0];
-    
+
     // preview image
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -69,9 +73,9 @@ export class EditProfileComponent implements OnInit {
 
   }
 
-  edit(): void {
+  async edit() {
 
-    const tasks$: Observable<any>[] = [];
+    const tasks$: Promise<any>[] = [];
 
     const attempt: User = {
       bio: this.user.bio,
@@ -79,17 +83,26 @@ export class EditProfileComponent implements OnInit {
       id: this.user.id,
       profileImageUrl: '',
     }
-
-    tasks$.push(this.userService.update(attempt))
     
-     if (this.chosenFile)
-      tasks$.push(this.userService.uploadProfileImage(this.chosenFile));
+    tasks$.push(this.userService.update(attempt).toPromise());
 
-    zip(...tasks$).subscribe(
-      (res) => this.router.navigate(['user', 'profile']),
-      (err) => console.error(err)
-    );
+    if (this.chosenFile)
+      tasks$.push((this.userService.uploadProfileImage(this.chosenFile)).toPromise());
+
+
+    Promise.all([...tasks$])
+      .then(res => {
+        this.success.show();
+      })
+      .catch(res => {
+        console.error(res);
+      });
     
   }
 
+  successClick() {
+    this.success.hide();
+    this.router.navigate(['user', 'profile']);
+  }
+  
 }

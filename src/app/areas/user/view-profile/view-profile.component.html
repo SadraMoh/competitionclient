@@ -15,7 +15,7 @@
 
     <div class="leads">
 
-      <div class="lead" *ngFor="let hist of history" [routerLink]="['/', 'tournament','info', hist.tournamentId]">
+      <div class="lead" *ngFor="let hist of history">
         <div class="place">{{ hist.rank}}</div>
         <label class="name">{{ hist.tournamentTitle }}</label>
       </div>
