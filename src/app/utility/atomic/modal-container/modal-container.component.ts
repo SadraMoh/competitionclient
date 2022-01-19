@@ -56,6 +56,8 @@ export class ModalContainerComponent implements OnInit {
   }
 
   overlayClicked(e: any) {
+    if(!this.shownModal.closeOnOutsideClick) return;
+    
     if (!e.path.includes(this.container.nativeElement)) {
       this.hide(this.shownModal);
     }

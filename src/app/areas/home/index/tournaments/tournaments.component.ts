@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Tournament } from 'src/app/models/tournament/Tournament';
 import { TournamentDifficulty } from 'src/app/models/tournament/TournamentDifficulty';
 import { TournamentService } from 'src/app/services/tournament.service';
+import { ModalComponent } from 'src/app/utility/atomic/modal/modal.component';
 
 @Component({
   selector: 'app-tournaments',
@@ -73,7 +74,10 @@ export class TournamentsComponent implements OnInit {
     private tournamentService: TournamentService
   ) { }
 
-  hydrated: boolean = false;
+  isHydrated: boolean = false;
+
+  @Output('hydrate') 
+  public hydrate: EventEmitter<void> = new EventEmitter();
   
   ngOnInit(): void {
 
@@ -82,7 +86,8 @@ export class TournamentsComponent implements OnInit {
       .subscribe(
         (res) => {
           this.tournaments = res.value;
-          this.hydrated = true;
+          this.isHydrated = true;
+          this.hydrate.emit();
         },
         (err) => { }
       )

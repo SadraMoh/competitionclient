@@ -44,6 +44,7 @@ import { DeadlinePipe } from './utility/pipes/deadline.pipe';
 import { CountdownComponent } from './utility/atomic/countdown/countdown.component';
 import { PurchaseComponent } from './areas/home/purchase/purchase.component';
 import { ModalComponent } from './utility/atomic/modal/modal.component';
+import { ConfirmationComponent } from './utility/atomic/confirmation/confirmation.component';
 import { ModalContainerComponent } from './utility/atomic/modal-container/modal-container.component';
 
 @NgModule({
@@ -86,6 +87,7 @@ import { ModalContainerComponent } from './utility/atomic/modal-container/modal-
     PurchaseComponent,
     ModalComponent,
     ModalContainerComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +100,9 @@ import { ModalContainerComponent } from './utility/atomic/modal-container/modal-
     JwtHelperService,
     PendingChangesGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    ModalComponent
+  ]
 })
 export class AppModule { }

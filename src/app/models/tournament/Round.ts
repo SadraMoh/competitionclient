@@ -8,4 +8,5 @@ export interface Round extends Id {
   isFalseResponseCount: number;
   questions: Question[];
   time?: string;
+  roundFee: number
 }

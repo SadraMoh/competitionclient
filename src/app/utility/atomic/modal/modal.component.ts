@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit {
   /**
    * Emits when the modal has been hidden
    */
-  @Output("shown")
+  @Output("hidden")
   public hidden: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild("template")
@@ -40,6 +40,12 @@ export class ModalComponent implements OnInit {
    */
   @Input("name")
   public name: string = '';
+
+  /**
+   * Should the modal close when clicked outside of it
+   */
+  @Input("closeOnOutsideClick")
+  public closeOnOutsideClick: boolean = true;
 
   show(): void {
     this.modalService.show(this);

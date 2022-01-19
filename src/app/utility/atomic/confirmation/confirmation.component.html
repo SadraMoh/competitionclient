@@ -1,0 +1,21 @@
+<modal (hidden)="cancel()" #modal>
+  <div class="card col">
+    
+    <h3>{{title}}</h3>
+    <p>
+      {{ text }}
+    </p>
+
+    <div class="actions ">
+      <button class="btn btn-success" (click)="accept()">
+        بله
+        <i class="material-icons">check</i>
+      </button>
+      <button class="btn btn-danger" (click)="modal.hide()">
+        خیر
+        <i class="material-icons">block</i>
+      </button>
+    </div>
+    
+  </div>
+</modal>

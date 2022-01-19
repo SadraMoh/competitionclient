@@ -5,7 +5,7 @@
   </div>
   <div class="card card-butt">
 
-    <ng-container *ngIf="hydrated; else loading">
+    <ng-container *ngIf="isHydrated; else loading">
       <ng-container *ngIf="multi">
         <app-tournament *ngFor="let m of multiplayer" [tournament]="m"></app-tournament>
         <span *ngIf="multiplayer.length == 0" class="noresult">

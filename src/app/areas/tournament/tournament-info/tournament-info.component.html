@@ -73,7 +73,7 @@
           <label class="coin">
             <span class="material-icons">refresh</span>
             <img src="./assets/svg/coin.svg">
-            <span>{{ tournament.fee }}</span>
+            <span>{{ round.roundFee }}</span>
           </label>
         </div>
       </ng-container>
@@ -115,7 +115,7 @@
       <div class="lead" [class.self]="lead.id == user?.id" *ngFor="let lead of tournament.participants"
         [routerLink]="['/', 'user','profile', lead.id]">
         <div class="place">{{ tournament.participants.indexOf(lead) + 1 }}</div>
-        <img class="avatar" src="./assets/png/avatar.png" alt="">
+        <img class="avatar" [src]="lead.imageUrl" alt="">
         <label class="name">{{ lead.fullName }}</label>
         <label class="time">{{ lead.time }}</label>
         <label class="score">{{ lead.score }}</label>

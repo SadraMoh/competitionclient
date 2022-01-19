@@ -1,6 +1,6 @@
 <div class="index page-padding page-gap col">
 
-  <app-tournaments></app-tournaments>
+  <app-tournaments #tournaments></app-tournaments>
 
   <!-- <app-leaderboards></app-leaderboards> -->
 
@@ -23,4 +23,10 @@
   
   <app-history *ngIf="accountService.loggedIn"></app-history>
 
+  <modal #loading [closeOnOutsideClick]="false" [size]="4" >
+    <div class="loading">
+      <img src="http://file.3pe-game.ir/uploads/logo.png" alt="">
+    </div>
+  </modal>
+  
 </div>

@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Injectable } from '@angular/core';
+import { ConfirmationComponent } from '../utility/atomic/confirmation/confirmation.component';
 import { ModalContainerComponent } from '../utility/atomic/modal-container/modal-container.component';
 import { ModalComponent } from '../utility/atomic/modal/modal.component';
 
@@ -11,6 +12,8 @@ export class ModalService {
   container!: ModalContainerComponent;
 
   modals: ModalComponent[] = [];
+
+  confirmModal?: ConfirmationComponent;
 
   constructor() {
 
@@ -78,6 +81,21 @@ export class ModalService {
     this.modals.push(component);
   }
 
+  registerConfirmModalComponent(component: ConfirmationComponent) {
+    this.confirmModal = component;
+  }
+
+  confirm(title: string, text: string): Promise<boolean> {
+
+    if (this.confirmModal)
+      return this.confirmModal.confirm(title, text);
+    else {
+      console.warn('No confirm modal is registered');
+      return Promise.resolve(false);
+    }
+
+  }
+
 }
 
 export enum ModalSize {
@@ -88,5 +106,6 @@ export enum ModalSize {
   /** one-time small dialog with one goal*/
   large,
   /** a complex modal often with nested routes */
-  xlarge
+  xlarge,
+  fullscreen
 }

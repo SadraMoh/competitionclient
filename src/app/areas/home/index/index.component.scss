@@ -1,6 +1,6 @@
 @import "/src/assets/styles/vars";
 @import "/src/assets/styles/utility";
- 
+
 .gold-banner {
   $gold: #fb983d;
   box-shadow: 0px 8px 0px 0px #ebb237, $card-shadow;
@@ -9,7 +9,8 @@
   grid-template-areas: "bigcoin title" "bigcoin text";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  background: url("/assets/svg/coin-banner-bg.svg"),  linear-gradient(94.42deg, $gold 0%, #f9d726 100%) ;
+  background: url("/assets/svg/coin-banner-bg.svg"),
+    linear-gradient(94.42deg, $gold 0%, #f9d726 100%);
   background-position: left;
   background-size: contain;
   background-repeat: no-repeat;
@@ -21,10 +22,10 @@
     font-size: 1.2em;
     margin-bottom: 4px;
     direction: rtl;
-    
+
     .coin {
       width: 22px;
-      box-shadow: 0px 2px 5px 0px #FECC4B;
+      box-shadow: 0px 2px 5px 0px #fecc4b;
       margin-left: 8px;
     }
   }
@@ -33,16 +34,15 @@
     grid-area: text;
 
     p {
-      font-size: .9em;
+      font-size: 0.9em;
       margin-bottom: 12px;
     }
-    
   }
 
   .btn {
     color: $gold;
     margin-left: auto;
-    
+
     .material-icons {
     }
   }
@@ -51,5 +51,18 @@
     grid-area: bigcoin;
     margin: auto 0;
     width: 120px;
+  }
+}
+
+.loading {
+  background-color: white;
+  @include col;
+  @include row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  img {
+    margin: auto;
   }
 }

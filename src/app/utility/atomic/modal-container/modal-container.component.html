@@ -1,5 +1,5 @@
-<div #overlay class="overlay" [class.open]="isShowingModal" (click)="overlayClicked($event)">
-  <div #container class="container" [class]="sizeToClass()">
+<div #overlay class="overlay" [class.open]="isShowingModal" [style.padding]="shownModal?.size == 4 ? '0' : ''" (click)="overlayClicked($event)">
+  <div #container class="container" [class]="sizeToClass()" [class.open]="isShowingModal" [style.padding]="shownModal?.size == 4 ? '0' : ''">
       <ng-container *ngTemplateOutlet="template">
 
       </ng-container>
