@@ -55,14 +55,15 @@
 }
 
 .loading {
-  background-color: white;
+  background-color: #E31E24;
   @include col;
   @include row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 
   img {
     margin: auto;
+    height: 800px;
+    
   }
 }
